@@ -6,14 +6,14 @@
           <label for="articleTitle">文章标题:</label>
           <input id="articleTitle" type="text" v-model="articleTitle">
         </div>
-        <div class="select-label-bx">
+        <div class="select-label-bx" v-show="labels">
           <select @change="setLabel">
               <option>---请选择标签---</option>
               <option :value="item.id" v-for="item in labels">{{item.title}}</option>
           </select>
         </div>
         <div class="post-img-out-bx">
-            <div style="float:left;line-height: 100px;">上传封面图片:&nbsp;</div>
+            <div style="float:left;line-height: 100px;">上传封面图片(可选):&nbsp;</div>
             <div class="post-image-bx" style="float:left;">
               <input type="file" class="post-image-input" @change="showPreview">
               <img class="post-view" :src="baseImg" alt="">
@@ -29,8 +29,7 @@
 </template>
 
 <script>
-  import {imageUpload, publicArticle} from '@/service/getData';
-  import { mapGetters } from 'vuex';
+  import {imageUpload, publicArticle, getLabel} from '@/service/getData';
   import topNav from '@/components/nav/topNav';
   export default {
     name: 'write',
@@ -42,15 +41,21 @@
         value: '',  //文章内容
         isSelectImg: false,
         loading: false,
+        labels: [],
         label: '',  //文章标签ID
         articleTitle: '', //文章标题
         baseImg: '//stblog.oss-cn-beijing.aliyuncs.com/stblog/7j096tgqq71516948976898.png'  //文章封面图片
       }
     },
-    computed: {
-      ...mapGetters([
-        'labels'
-      ])
+    mounted() {
+      let _this = this;
+      getLabel().then((res)=>{
+        console.log(res);
+        if(res.success) {
+          _this.labels = res.data;
+          _this.$store.commit('SET_LABELS', res.data);
+        }
+      });
     },
     methods: {
       $imgAdd(pos, $file){

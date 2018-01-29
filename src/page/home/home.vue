@@ -24,9 +24,32 @@
                         <router-link :to="'sign_up'">注册</router-link>
                       </span>
                   </div>
-                  <div class="nav-user-bx" v-else>
+                  <a href="javascript:void(0);" class="nav-user-bx" v-else>
                     <img :src="userData.avator" alt="">
-                  </div>
+                    <span class="bottom-icon">
+                      <svg-icon iconClass="bottomArrow"></svg-icon>
+                    </span>
+                    <ul class="slide-menu">
+                      <li>
+                        <span>
+                          <svg-icon iconClass="userCenter"></svg-icon>
+                        </span>
+                        我的主页
+                      </li>
+                      <li>
+                        <span>
+                          <svg-icon iconClass="follow"></svg-icon>
+                        </span>
+                        我的关注
+                      </li>
+                      <li @click="exit">
+                        <span>
+                          <svg-icon iconClass="exit"></svg-icon>
+                        </span>
+                        退出
+                      </li>
+                    </ul>
+                  </a>
                   <div class="read-btn">
                     <router-link :to="'write'">
                       <span class="write-icon-bx">
@@ -38,6 +61,7 @@
               </div>
           </div>
           <div class="article-out-bx">
+              <!--标签列表-->
               <label-com></label-com>
               <!--文章列表-->
               <article-list></article-list>
@@ -50,6 +74,7 @@
   import {getUserInfo} from '@/service/getData';
   import articleList from '@/components/articleLists/articleList';
   import labelCom from '@/components/label/label';
+  import tools from '@/util/tools';
   export default {
     name: 'home',
     components: {
@@ -61,6 +86,11 @@
         userData: ''
       }
     },
+//    computed: {
+//      ...mapGetters([
+//        'labels'
+//      ])
+//    },
     mounted() {
       let _this = this;
       getUserInfo().then((res)=>{
@@ -73,6 +103,16 @@
     methods: {
       gotosigin: function() {
         this.$router.push({ name: 'sign_up'});
+      },
+      exit() {
+        //线上
+        if(process.env.NODE_ENV === 'production') {
+          tools.setCookie('USER_ID', "", -1, '.stblog.ltyun.cc', '/');
+        }else {
+          //本地
+          tools.setCookie('USER_ID', "", -1, '.youstde.blog.com', '/');
+        }
+        window.location.reload();
       }
     }
   }

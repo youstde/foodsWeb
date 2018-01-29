@@ -1,12 +1,13 @@
 export default function request(url, config) {
   if (url.indexOf('//') === -1) {
-    if(window.location.href.indexOf('titan.')>-1){
-      url = '//titan.adbaitai.com/titan-server' + url;
+    if(process.env.NODE_ENV === 'production'){
+      url = '//stblog.ltyun.cc/api' + url;
     }else{
+      //本地
       url = '//api.youstde.blog.com' + url;
-      // url = '//127.0.0.1:7001' + url;
     }
   }
+
   config = config || {method: 'get'};
   config.method = config.method || 'get';
 

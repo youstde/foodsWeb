@@ -1,6 +1,6 @@
 <template>
   <ul class="note-list">
-    <li class="list-item" v-for="item in articleLists">
+    <li class="list-item" v-for="item in articleLists" v-show="articleLists.length">
       <div class="item-left">
         <div class="left-top-bx">
           <img :src="item.avator" alt="">
@@ -45,12 +45,15 @@
         <img :src="item.postImg" alt="">
       </div>
     </li>
+
+    <li class="item-base-bx" v-show="articleLists.length === 0">
+      <svg-icon iconClass="bookLogo"></svg-icon>
+    </li>
   </ul>
 </template>
 
 <script>
   import {getArticle} from '@/service/getData';
-
   export default {
     name: 'article-lists',
     data() {
@@ -60,6 +63,9 @@
     },
     mounted() {
       let _this = this;
+      onMessage('setArticle',(data)=>{
+        _this.articleLists = data;
+      });
       getArticle().then(res => {
         console.log(res);
         if (res.success) {

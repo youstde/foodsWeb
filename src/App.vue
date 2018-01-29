@@ -7,7 +7,6 @@
 
 <script>
   import vueTip from '@/components/tip/tip.vue';
-  import {getLabel} from '@/service/getData';
   export default {
     name: 'App',
     data() {
@@ -17,14 +16,6 @@
       }
     },
     mounted() {
-      let _this = this;
-      getLabel().then((res)=>{
-        console.log(res);
-        if(res.success) {
-          _this.labels = res.data;
-          _this.$store.commit('SET_LABELS', res.data);
-        }
-      });
     },
     components: {
       vueTip

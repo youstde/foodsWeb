@@ -1,6 +1,6 @@
 <template>
   <div class="label-bx">
-    <div class="label-item" v-for="(item,index) in labels" v-show="index < labelShowNum">
+    <div class="label-item" v-for="(item,index) in labels" @click="filterArticle" v-show="index < labelShowNum" :data-id="index">
       <img :src="item.postimg" alt="">
       <div class="label-title">{{item.title}}</div>
     </div>
@@ -15,25 +15,27 @@
 </template>
 
 <script>
-  import {getLabel} from '@/service/getData';
-  import { mapGetters } from 'vuex';
+  import {getLabel, getArticleByLabel} from '@/service/getData';
   export default {
     name: 'label-com',
     data () {
       return {
+        labels: [],
         isChange: false,
         labelShowNum: 10,
         moreLabel: '更多热门标题',
         arrowIcon: 'arrowRight'
       }
     },
-    computed: {
-      ...mapGetters([
-        'labels'
-      ])
-    },
     mounted() {
-
+      let _this = this;
+      getLabel().then((res)=>{
+        console.log(res);
+        if(res.success) {
+          _this.labels = res.data;
+          _this.$store.commit('SET_LABELS', res.data);
+        }
+      });
     },
     methods: {
       showAllLabel() {
@@ -47,6 +49,18 @@
           this.arrowIcon = 'arrowRight';
         }
         this.isChange = !this.isChange;
+      },
+      filterArticle(e) {
+        let labelIndex = e.currentTarget.getAttribute('data-id'),
+            labelId = this.labels[labelIndex].id;
+        getArticleByLabel({
+          id: labelId
+        }).then((res)=>{
+          console.log(res);
+          if(res.success){
+            sendMessage('setArticle', res.data);
+          }
+        });
       }
     }
   }

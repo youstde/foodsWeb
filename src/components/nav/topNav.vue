@@ -5,11 +5,9 @@
         <img src="//oss.ltcdn.cc/stblog/blogimage/blog_logo_two.png" alt="">
       </router-link>
     </div>
-    <div class="nav-search">
-      <input type="text" placeholder="搜索">
-      <div class="search-icon-bx">
-        <svg-icon iconClass="search"></svg-icon>
-      </div>
+    <div class="nav-key-word-bx">
+      <router-link :to="'/'">发现</router-link>
+      <router-link :to="'/'">关注</router-link>
     </div>
     <div class="nav-right">
       <div class="nav-login-bx" v-if="userData?false:true">
@@ -22,8 +20,28 @@
       </div>
       <a href="javascript:void(0);" class="nav-user-bx" v-else>
         <img :src="userData.avator" alt="">
+        <span class="bottom-icon">
+          <svg-icon iconClass="bottomArrow"></svg-icon>
+        </span>
         <ul class="slide-menu">
-          <li>test</li>
+          <li>
+            <span>
+              <svg-icon iconClass="userCenter"></svg-icon>
+            </span>
+            我的主页
+          </li>
+          <li>
+            <span>
+              <svg-icon iconClass="follow"></svg-icon>
+            </span>
+            我的关注
+          </li>
+          <li @click="exit">
+            <span>
+              <svg-icon iconClass="exit"></svg-icon>
+            </span>
+            退出
+          </li>
         </ul>
       </a>
       <div class="read-btn">
@@ -40,7 +58,7 @@
 
 <script>
   import {getUserInfo} from '@/service/getData';
-
+  import tools from '@/util/tools';
   export default {
     name: 'topNav',
     data() {
@@ -57,7 +75,18 @@
         }
       });
     },
-    methods: {}
+    methods: {
+      exit() {
+          //线上
+          if(process.env.NODE_ENV === 'production') {
+            tools.setCookie('USER_ID', "", -1, '.stblog.ltyun.cc', '/');
+          }else {
+            //本地
+            tools.setCookie('USER_ID', "", -1, '.youstde.blog.com', '/');
+          }
+          window.location.reload();
+      }
+    }
   }
 </script>
 

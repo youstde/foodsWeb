@@ -14,6 +14,13 @@ export const getArticleById = (params) => {
   return request('/getArticleById',{params: params});
 };
 /**
+ * 通过labelID获取文章
+ * @param params
+ */
+export const getArticleByLabel = (params) => {
+  return request('/getArticleByLabel',{params: params});
+};
+/**
  * 获取用户信息
  */
 export const getUserInfo = () => {
