@@ -29,7 +29,7 @@
 </template>
 
 <script>
-  import {imageUpload, publicArticle, getLabel} from '@/service/getData';
+  import {imageUpload, publicArticle, getLabel, getUserInfo} from '@/service/getData';
   import topNav from '@/components/nav/topNav';
   export default {
     name: 'write',
@@ -46,6 +46,17 @@
         articleTitle: '', //文章标题
         baseImg: '//stblog.oss-cn-beijing.aliyuncs.com/stblog/7j096tgqq71516948976898.png'  //文章封面图片
       }
+    },
+    beforeRouteEnter(to, from, next) {
+      getUserInfo().then((res)=>{
+        if(res.success) {
+          next();
+        }else {
+          next(vm=>{
+            vm.$router.push({ name: 'sign_in'});
+          });
+        }
+      });
     },
     mounted() {
       let _this = this;
