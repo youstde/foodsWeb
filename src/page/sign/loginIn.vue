@@ -43,7 +43,14 @@
         userPhone: '',
         userPwd: '',
         checkUserPhone: false,
-        checkUserPwd: false
+        checkUserPwd: false,
+        referer: 'home'
+      }
+    },
+    mounted() {
+      console.log(this.$route.params.referer);
+      if(this.$route.params && this.$route.params.referer) {
+        this.referer = this.$route.params.referer;
       }
     },
     methods: {
@@ -60,7 +67,7 @@
                    message: data.data.msg
                  });
                  setTimeout(()=>{
-                   _this.$router.push({ name: 'home'});
+                   _this.$router.push({ name: _this.referer});
                  },1e3);
                }else {
                  _this.$store.commit('SET_TIP', {

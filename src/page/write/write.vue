@@ -53,7 +53,7 @@
           next();
         }else {
           next(vm=>{
-            vm.$router.push({ name: 'sign_in'});
+            vm.$router.push({ name: 'sign_in', params: {referer: 'write'}});
           });
         }
       });

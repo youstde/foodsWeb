@@ -35,12 +35,14 @@
     },
     data () {
       return {
-        article: ''
+        article: '',
+        articleId: ''
       }
     },
     mounted() {
       let _this =this;
       let articleId = tools.getQueryString('id');
+      this.articleId = articleId;
       getArticleById({
         id: articleId
       }).then((res)=>{
