@@ -11,7 +11,8 @@ const state = {
     type: 'err',
     messgae: 'xixi',
     labels: []
-  }
+  },
+  isLoading: true,
 }
 
 export default new Vuex.Store({

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <vue-tip type="tip.type" message="tip.message"></vue-tip>
+    <base-loading></base-loading>
     <router-view/>
   </div>
 </template>

@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-const home = r => require.ensure([], () => r(require('../page/home/home')), 'home')
-const loginIn = r => require.ensure([], () => r(require('../page/sign/loginIn')), 'loginIn')
-const loginUp = r => require.ensure([], () => r(require('../page/sign/loginUp')), 'loginUp')
-const write = r => require.ensure([], () => r(require('../page/write/write')), 'write')
-const articleDetail = r => require.ensure([], () => r(require('../page/articleDetail/articleDetail')), 'articleDetail')
+const home = r => require.ensure([], () => r(require('../pages/home/home')), 'home')
+const loginIn = r => require.ensure([], () => r(require('../pages/sign/loginIn')), 'loginIn')
+const loginUp = r => require.ensure([], () => r(require('../pages/sign/loginUp')), 'loginUp')
+const write = r => require.ensure([], () => r(require('../pages/write/write')), 'write')
+const articleDetail = r => require.ensure([], () => r(require('../pages/articleDetail/articleDetail')), 'articleDetail')
 
 Vue.use(Router)
 

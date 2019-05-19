@@ -1,30 +1,45 @@
 <template>
-  <div class="loading-box">
-    <vue-loading type="bubbles" color="#d9544e" :size="{ width: '100px', height: '100px' }"></vue-loading>
+  <div :class='{loading_container:true, dissipate_loading:!isLoading, hidden: closeLoading}'>
+    <div class='loading_bx'>
+      <div class="loader"></div>
+      <svg-icon iconClass='cart-moren'></svg-icon>
+    </div>
   </div>
 </template>
 
 <script>
-  import vueLoading from 'vue-loading-template';
+  import { mapState } from 'vuex'
+import { setTimeout } from 'timers';
   export default {
     name: 'base-loading',
-    components: {
-      vueLoading
+    data () {
+      return {
+        closeLoading: false
+      }
     },
+    watch: {
+      isLoading (value) {
+        if(value === false) {
+          setTimeout(() => {
+            this.closeLoading = true;
+          }, 1e3)
+        }
+      }
+    },
+    mounted() {
+
+    },
+     computed: {
+       ...mapState([
+        'isLoading'
+      ])
+     },
+    methods: {
+
+    }
   }
 </script>
 
-<style lang="less" scoped>
-  .loading-box {
-    position: fixed;
-    top:0;
-    left:0;
-    z-index: 9999;
-    width: 100%;
-    height:100%;
-    background-color: rgba(0,0,0,0.7);
-    .vue-loading {
-      margin-top: 200px;
-    }
-  }
+<style lang="scss" scoped>
+  @import './index.scss';
 </style>

@@ -2,20 +2,21 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import store from './store/';
+import '@/util/rem'
+import store from './store/'
 import router from './router'
-import '@/components/svgIcon/svgIn.js';
-import baseLoading from '@/components/loading/loading.vue';
-import svgIcon from '@/components/svgIcon/svgIcon.vue';
+import '@/components/svgIcon/svgIn.js'
+import baseLoading from '@/components/loading/loading.vue'
+import svgIcon from '@/components/svgIcon/svgIcon.vue'
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 // use
 Vue.use(mavonEditor)
 
-Vue.component('base-loading', baseLoading);
-Vue.component('svg-icon', svgIcon);
-Vue.config.productionTip = false;
-window.a =123;
+Vue.component('base-loading', baseLoading)
+Vue.component('svg-icon', svgIcon)
+Vue.config.productionTip = false
+window.a =123
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
