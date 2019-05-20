@@ -1,0 +1,25 @@
+.search_bx {
+  width: 100%;
+  height: 1.7rem;
+  background-color: #fff;
+  @include borderRadius(5px);
+  padding-left: 0.75rem;
+  a {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .icon_bx {
+    width: 0.9rem;
+    height: 0.9rem;
+    margin-top: 0.4rem;
+    float: left;
+  }
+  .search_label{
+    color: #9b9b9b;
+    height: 1.7rem;
+    line-height: 1.7rem;
+    float: left;
+    font-size: 14px;
+  }
+}

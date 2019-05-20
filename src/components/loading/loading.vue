@@ -41,5 +41,6 @@ import { setTimeout } from 'timers';
 </script>
 
 <style lang="scss" scoped>
+  @import 'src/style/mixin';
   @import './index.scss';
 </style>

@@ -1,24 +1,38 @@
 <template>
   <div class="home-bx">
-     test
+     <nav class='home_banner'>
+        <div class="home_top_container">
+          <router-link class="shop_name" to='/toggleshop'>
+            {{shop}}
+            <span class='icon_bx'><svg-icon iconClass='arrowdown' /></span>
+          </router-link>
+        </div>
+        <search />
+        <div class='home_nav_bx'>
+          <HomeNav />
+        </div>
+      </nav>
      <bottom-nav></bottom-nav>
-     <svg-icon iconClass='phone'></svg-icon>
   </div>
 </template>
 
 <script>
   import tools from '@/util/tools'
   import { setTimeout } from 'timers'
-  import BottomNav from '@/components/bottomNav/bottomNav.vue'
+  import BottomNav from '@/components/bottomNav/bottomNav'
+  import Search from '@/components/search/search'
+  import HomeNav from './components/homeNav/homeNav'
   export default {
     name: 'home',
     components: {
-      BottomNav
+      BottomNav,
+      Search,
+      HomeNav
     },
     data () {
       return {
         userData: '',
-        value: [1,2,3]
+        shop: '东昌路店'
       }
     },
 //    computed: {
@@ -27,9 +41,7 @@
 //      ])
 //    },
     mounted() {
-      setTimeout(() => {
-        this.$store.commit('SET_IS_LOADING', false)
-      }, 2e3)
+      this.$store.commit('SET_IS_LOADING', false)
     },
     methods: {
 
@@ -39,5 +51,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
+  @import 'src/style/mixin';
   @import "./index.scss";
 </style>

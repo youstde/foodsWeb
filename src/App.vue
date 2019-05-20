@@ -24,7 +24,9 @@
   }
 </script>
 
-<style>
+<style lang="scss">
+  @import 'src/style/common';
+  @import 'src/style/mixin';
   .clear {
     clear:both;
   }
@@ -33,7 +35,7 @@
     text-decoration: none;
   }
   body {
-    color: #333;
+    color: #333333;
   }
   input,button {
     outline: none;
@@ -41,7 +43,8 @@
   html,body {
     height:100%;
     width: 100%;
-    background-color: #fff;
+    max-width: $maxWidth;
+    background-color: $bgColor;
     margin: 0;
     padding:0;
   }

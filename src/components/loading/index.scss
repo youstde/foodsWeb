@@ -15,7 +15,7 @@
     margin: 40vh auto 0;
     color: pink;
     position: relative;
-    border-radius: 50%;
+    @include borderRadius(50%);
     border: 1px solid pink;
     overflow: hidden;
     .loader {

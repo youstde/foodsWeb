@@ -9,6 +9,7 @@ const articleDetail = r => require.ensure([], () => r(require('../pages/articleD
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
