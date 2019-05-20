@@ -1,12 +1,11 @@
-body {
-  background-color: #fff;
-}
+$pagePadding: 0.7rem;
+
 .home-bx {
   .home_banner {
     width: 100%;
     height: 15rem;
     max-height: 516px;
-    padding: 0 0.7rem;
+    padding: 0 $pagePadding;
     @include boxSizing;
     // position: relative;
     background: url('../../assets/home-banner.png') no-repeat center/ 100% 100%;
@@ -30,6 +29,16 @@ body {
     .home_nav_bx {
       width: 100%;
       margin-top: 8.1rem;
+    }
+  }
+  .center_container {
+    padding: 2.5rem $pagePadding 0;
+    .time_discount {
+      .title {
+        font-size: 0.9rem;
+        text-align: left;
+        padding: 1rem 0 0.5rem;
+      }
     }
   }
 }

@@ -1,8 +1,10 @@
 
 .home_nav_bx {
   width: 100%;
+  padding: 0 0.5rem;
   background-color: #fff;
   @include borderRadius(7px);
+  @include boxSizing;
   .home_nav_item {
     text-align: center;
     a {

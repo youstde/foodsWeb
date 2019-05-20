@@ -1,0 +1,42 @@
+
+.fast_news_bx {
+  width: 100%;
+  height: 2.5rem;
+  overflow: hidden;
+  background-color: #fff;
+  @include borderRadius(7px);
+  .fast_news_left {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: -190%;
+      width: 1px;
+      height: 3.8rem;
+      -webkit-transform: scale(0.5);
+      transform: scale(0.5);
+      background-color: $morenColor;
+    }
+    .fast_news_img {
+      width: 3.15rem;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  .news_title{
+    font-size: 14px;
+    @include singleLineView;
+  }
+  .news_footer {
+    color: $morenColor;
+    font-size: 12px;
+    span {
+      color: $morenColor;
+    }
+  }
+  .vux-flexbox {
+    height: 100%;
+  }
+}

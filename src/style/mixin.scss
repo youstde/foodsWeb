@@ -13,6 +13,13 @@ $maxWidth: 640px;
 	background-size: 100% 100%;
 }
 
+// 文本单行显示
+@mixin singleLineView {
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+
 @mixin boxSizing {
   box-sizing: border-box;
   -moz-box-sizing:border-box; /* Firefox */

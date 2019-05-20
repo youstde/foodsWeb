@@ -12,7 +12,18 @@
           <HomeNav />
         </div>
       </nav>
-     <bottom-nav></bottom-nav>
+      <div class='center_container'>
+        <!-- S=快讯 -->
+        <fast-news />
+        <!-- E=快讯 -->
+        <!-- S=限时优惠 -->
+        <div class='time_discount'>
+          <div class='title'>限时优惠</div>
+          <time-discount />
+        </div>
+        <!-- E=限时优惠 -->
+      </div>
+     <bottom-nav />
   </div>
 </template>
 
@@ -22,12 +33,17 @@
   import BottomNav from '@/components/bottomNav/bottomNav'
   import Search from '@/components/search/search'
   import HomeNav from './components/homeNav/homeNav'
+  import FastNews from './components/fastNews/fastNews'
+  import TimeDiscount from './components/timeDiscount/timeDiscount'
+
   export default {
     name: 'home',
     components: {
       BottomNav,
       Search,
-      HomeNav
+      HomeNav,
+      FastNews,
+      TimeDiscount
     },
     data () {
       return {

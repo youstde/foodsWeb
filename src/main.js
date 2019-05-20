@@ -13,6 +13,7 @@ import 'mavon-editor/dist/css/index.css'
 // use
 Vue.use(mavonEditor)
 
+
 Vue.component('base-loading', baseLoading)
 Vue.component('svg-icon', svgIcon)
 Vue.config.productionTip = false
