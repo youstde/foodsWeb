@@ -4,7 +4,9 @@ $fc:#fff;
 $bgColor: #f4f4f4;
 $themeColor: #51af7f;
 $morenColor: #bebebe;
+$inputPlaceHolderColor: #9b9b9b;
 $maxWidth: 640px;
+$priceActiveColor: #e65634;
 
 // 背景图片地址和大小
 @mixin bis($url) {
@@ -33,6 +35,23 @@ $maxWidth: 640px;
     -o-border-radius: $radius;
     border-radius: $radius;
 }
+
+@mixin animate($aniName, $time, $type) {
+  animation:$aniName $time $type;
+  -webkit-animation:$aniName $time $type; /* Safari 和 Chrome */
+}
+// 元素上下左右居中
+@mixin positionMiddle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%); 	/* IE 9 */
+  -moz-transform: translate(-50%, -50%); 	/* Firefox */
+  -webkit-transform: translate(-50%, -50%); /* Safari 和 Chrome */
+  -o-transform: translate(-50%, -50%); 	/* Opera */
+}
+
 //定位全屏
 @mixin allcover{
 	position:absolute;

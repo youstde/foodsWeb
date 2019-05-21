@@ -187,6 +187,6 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" scoped>
-  @import "./write.less";
+<style lang="scss" scoped>
+  @import "./write.scss";
 </style>

@@ -1,13 +1,15 @@
 <template>
-  <div class='bottom_bx'>
-       <flexbox>
-        <flexbox-item class='bottom_nav_item' v-for='(item, i) in navList' :key='i'>
-          <router-link :to='item.link'>
-            <span class='icon_bx'><svg-icon :iconClass='item.icon_class'></svg-icon></span>
-            <p class='item_label'>{{item.label}}</p>
-          </router-link>
-        </flexbox-item>
-      </flexbox>
+  <div>
+    <div class='bottom_bx'>
+        <flexbox>
+          <flexbox-item class='bottom_nav_item' v-for='(item, i) in navList' :key='i'>
+            <router-link :to='item.link'>
+              <span class='icon_bx'><svg-icon :iconClass='item.icon_class'></svg-icon></span>
+              <p class='item_label'>{{item.label}}</p>
+            </router-link>
+          </flexbox-item>
+        </flexbox>
+    </div>
   </div>
 </template>
 
@@ -25,7 +27,7 @@
           {
             label: '今日食材',
             icon_class: 'home-moren',
-            link: 'msite'
+            link: '/'
           },
           {
             label: '购物车',

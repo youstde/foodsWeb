@@ -8,11 +8,10 @@ import router from './router'
 import '@/components/svgIcon/svgIn.js'
 import baseLoading from '@/components/loading/loading.vue'
 import svgIcon from '@/components/svgIcon/svgIcon.vue'
-import mavonEditor from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
-// use
-Vue.use(mavonEditor)
+// import 'cube-ui/lib/style.css'
+import Cube from 'cube-ui'
 
+Vue.use(Cube)
 
 Vue.component('base-loading', baseLoading)
 Vue.component('svg-icon', svgIcon)

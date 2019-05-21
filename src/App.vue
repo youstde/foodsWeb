@@ -41,8 +41,8 @@
     outline: none;
   }
   html,body {
-    height:100%;
     width: 100%;
+    height: 100%;
     max-width: $maxWidth;
     background-color: $bgColor;
     margin: 0;
@@ -55,5 +55,15 @@
     text-align: center;
     color: #2c3e50;
     height:100%;
+    // margin-bottom: 2.5rem;
+  }
+  // cube-Ui样式覆盖
+  .cube-btn {
+    padding: 0.6rem 0 !important;
+    -webkit-border-radius: 1.2rem !important;
+    -moz-border-radius: 1.2rem !important;
+    -ms-border-radius: 1.2rem !important;
+    -o-border-radius: 1.2rem !important;
+    border-radius: 1.2rem !important;
   }
 </style>

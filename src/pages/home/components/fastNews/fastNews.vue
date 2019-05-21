@@ -10,7 +10,7 @@
             <div class="swiper-slide" v-for='(item, i) in fastNews' :key='i'>
               <div class='news_title'>{{item.title}}</div>
               <div class='news_footer'>
-                活动时间：
+                活动时间:
                 <span>{{item.startTime | baseDateFormat}}</span> -
                 <span>{{item.endTime | baseDateFormat}}</span>
               </div>
@@ -26,6 +26,7 @@
   import { Flexbox, FlexboxItem, dateFormat } from 'vux'
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
+
   export default {
     name: 'fast-news',
     components: {

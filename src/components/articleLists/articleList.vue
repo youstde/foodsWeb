@@ -78,6 +78,6 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" scoped>
-  @import "./index.less";
+<style lang="scss" scoped>
+  @import "./index.scss";
 </style>

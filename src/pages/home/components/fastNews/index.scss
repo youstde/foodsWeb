@@ -27,6 +27,7 @@
   }
   .news_title{
     font-size: 14px;
+    line-height: 1.5;
     @include singleLineView;
   }
   .news_footer {

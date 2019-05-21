@@ -1,0 +1,102 @@
+
+.sign_bx {
+  height: 100%;
+  background-color: #fff;
+  .banner_bx {
+    width: 100%;
+    height: 11.8rem;
+    overflow: hidden;
+    position: relative;
+    img {
+      display: block;
+    }
+    img.banner {
+      display: block;
+      width: 100%;
+      height: auto;
+      @include animate(scaleImg, 30s, infinite);
+    }
+    .title {
+      width: 12rem;
+      @include positionMiddle;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .login_form {
+    width: 100%;
+    padding: 0 1.5rem;
+    margin-top: -0.3rem;
+    @include boxSizing;
+    border: 1px solid transparent;
+    position: relative;
+    background-color: #fff;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    &::before {
+      content: '';
+      border: 0.4rem solid transparent;
+      border-bottom-color: #fff;
+      position: absolute;
+      top: -0.85rem;
+      left: 1.3rem;
+    }
+    .input_bx {
+      position: relative;
+      width: 100%;
+      input {
+        &::-webkit-input-placeholder{
+          color: $inputPlaceHolderColor;
+        }
+        &::-moz-placeholder{  //不知道为何火狐的placeholder的颜色是粉红色，怎么改都不行，希望有大牛路过帮忙指点
+          color: $inputPlaceHolderColor;
+        }
+        &:-ms-input-placeholder{  //由于我的IE刚好是IE9，支持不了placeholder，所以也测试不了(⊙﹏⊙)，有IE10以上的娃可以帮我试试
+          color: $inputPlaceHolderColor;
+        }
+      }
+      .warring_tip {
+        font-size: 14px;
+        color: $priceActiveColor;
+        padding-left: 0.2rem;
+        position: absolute;
+        bottom: -1rem;
+        left: 0;
+      }
+      .telphone {
+        width: 100%;
+        height: 1.6rem;
+        display: block;
+        margin-top: 2.7rem;
+        padding-left: 0.2rem;
+        }
+        .line {
+          width: 200%;
+          height: 1px;
+          position: absolute;
+          bottom: 0;
+          left: -50%;
+          -webkit-transform: scale(0.5);
+          transform: scale(0.5);
+          background-color: #ccc;
+        }
+      }
+    .submit_btn {
+      padding-top: 1.7rem;
+    }
+  }
+}
+
+@keyframes scaleImg {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

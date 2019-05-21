@@ -5,6 +5,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
+  z-index: 11;
   background-color: #fff;
   .bottom_nav_item {
     text-align: center;
@@ -23,8 +24,16 @@
     }
     .item_label {
       color: $morenColor;
-      font-size: 14px;
+      font-size: 12px;
       padding-bottom: 0.25rem;
+    }
+    .router-link-active {
+      .icon_bx {
+        color: $themeColor;
+      }
+      .item_label {
+        color: $themeColor;
+      }
     }
   }
 }
