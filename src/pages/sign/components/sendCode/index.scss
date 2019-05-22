@@ -1,0 +1,13 @@
+
+.send_code_bx {
+  position: absolute;
+  @include positionMiddle;
+  right: 0;
+  .send_code_btn {
+    color: $themeColor;
+    font-size: 14px;
+  }
+  .count_down {
+    @extend .send_code_btn;
+  }
+}

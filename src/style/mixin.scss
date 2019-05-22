@@ -41,7 +41,7 @@ $priceActiveColor: #e65634;
   -webkit-animation:$aniName $time $type; /* Safari 和 Chrome */
 }
 // 元素上下左右居中
-@mixin positionMiddle {
+@mixin positionCenter {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -50,6 +50,16 @@ $priceActiveColor: #e65634;
   -moz-transform: translate(-50%, -50%); 	/* Firefox */
   -webkit-transform: translate(-50%, -50%); /* Safari 和 Chrome */
   -o-transform: translate(-50%, -50%); 	/* Opera */
+}
+// 元素上下居中
+@mixin positionMiddle {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%); 	/* IE 9 */
+  -moz-transform: translateY(-50%); 	/* Firefox */
+  -webkit-transform: translateY(-50%); /* Safari 和 Chrome */
+  -o-transform: translateY(-50%); 	/* Opera */
 }
 
 //定位全屏

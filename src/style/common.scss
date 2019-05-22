@@ -5,7 +5,7 @@ body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, l
   font-style: normal;
   text-decoration: none;
   border: none;
-  color: #333;
+  // color: #333;
   font-weight: normal;
   font-family: "Microsoft Yahei";
   box-sizing: border-box;
@@ -108,4 +108,18 @@ html,body{
 
 .animation_opactiy{
   animation: backOpacity 2s ease-in-out infinite;
+}
+
+// cube-uivalidator的样式覆盖
+.cube-validator-msg-def {
+  text-align: left;
+  display: block;
+  padding-left: 0.2rem;
+  position: absolute;
+  bottom: -1rem;
+  left: 0;
+}
+
+.cube-btn_disabled::after {
+  border: 0 none !important;
 }

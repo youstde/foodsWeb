@@ -32,12 +32,12 @@
           {
             label: '购物车',
             icon_class: 'cart-moren',
-            link: 'msite'
+            link: '/msite'
           },
           {
             label: '我的',
             icon_class: 'my-moren',
-            link: 'msite'
+            link: '/myzoe'
           }
         ]
       }

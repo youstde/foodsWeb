@@ -74,7 +74,7 @@ import { setTimeout } from 'timers';
         goodslist: [
           {
             id: 1,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/test12323.jpg',
             title: '精选优质黄瓜',
             odderPrice: '14.6/斤',
             cheapPrice: '1.46/斤'

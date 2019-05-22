@@ -2,6 +2,7 @@
 .sign_bx {
   height: 100%;
   background-color: #fff;
+  position: relative;
   .banner_bx {
     width: 100%;
     height: 11.8rem;
@@ -18,7 +19,7 @@
     }
     .title {
       width: 12rem;
-      @include positionMiddle;
+      @include positionCenter;
       img {
         width: 100%;
         height: auto;
@@ -57,34 +58,43 @@
           color: $inputPlaceHolderColor;
         }
       }
-      .warring_tip {
-        font-size: 14px;
-        color: $priceActiveColor;
-        padding-left: 0.2rem;
-        position: absolute;
-        bottom: -1rem;
-        left: 0;
-      }
       .telphone {
+        font-size: 14px;
         width: 100%;
         height: 1.6rem;
         display: block;
         margin-top: 2.7rem;
         padding-left: 0.2rem;
-        }
-        .line {
-          width: 200%;
-          height: 1px;
-          position: absolute;
-          bottom: 0;
-          left: -50%;
-          -webkit-transform: scale(0.5);
-          transform: scale(0.5);
-          background-color: #ccc;
-        }
       }
+      .telphone_code {
+        @extend .telphone;
+        width: 75%;
+      }
+      .line {
+        width: 200%;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: -50%;
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
+        background-color: #ccc;
+      }
+    }
     .submit_btn {
       padding-top: 1.7rem;
+    }
+  }
+  .statement {
+    width: 100%;
+    text-align: center;
+    color: $inputPlaceHolderColor;
+    font-size: 12px;
+    position: absolute;
+    bottom: 1.5rem;
+    left: 0;
+    a {
+      color: $themeColor;
     }
   }
 }

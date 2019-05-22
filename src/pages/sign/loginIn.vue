@@ -8,63 +8,112 @@
     </div>
     <div class="login_form">
       <div class='input_bx'>
-        <input class='telphone' v-model="telphone" type="number" placeholder="请输入手机号" />
-        <span class='warring_tip'>请输入正确的手机号</span>
+        <cube-validator ref='phoneValidator' :model="telphone" :rules="phoneRules" :messages="phoneMessages">
+          <input class='telphone' v-model="telphone" type="number" placeholder="请输入手机号" />
+        </cube-validator>
         <span class='line'></span>
       </div>
       <div class='input_bx'>
-        <input class='telphone' v-model="phoneCode" type="number" placeholder="请输入验证码" />
-        <span class='warring_tip'>请输入正确的手机号</span>
+        <cube-validator ref='codeValidator' :model="phoneCode" :rules="codeRules" :messages="codeMessages">
+          <input class='telphone_code' v-model="phoneCode" type="number" placeholder="请输入验证码" />
+          <send-code></send-code>
+        </cube-validator>
         <span class='line'></span>
       </div>
-      <div class='submit_btn'><cube-button>确定</cube-button></div>
+      <div class='submit_btn'><cube-button :disabled='isSending' @click='submit'>确定</cube-button></div>
     </div>
+    <toast-type :type='showToastType' :message='toastTypeValue' :showToast='showWarningToast' :onHide="onHide"></toast-type>
+    <div class='statement'>登录即代表你同意<router-link to='/statement'>《用户使用条款和隐私声明》</router-link></div>
   </div>
 </template>
 
 <script>
+  import ToastType from '@/components/toastType/toastType'
+  import SendCode from './components/sendCode/sendCode'
+  import { login } from './service'
 
   export default {
     name: 'sign',
+    components: {
+      ToastType,
+      SendCode
+    },
     data () {
       return {
+        showWarningToast:false,
+        isSending: false,
+        showToastType: '',
+        toastTypeValue: '',
         telphone: '',
         phoneCode: '',
-        validity: {
-          telphone: {
-            rule: /^1[34578]\d{9}$/,
-            message: '请输入正确手机号'
-          },
-          phoneCode: {
-            rule: /(^\s*)|(\s*$)/g,
-            message: '请输入正确格式的验证码'
+        phoneRules: {
+          required: true,
+          type: 'number',
+          pattern: /^1[34578]\d{9}$/
+        },
+        phoneMessages: {
+          pattern: '请输入正确手机号'
+        },
+        codeRules: {
+          required: true,
+          type: 'number',
+          custom: (val) => {
+            return val.length === 6
           }
+        },
+        codeMessages: {
+          custom: '验证码长度应为6'
         }
       }
     },
     mounted() {
-      this.$store.commit('SET_IS_LOADING', false)
+      this.$store.commit('SET_IS_LOADING', false);
     },
     methods: {
-      checkPhone() {
-        //去首尾空格
-        let phone = this.userPhone.replace(/(^\s*)|(\s*$)/g, '');
-        if(!/^1[34578]\d{9}$/.test(phone)) {
-
-          this.checkUserPhone = false;
-          return;
-        }
-        this.checkUserPhone = true;
+      submit() {
+        const { phoneCode, telphone } = this;
+        const vPhone = this.$refs.phoneValidator.validate()
+        const vCode = this.$refs.codeValidator.validate()
+        let isLegal = true
+        this.isSending = true;
+        Promise.all([vPhone, vCode]).then((validResult) => {
+          validResult.some((valid) => {
+            if(!valid) isLegal = false
+            return !valid
+          })
+          if(isLegal) {
+            // 发送请求
+            login({
+              t: 'login',
+              mobile: telphone,
+              code: phoneCode,
+              c: 'weixin'
+            }).then((res) => {
+              if(res.errcode === 0) {
+                this.onShowToast('success', '登录成功!')
+              } else {
+                const toast = this.$createToast({
+                  txt: res.message,
+                  type: 'error'
+                })
+                toast.show()
+              }
+            })
+          } else {
+            // 警告提醒
+            this.onShowToast('warn', '请输入完整的的信息')
+          }
+          this.isSending = false;
+        })
       },
-      checkPwd() {
-        let userPwd = this.userPwd.replace(/(^\s*)|(\s*$)/g, '');
-        if(/\s+/.test(userPwd)) {
-
-          this.checkUserPwd = false;
-          return;
-        }
-        this.checkUserPwd = true;
+      onShowToast(type, value) {
+        this.showToastType = type
+        this.toastTypeValue = value
+        this.showWarningToast = true
       },
+      onHide() {
+        this.showWarningToast = false
+      }
     }
   }
 </script>
