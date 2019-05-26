@@ -27,3 +27,9 @@ function sort_ASCII(obj){
   }))
 
 ```
+
+### slot插槽的使用
+```js
+// 类似于react中this.props.children
+https://cn.vuejs.org/v2/guide/components-slots.html
+```

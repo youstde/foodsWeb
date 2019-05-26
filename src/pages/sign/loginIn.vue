@@ -67,7 +67,7 @@
       }
     },
     mounted() {
-      this.$store.commit('SET_IS_LOADING', false);
+
     },
     methods: {
       submit() {

@@ -36,6 +36,22 @@ $priceActiveColor: #e65634;
     border-radius: $radius;
 }
 
+// inputplaceholder颜色
+@mixin placeholderStyle($color) {
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &:-moz-placeholder {/* Firefox 18- */
+    color: $color;
+  }
+  &::-moz-placeholder{/* Firefox 19+ */
+   color: $color;
+  }
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+}
+
 @mixin animate($aniName, $time, $type) {
   animation:$aniName $time $type;
   -webkit-animation:$aniName $time $type; /* Safari 和 Chrome */

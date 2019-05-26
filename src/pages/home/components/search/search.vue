@@ -1,6 +1,6 @@
 <template>
   <div class='search_bx'>
-    <router-link to='/toggleshop'>
+    <router-link to='/search'>
       <span class='icon_bx'><svg-icon iconClass='search' /></span>
       <span class='search_label'>搜索</span>
     </router-link>

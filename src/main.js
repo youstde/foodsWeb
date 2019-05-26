@@ -7,14 +7,12 @@ import '@/util/rem'
 import store from './store/'
 import router from './router'
 import '@/components/svgIcon/svgIn.js'
-import baseLoading from '@/components/loading/loading.vue'
 import svgIcon from '@/components/svgIcon/svgIcon.vue'
 // import 'cube-ui/lib/style.css'
 import Cube from 'cube-ui'
 
 Vue.use(Cube)
 
-Vue.component('base-loading', baseLoading)
 Vue.component('svg-icon', svgIcon)
 Vue.config.productionTip = false
 window.a =123

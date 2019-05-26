@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-    <vue-tip type="tip.type" message="tip.message"></vue-tip>
-    <base-loading></base-loading>
     <router-view/>
   </div>
 </template>
 
 <script>
-  import vueTip from '@/components/tip/tip.vue';
+
   export default {
     name: 'App',
     data() {
@@ -19,7 +17,7 @@
     mounted() {
     },
     components: {
-      vueTip
+
     }
   }
 </script>

@@ -7,18 +7,25 @@
         :options='scrollOptions'
         @pulling-down='onPullingDown'
         @pulling-up='onPullingUp'>
-        <nav class='home_banner'>
+        <div class='home_banner_outbx'>
+          <div class='home_banner_swiper_bx'><home-banner></home-banner></div>
+          <!-- S=门店切换 -->
           <div class='home_top_container'>
             <router-link class='shop_name' to='/toggleshop'>
               {{shop}}
               <span class='icon_bx'><svg-icon iconClass='arrowdown' /></span>
             </router-link>
-            </div>
-            <search />
-            <div class='home_nav_bx'>
-              <HomeNav />
-            </div>
-        </nav>
+          </div>
+          <!-- E=门店切换 -->
+          <!-- S=搜索 -->
+          <div class='search_out_bx'><search /></div>
+          <!-- E=搜索 -->
+          <!-- S=顶部导航 -->
+          <div class='home_nav_bx'>
+            <HomeNav />
+          </div>
+          <!-- E=顶部导航 -->
+        </div>
         <div class='center_container'>
           <!-- S=快讯 -->
           <fast-news />
@@ -26,7 +33,10 @@
         </div>
         <!-- S=限时优惠 -->
         <div class='time_discount'>
-          <div class='title'>限时优惠</div>
+          <div class='title'>
+            <span>限时优惠</span>
+            <span class='get_more'><router-link to='/list'>查看更多 ></router-link></span>
+          </div>
           <time-discount />
         </div>
         <!-- E=限时优惠 -->
@@ -37,13 +47,16 @@
       </cube-scroll>
      </div>
      <bottom-nav />
+     <base-loading />
   </div>
 </template>
 
 <script>
+  import BaseLoading from '@/components/loading/loading.vue'
   import tools from '@/util/tools'
   import BottomNav from '@/components/bottomNav/bottomNav'
-  import Search from '@/components/search/search'
+  import Search from './components/search/search'
+  import HomeBanner from './components/homeBanner/homeBanner'
   import HomeNav from './components/homeNav/homeNav'
   import FastNews from './components/fastNews/fastNews'
   import TimeDiscount from './components/timeDiscount/timeDiscount'
@@ -54,6 +67,8 @@ import { setTimeout } from 'timers';
   export default {
     name: 'home',
     components: {
+      BaseLoading,
+      HomeBanner,
       BottomNav,
       Search,
       HomeNav,

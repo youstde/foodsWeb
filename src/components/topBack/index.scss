@@ -1,0 +1,19 @@
+.top_back_bx {
+  padding-left: 0.9rem;
+  padding-top: 0.5rem;
+  padding-right: 0.55rem;
+  .left_bx {
+    float: left;
+    width: 1rem;
+    position: relative;
+  }
+  .right_bx {
+    float: left;
+  }
+  .icon_bx {
+    width: 0.7rem;
+    height: 0.7rem;
+    display: inline-block;
+    @include positionCenter;
+  }
+}

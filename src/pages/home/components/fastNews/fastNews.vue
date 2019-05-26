@@ -62,8 +62,9 @@
     },
     mounted() {
       var mySwiper = new Swiper('#fast_news_swiper', {
+        direction : 'vertical',
         autoplay:{
-            delay: 5000,
+            delay: 4000,
             disableOnInteraction: false,
         },//可选选项，自动滑动
         loop : true,
