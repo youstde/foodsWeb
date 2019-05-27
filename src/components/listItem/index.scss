@@ -1,0 +1,38 @@
+.landscape_list_item {
+  height: 6.35rem;
+  padding: 0.75rem 0.65rem;
+  position: relative;
+  @include halfUnderLine;
+  .item_left {
+    float: left;
+    img {
+      display: block;
+      width: 4.75rem;
+      height: 4.75rem;
+    }
+    padding-right: 0.75rem;
+  }
+  .item_right {
+    text-align: left;
+    float: left;
+    .title {
+      font-size: 14px;
+    }
+    .price {
+      padding-top: 0.7rem;
+      font-weight: 700;
+      font-size: 12px;
+      color: $priceActiveColor;
+    }
+  }
+  .goods_car_bx {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.65rem;
+  }
+  .input_num_bx {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.65rem;
+  }
+}

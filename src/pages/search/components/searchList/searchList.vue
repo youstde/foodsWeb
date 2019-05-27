@@ -1,24 +1,124 @@
 <template>
   <div class='search_list'>
-    <list-item />
+    <condition-tab />
+    <div class="scroll_bx">
+      <cube-scroll
+        ref='scroll'
+        :data='lists'
+        :options='scrollOptions'
+        @pulling-up='onPullingUp'>
+        <list-item
+         :itemObj='item'
+         v-for='(item,i) in lists'
+         :key='i'
+         :disableScoll='disableScoll'
+         :blurFun='enableScroll'  />
+      </cube-scroll>
+    </div>
   </div>
 </template>
 
 <script>
+  import ConditionTab from '../conditionTab/conditionTab'
   import ListItem from '@/components/listItem/listItem'
 
   export default {
     name: 'search-list',
     components: {
-      ListItem
+      ListItem,
+      ConditionTab
     },
     data () {
       return {
-
+        pullUpLoadIndex: 1,
+        scrollOptions: {
+          pullDownRefresh: false,
+          pullUpLoad: true,
+          scrollbar: true
+        },
+        lists: [
+          {
+            id: 1,
+            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            title: '鲁花家香味浓压榨籽油',
+            price: '39.9/瓶'
+          },
+          {
+            id: 2,
+            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            title: '鲁花家香味浓压榨籽油',
+            price: '39.9/瓶'
+          },
+          {
+            id: 3,
+            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            title: '鲁花家香味浓压榨籽油',
+            price: '39.9/瓶'
+          },
+          {
+            id: 4,
+            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            title: '鲁花家香味浓压榨籽油',
+            price: '39.9/瓶'
+          },
+          {
+            id: 5,
+            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            title: '鲁花家香味浓压榨籽油',
+            price: '39.9/瓶'
+          },
+          {
+            id: 6,
+            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            title: '鲁花家香味浓压榨籽油',
+            price: '39.9/瓶'
+          },
+          {
+            id: 7,
+            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            title: '鲁花家香味浓压榨籽油',
+            price: '39.9/瓶'
+          }
+        ]
       }
     },
-    methods: {
+    mounted() {
 
+    },
+    methods: {
+      disableScoll() {
+        this.$refs.scroll.disable()
+      },
+      enableScroll() {
+        this.$refs.scroll.enable()
+      },
+      onPullingUp() {
+        // 更新数据
+        console.log(111)
+        this.lists = this.lists.concat([
+          {
+            id: Date.now(),
+            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            title: '鲁花家香味浓压榨籽油',
+            price: '39.9/瓶'
+          },
+          {
+            id: Date.now(),
+            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            title: '鲁花家香味浓压榨籽油',
+            price: '39.9/瓶'
+          },
+          {
+            id: Date.now(),
+            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            title: '鲁花家香味浓压榨籽油',
+            price: '39.9/瓶'
+          }
+        ])
+        const { pullUpLoadIndex } = this;
+        this.pullUpLoadIndex = pullUpLoadIndex + 1;
+        this.$refs.scroll.refresh()
+      },
     }
   }
 </script>

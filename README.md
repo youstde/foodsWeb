@@ -33,3 +33,9 @@ function sort_ASCII(obj){
 // 类似于react中this.props.children
 https://cn.vuejs.org/v2/guide/components-slots.html
 ```
+
+### 移动端控制键盘的显隐
+[移动端控制键盘的显隐](https://www.cnblogs.com/matthew9298-Begin20160224/p/5951904.html)
+
+###
+[ios input输入时弹出键盘框 页面整体上移键盘框消失后页面不能回弹的问题](https://blog.csdn.net/zhangkeke_/article/details/88739521)

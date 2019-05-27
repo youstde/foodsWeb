@@ -1,6 +1,6 @@
 .search_bx {
   height: 100%;
-  background-color: #fff;
+  // background-color: #fff;
   .search_right_lbx {
     position: relative;
     .icon_bx {
@@ -21,8 +21,13 @@
       @include boxSizing;
       @include placeholderStyle(#9b9b9b);
     }
+    .haveCarBtn {
+      width: 13.25rem;
+    }
   }
   .label_container {
     padding: 0 0.675rem;
+    height: 100%;
+    background-color: #fff;
   }
 }

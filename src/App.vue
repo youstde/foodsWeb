@@ -15,8 +15,6 @@
       }
     },
     mounted() {
-    },
-    components: {
 
     }
   }
@@ -55,6 +53,7 @@
     height:100%;
     // margin-bottom: 2.5rem;
   }
+
   // cube-Ui样式覆盖
   .cube-btn {
     padding: 0.6rem 0 !important;

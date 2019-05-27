@@ -47,12 +47,11 @@
       </cube-scroll>
      </div>
      <bottom-nav />
-     <base-loading />
   </div>
 </template>
 
 <script>
-  import BaseLoading from '@/components/loading/loading.vue'
+  import { mapState } from 'vuex'
   import tools from '@/util/tools'
   import BottomNav from '@/components/bottomNav/bottomNav'
   import Search from './components/search/search'
@@ -67,7 +66,6 @@ import { setTimeout } from 'timers';
   export default {
     name: 'home',
     components: {
-      BaseLoading,
       HomeBanner,
       BottomNav,
       Search,
@@ -78,9 +76,10 @@ import { setTimeout } from 'timers';
     },
     data () {
       return {
+        isLoading: true,
         userData: '',
         shop: '东昌路店',
-        pullUpLoadIndex: 0, // 商品列表下拉的页数
+        pullUpLoadIndex: 1, // 商品列表下拉的页数
         scrollOptions: {
           pullDownRefresh: true,
           pullUpLoad: true,
@@ -152,7 +151,7 @@ import { setTimeout } from 'timers';
 //      ])
 //    },
     mounted() {
-      this.$store.commit('SET_IS_LOADING', false)
+
     },
     methods: {
       onPullingDown() {

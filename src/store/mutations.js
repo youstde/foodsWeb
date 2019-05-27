@@ -5,7 +5,7 @@ export const SET_LABELS = (state, value) => {
   state.labels = value;
 }
 
-export const SET_IS_LOADING = (state, value) => {
-  state.isLoading = value;
+export const SET_ISFIRSTLOADING = (state, value) => {
+  state.isFirstLoading = value;
 }
 

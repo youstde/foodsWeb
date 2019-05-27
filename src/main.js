@@ -13,6 +13,10 @@ import Cube from 'cube-ui'
 
 Vue.use(Cube)
 
+// router.beforeEach((to, from, next) => {
+//   next()
+// })
+
 Vue.component('svg-icon', svgIcon)
 Vue.config.productionTip = false
 window.a =123

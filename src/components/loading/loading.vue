@@ -8,13 +8,15 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
 import { setTimeout } from 'timers';
   export default {
     name: 'base-loading',
+    props: [
+      'isLoading'
+    ],
     data () {
       return {
-        closeLoading: false
+        closeLoading: false,
       }
     },
     watch: {
@@ -29,11 +31,6 @@ import { setTimeout } from 'timers';
     mounted() {
 
     },
-     computed: {
-       ...mapState([
-        'isLoading'
-      ])
-     },
     methods: {
 
     }
