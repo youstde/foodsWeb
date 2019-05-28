@@ -1,6 +1,10 @@
 .top_back_bx {
-  padding: 0.5rem 0.55rem 0.8rem 0.9rem;
+  padding-top: 0.5rem;
+  padding-left: 0.9rem;
+  padding-right: 0.55rem;
   background-color: #fff;
+  position: relative;
+  z-index: 11;
   .left_bx {
     float: left;
     width: 1rem;
@@ -8,6 +12,7 @@
   }
   .right_bx {
     float: left;
+    position: relative;
   }
   .icon_bx {
     width: 0.7rem;

@@ -4,6 +4,8 @@ const home = r => require.ensure([], () => r(require('../pages/home/home')), 'ho
 const loginIn = r => require.ensure([], () => r(require('../pages/sign/loginIn')), 'loginIn')
 const myZoe = r => require.ensure([], () => r(require('../pages/myZoe/myZoe')), 'myZoe')
 const search = r => require.ensure([], () => r(require('../pages/search/search')), 'search')
+const toggleShop = r => require.ensure([], () => r(require('../pages/toggleShop/toggleShop')), 'toggleShop')
+const goodsClassify = r => require.ensure([], () => r(require('../pages/goodsClassify/goodsClassify')), 'goodsClassify')
 const write = r => require.ensure([], () => r(require('../pages/write/write')), 'write')
 const articleDetail = r => require.ensure([], () => r(require('../pages/articleDetail/articleDetail')), 'articleDetail')
 
@@ -34,6 +36,16 @@ export default new Router({
       path: '/search',
       name: 'search',
       component: search
+    },
+    {
+      path: '/toggleshop',
+      name: 'toggleShop',
+      component: toggleShop
+    },
+    {
+      path: '/goodsclassify',
+      name: 'goodsClassify',
+      component: goodsClassify
     },
     {
       path: '/write',

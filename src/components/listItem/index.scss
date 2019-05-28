@@ -29,6 +29,13 @@
     position: absolute;
     bottom: 0.75rem;
     right: 0.65rem;
+    .buy_btn {
+      font-size: 14px;
+      color: #fff;
+      background-color: $themeColor;
+      padding: 0.5rem 1rem;
+      @include borderRadius(21px);
+    }
   }
   .input_num_bx {
     position: absolute;

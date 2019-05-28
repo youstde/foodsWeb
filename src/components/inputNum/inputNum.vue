@@ -87,8 +87,8 @@
   .input_num {
     .minus_bt {
       float: left;
-      width: 1.1rem;
-      height: 1.15rem;
+      width: 1.6rem;
+      height: 1.6rem;
       position: relative;
       @include halfLeftLine;
       @include halfRightLine;
@@ -102,13 +102,13 @@
       font-size: 0.8rem;
       float: left;
       width: 1.5rem;
-      height: 1.15rem;
+      height: 1.6rem;
       text-align: center;
     }
     .add_bt {
       float: left;
-      width: 1.1rem;
-      height: 1.15rem;
+      width: 1.6rem;
+      height: 1.6rem;
       position: relative;
       @include halfLeftLine;
       @include halfRightLine;

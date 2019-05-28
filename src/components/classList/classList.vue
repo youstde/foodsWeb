@@ -1,5 +1,5 @@
 <template>
-  <div class='search_list'>
+  <div class='class_list'>
     <condition-tab />
     <div class="scroll_bx">
       <cube-scroll
@@ -19,11 +19,11 @@
 </template>
 
 <script>
-  import ConditionTab from '../conditionTab/conditionTab'
+  import ConditionTab from '@/components/conditionTab/conditionTab'
   import ListItem from '@/components/listItem/listItem'
 
   export default {
-    name: 'search-list',
+    name: 'class-list',
     components: {
       ListItem,
       ConditionTab

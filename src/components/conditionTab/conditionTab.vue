@@ -18,6 +18,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
 
   export default {
     name: 'condition-tab',
@@ -29,13 +30,26 @@
         showSlide: false,
       }
     },
+    watch: {
+      isShowCover(value) {
+        if(!value) {
+          this.showSlide = false
+        }
+      }
+    },
     methods: {
 
+    },
+    computed: {
+      ...mapGetters([
+        'isShowCover'
+      ])
     },
     methods: {
       toggleSlideState() {
         const { showSlide } = this
         this.showSlide = !showSlide
+        this.$store.commit('SET_IS_SHOW_COVER', !showSlide)
       }
     }
   }

@@ -1,0 +1,49 @@
+.goods_classify {
+  height: 100%;
+  background-color: #fff;
+  overflow: hidden;
+  position: relative;
+  .scroll_out_bx {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .right_arrow_bx {
+    width: 1rem;
+    height: 1.95rem;
+    position: absolute;
+    top: 0;
+    left: 15rem;
+    z-index: 11;
+    background-color: #fff;
+    span {
+      width: 0.6rem;
+      height: 0.6rem;
+      @include positionCenter;
+    }
+  }
+  .top_nav_list_bx {
+    width: 100%;
+    position: absolute;
+    top: 2.45rem;
+    left: 0;
+    z-index: 12;
+    padding: 0.4rem 0.3rem;
+    text-align: left;
+    background-color: #fff;
+    @include halfTopLine;
+    .list_item {
+      font-size: 12px;
+      display: inline-block;
+      padding: 0.2rem 0.45rem;
+      border: 1px solid #f1f1f1;
+      margin: 0.5rem 0.3rem;
+      @include borderRadius(18px);
+    }
+    .active_item {
+      color: #fff;
+      background-color: $themeColor;
+    }
+  }
+}
+

@@ -1,0 +1,28 @@
+.scroll_nav {
+  .swiper-container {
+    width: 15.5rem;
+  }
+  .swiper-slide {
+    font-size: 12px;
+    height: 1.95rem;
+    line-height: 1.95rem;
+    .active_item {
+      font-size: 0.75rem;
+      &::after {
+        content: '';
+        width: 60%;
+        height: 1px;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        -ms-transform: translateX(-50%); 	/* IE 9 */
+        -moz-transform: translateX(-50%); 	/* Firefox */
+        -webkit-transform: translateX(-50%); /* Safari 和 Chrome */
+        -o-transform: translateX(-50%); 	/* Opera */
+        background-color: green;
+      }
+    }
+  }
+
+}

@@ -9,3 +9,7 @@ export const SET_ISFIRSTLOADING = (state, value) => {
   state.isFirstLoading = value;
 }
 
+export const SET_IS_SHOW_COVER = (state, value) => {
+  state.isShowCover = value;
+}
+

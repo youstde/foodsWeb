@@ -8,7 +8,7 @@
       <div class='price'>{{itemObj.price}}</div>
     </div>
     <div v-if='isShowCar' class='goods_car_bx' :data-id='itemObj.id' @click='addCar'>
-      <goods-car></goods-car>
+      <div class='buy_btn'>购买</div>
     </div>
     <div v-else class='input_num_bx'>
       <input-num :changeBack='changeBack' :blurBack='blurBack'></input-num>

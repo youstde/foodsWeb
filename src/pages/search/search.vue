@@ -1,6 +1,6 @@
 <template>
   <div class='search_bx'>
-    <top-back heightNum='1.95rem'>
+    <top-back heightNum='1.95rem' paddingBtm='0.8rem'>
       <div class="search_right_lbx">
         <span class='icon_bx'><svg-icon iconClass='search'></svg-icon></span>
         <input :class='{search_input: true, haveCarBtn:haveCarBtn}' ref='searchInput' type='text' placeholder="搜索" v-model="searchKey" @input='searchInput'  @keypress="searchGoods" />
@@ -15,7 +15,7 @@
     <!-- E=搜索标签 -->
     <!-- S=搜索列表 -->
     <div class="search_list_bx" v-else>
-      <search-list />
+      <class-list />
     </div>
     <!-- E=搜索列表 -->
      <toast v-model="showSearchToast" type='text' text='请输入搜索内容'></toast>
@@ -27,7 +27,7 @@
   import TopBack from '@/components/topBack/topBack'
   import HotLabel from './components/hotLabel/hotLabel'
   import HistoryLabel from './components/historyLabel/historyLabel'
-  import SearchList from './components/searchList/searchList'
+  import ClassList from '@/components/classList/classList'
 
   export default {
     name: 'search',
@@ -35,7 +35,7 @@
       TopBack,
       HotLabel,
       HistoryLabel,
-      SearchList,
+      ClassList,
       Flexbox,
       FlexboxItem,
       Toast

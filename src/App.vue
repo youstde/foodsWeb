@@ -1,10 +1,12 @@
 <template>
   <div id="app">
     <router-view/>
+    <div v-if='isShowCover' class="coverage_bx" @touchmove.prevent @click='closeCover'></div>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'App',
@@ -16,6 +18,17 @@
     },
     mounted() {
 
+    },
+    computed: {
+      ...mapGetters([
+        'isShowCover'
+      ])
+    },
+    methods: {
+      closeCover() {
+        console.log('close')
+        this.$store.commit('SET_IS_SHOW_COVER', false)
+      }
     }
   }
 </script>
@@ -49,9 +62,18 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
     height:100%;
     // margin-bottom: 2.5rem;
+  }
+
+  .coverage_bx {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.4);
   }
 
   // cube-Ui样式覆盖

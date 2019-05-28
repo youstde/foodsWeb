@@ -1,0 +1,63 @@
+.toggle_shop {
+  height: 100%;
+  background-color: #fff;
+  .toggle_top_bx {
+    text-align: left;
+    padding: 0 0.65rem;
+    height: 2.5rem;
+    position: relative;
+    @include halfUnderLine;
+    .active_shop {
+      height: 100%;
+      line-height: 2.5rem;
+      display: inline-block;
+      position: relative;
+      font-size: 14px;
+      font-weight: 700;
+      .arrow_icon {
+        width: 0.6rem;
+        height: 0.6rem;
+        @include positionMiddle;
+        right: -0.7rem;
+      }
+    }
+    .cancel_btn {
+      font-size: 12px;
+      height: 2.5rem;
+      line-height: 2.5rem;
+      position: absolute;
+      right: 0.65rem;
+      top: 0;
+    }
+  }
+  .shop_list {
+    .toggle_tip {
+      text-align: left;
+      height: 2.5rem;
+      padding: 1.4rem 0.65rem 0;
+      color: $inputPlaceHolderColor;
+      font-size: 12px;
+      position: relative;
+      @include halfUnderLine;
+    }
+    .shop_item {
+      height: 3.15rem;
+      text-align: left;
+      position: relative;
+      @include halfUnderLine;
+      padding: 0 0.65rem;
+      .item_shop_name {
+        font-size: 0.75rem;
+        padding-top: 0.7rem;
+        padding-bottom: 0.15rem;
+        @include textSingleShow;
+      }
+      .item_shop_adress {
+        line-height: 1.3;
+        color: $inputPlaceHolderColor;
+        font-size: 12px;
+        @include txtLineShow(2);
+      }
+    }
+  }
+}

@@ -12,7 +12,8 @@ const state = {
     messgae: 'xixi',
     labels: []
   },
-  isFirstLoading: true
+  isFirstLoading: true,
+  isShowCover: false
 }
 
 export default new Vuex.Store({

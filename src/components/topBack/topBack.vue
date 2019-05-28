@@ -1,5 +1,5 @@
 <template>
-  <div class='top_back_bx clear'>
+  <div class='top_back_bx clear' :style='{paddingBottom:paddingBtm}'>
     <div class="left_bx" :style='{height:heightNum}'>
       <span class='icon_bx'><svg-icon iconClass='back'></svg-icon></span>
     </div>
@@ -15,7 +15,8 @@
 
     },
     props: [
-      'heightNum'
+      'heightNum',
+      'paddingBtm'
     ],
     data () {
       return {
