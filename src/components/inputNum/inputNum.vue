@@ -93,6 +93,7 @@
       @include halfLeftLine;
       @include halfRightLine;
       .icon_bx {
+        color: #9b9b9b;
         width: 0.5rem;
         height: 0.5rem;
         @include positionCenter;
@@ -113,6 +114,7 @@
       @include halfLeftLine;
       @include halfRightLine;
       .icon_bx {
+        color: #9b9b9b;
         width: 0.5rem;
         height: 0.5rem;
         @include positionCenter;
