@@ -9,7 +9,6 @@
   .append_car_left {
     height: 2.2rem;
     position: relative;
-    @include halfTopLine;
     .icon_bx {
       width: 0.95rem;
       height: 0.95rem;
@@ -46,7 +45,6 @@
       height: 2.2rem;
       margin-left: 0 !important;
       color: $themeColor;
-      @include halfTopLine;
       .opera_icon_bx {
         width: 1.9rem;
         height: 2.2rem;
@@ -59,6 +57,7 @@
         }
       }
       .num_input {
+        text-align: center;
         font-weight: 700;
         color: $themeColor;
         font-size: 0.75rem;
@@ -67,14 +66,49 @@
         height: 2.2rem;
         background-color: #fff;
       }
+      input:disabled {
+        background-color: #fff;
+        color: $themeColor;
+        opacity: 1;
+        -webkit-text-fill-color: $themeColor;
+        -webkit-opacity: 1;
+      }
     }
   }
   .key_borad {
     width: 100%;
-    height: 5rem;
     background-color: #fff;
     position: absolute;
-    bottom: 2.2rem;
+    bottom: 2.175rem;
     left: 0;
+    .title {
+      height: 2rem;
+      line-height: 2rem;
+      color: #9b9b9b;
+      font-size: 12px;
+      text-align: left;
+      padding-left: 0.7rem;
+    }
+    .keys_out_bx {
+      width: 100%;
+      height: auto;
+    }
+    .borad_item {
+      height: 2.5rem;
+      line-height: 2.5rem;
+      text-align: center;
+      margin-left: 0 !important;
+      div {
+        font-size: 0.75rem;
+        position: relative;
+        @include halfTopLine;
+        &.have_right_line {
+          @include halfRightLine;
+        }
+        &.active {
+          background-color:#f1f1f1;
+        }
+      }
+    }
   }
 }

@@ -1,0 +1,31 @@
+.goods_detail {
+  height: 100%;
+  overflow: hidden;
+  .go_back_out_bx {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  }
+  .go_home_bx {
+    width: 16rem;
+    height: 1.5rem;
+    position: relative;
+    .go_back_icon_bx {
+      width: 1.5rem;
+      height: 1.5rem;
+      position: absolute;
+      right: 0;
+      top: 0;
+      a {display:block;}
+      background-color: #fff;
+      @include borderRadius(50%);
+      .icon_bx {
+        width: 0.875rem;
+        height: 0.875rem;
+        @include positionCenter;
+      }
+    }
+  }
+}

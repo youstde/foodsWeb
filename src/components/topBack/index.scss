@@ -5,6 +5,16 @@
   background-color: #fff;
   position: relative;
   z-index: 11;
+  &.radis_type {
+    background-color: transparent;
+    .radis_icon_bx {
+      width: 1.5rem;
+      height: 1.5rem;
+      @include borderRadius(50%);
+      background-color: #fff;
+      position: relative;
+    }
+  }
   .left_bx {
     float: left;
     width: 1rem;

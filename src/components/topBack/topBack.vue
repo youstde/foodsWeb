@@ -1,7 +1,10 @@
 <template>
-  <div class='top_back_bx clear' :style='{paddingBottom:paddingBtm}'>
+  <div :class="{top_back_bx:true, clear:true,radis_type:type==='radis'}" :style='{paddingBottom:paddingBtm}'>
     <div class="left_bx" :style='{height:heightNum}'>
-      <span class='icon_bx'><svg-icon iconClass='back'></svg-icon></span>
+      <div v-if="type==='radis'" class='radis_icon_bx'>
+        <span class='icon_bx'><svg-icon iconClass='back'></svg-icon></span>
+      </div>
+      <span v-else class='icon_bx'><svg-icon iconClass='back'></svg-icon></span>
     </div>
     <div class='right_bx'><slot></slot></div>
   </div>
@@ -15,6 +18,7 @@
 
     },
     props: [
+      'type',
       'heightNum',
       'paddingBtm'
     ],

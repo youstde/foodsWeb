@@ -1,0 +1,92 @@
+.detail_swiper_bx {
+  width: 100%;
+  .swiper-container {
+    .swiper-wrapper {
+      .swiper-slide {
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+    .swiper-pagination {
+      width: 20%;
+      position: absolute;
+      left: 50%;
+      top: 94%;
+      transform: translateX(-50%);
+      -ms-transform: translateX(-50%); 	/* IE 9 */
+      -moz-transform: translateX(-50%); 	/* Firefox */
+      -webkit-transform: translateX(-50%); /* Safari 和 Chrome */
+      -o-transform: translateX(-50%); 	/* Opera */
+    }
+    .swiper-pagination-progressbar {
+      background: #eeeeee;
+    }
+  }
+  .detail_swiper_detail {
+    background-color: #fff;
+    padding: 0 0.65rem;
+    .title {
+      padding-top: 0.9rem;
+      font-size: 0.75rem;
+      line-height: 1.5;
+      text-align: left;
+    }
+    .botttom_bx {
+      padding-top: 0.75rem;
+      padding-bottom: 1rem;
+      position: relative;
+      .left_price {
+        text-align: left;
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: $priceActiveColor;
+      }
+      .right_warehouse {
+        @include positionMiddle;
+        right: 0;
+        font-size: 12px;
+      }
+    }
+  }
+  .goods_size {
+    margin-top: 0.3rem;
+    background-color: #fff;
+    padding: 0 0.6rem;
+    .title {
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-align: left;
+      padding-top: 1rem;
+      padding-bottom: 0.5rem;
+      position: relative;
+      @include halfUnderLine;
+    }
+    .size_item {
+      height: 1.55rem;
+      .item_label {
+        height: 1.55rem;
+        line-height: 1.55rem;
+        color: $inputPlaceHolderColor;
+        font-size: 13px;
+        @include textSingleShow;
+      }
+      .item_info {
+        margin-left: 0 !important;
+        height: 1.55rem;
+        line-height: 1.55rem;
+        font-size: 13px;
+        @include textSingleShow;
+      }
+    }
+    .after_flex_bx {
+      margin-left: 0 !important;
+    }
+  }
+  .detail_rich_txt {
+    margin-top: 0.25rem;
+    background-color: #fff;
+    padding-bottom: 2.5rem;
+  }
+}

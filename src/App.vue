@@ -85,4 +85,8 @@
     -o-border-radius: 1.2rem !important;
     border-radius: 1.2rem !important;
   }
+
+  .swiper-pagination-progressbar-fill {
+    background: $themeColor !important;
+  }
 </style>
