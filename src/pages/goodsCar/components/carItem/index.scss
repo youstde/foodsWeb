@@ -1,0 +1,42 @@
+.landscape_list_item {
+  height: 5rem;
+  padding: 0.75rem 0.65rem;
+  margin-bottom: 0.25rem;
+  position: relative;
+  background-color: #fff;
+  @include borderRadius(0.35rem);
+  .flex_item_bx {
+    height: 3.5rem;
+    margin-left: 0 !important;
+    position: relative;
+    .check_in_car {
+      @include positionMiddle;
+    }
+    img {
+      display: block;
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+    .title {
+      font-size: 0.7rem;
+      padding-top: 0.4rem;
+      @include singleLineView;
+    }
+    .price_bx {
+      padding-top: 0.75rem;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: $priceActiveColor;
+    }
+    .car_input_num_out_bx {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+  .input_num_bx {
+    position: absolute;
+    bottom: 0.75rem;
+    right: 0.65rem;
+  }
+}

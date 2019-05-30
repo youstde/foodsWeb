@@ -7,6 +7,7 @@
   left: 0;
   z-index: 11;
   background-color: #fff;
+  @include halfTopLine;
   .bottom_nav_item {
     text-align: center;
     a {

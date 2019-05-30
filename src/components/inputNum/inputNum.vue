@@ -1,6 +1,6 @@
 <template>
-  <div class='input_out_bx clear'>
-      <div class='input_num clear'>
+  <div class='input_out_bx'>
+      <div class='input_num'>
       <div class='minus_bt' @click='deleteNum'>
         <span class='icon_bx'><svg-icon iconClass='jian' /></span>
       </div>
@@ -17,6 +17,7 @@
   export default {
     name: 'input-num',
     props: [
+      'type',
       'changeBack',
       'blurBack'
     ],
@@ -34,8 +35,12 @@
       }
     },
     mounted() {
-      this.changeBack(1)
-      this.$refs.numInput.focus()
+      if(this.type === 'car') {
+        this.changeBack(1)
+      } else {
+        this.changeBack(1)
+        this.$refs.numInput.focus()
+      }
     },
     methods: {
        updateNum(num) {
@@ -85,6 +90,7 @@
     @include halfTopLine;
   }
   .input_num {
+    height: 1.6rem;
     .minus_bt {
       float: left;
       width: 1.6rem;

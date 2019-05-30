@@ -32,7 +32,7 @@
           {
             label: '购物车',
             icon_class: 'cart-moren',
-            link: '/msite'
+            link: '/goodscar'
           },
           {
             label: '我的',

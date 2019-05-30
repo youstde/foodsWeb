@@ -39,3 +39,6 @@ https://cn.vuejs.org/v2/guide/components-slots.html
 
 ###
 [ios input输入时弹出键盘框 页面整体上移键盘框消失后页面不能回弹的问题](https://blog.csdn.net/zhangkeke_/article/details/88739521)
+
+###checkbox在vue中的使用
+[ Vue 复选框 checkbox 全选与取消全选](https://c.runoob.com/codedemo/3870)

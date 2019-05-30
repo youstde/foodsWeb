@@ -17,6 +17,7 @@
     float: left;
     .title {
       font-size: 14px;
+      @include singleLineView;
     }
     .price {
       padding-top: 0.7rem;

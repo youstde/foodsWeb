@@ -1,6 +1,6 @@
 <template>
   <div class='goods_detail'>
-    <div class="go_back_out_bx" ref='goBackOutBx' :style="'background:rgba(255,255,255,'+threshold+')'">
+    <div class="go_back_out_bx">
         <top-back type='radis' heightNum='1.95rem'>
           <div class="go_home_bx">
             <div class="go_back_icon_bx">
@@ -13,8 +13,6 @@
     </div>
     <cube-scroll
         ref='scroll'
-        :scroll-events="['scroll']"
-        @scroll="onScrollHandle"
         :options='scrollOptions'>
       <detail-swiper></detail-swiper>
       </cube-scroll>
@@ -36,7 +34,6 @@
     },
     data () {
       return {
-         threshold: 0,
          scrollOptions: {
           pullDownRefresh: false,
           pullUpLoad: false,
@@ -48,14 +45,7 @@
 
     },
     methods: {
-      onScrollHandle(pos) {
-        const threshold = Math.abs(pos.y/100)
-        if(threshold <= 1) {
-          this.threshold = threshold
-        } else {
-          this.threshold = 1
-        }
-      }
+
     }
   }
 </script>

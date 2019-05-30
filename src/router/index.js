@@ -7,6 +7,7 @@ const search = r => require.ensure([], () => r(require('../pages/search/search')
 const toggleShop = r => require.ensure([], () => r(require('../pages/toggleShop/toggleShop')), 'toggleShop')
 const goodsClassify = r => require.ensure([], () => r(require('../pages/goodsClassify/goodsClassify')), 'goodsClassify')
 const goodsDetail = r => require.ensure([], () => r(require('../pages/goodsDetail/goodsDetail')), 'goodsDetail')
+const goodsCar = r => require.ensure([], () => r(require('../pages/goodsCar/goodsCar')), 'goodsCar')
 const write = r => require.ensure([], () => r(require('../pages/write/write')), 'write')
 const articleDetail = r => require.ensure([], () => r(require('../pages/articleDetail/articleDetail')), 'articleDetail')
 
@@ -52,6 +53,11 @@ export default new Router({
       path: '/goodsdetail',
       name: 'goodsDetail',
       component: goodsDetail
+    },
+    {
+      path: '/goodscar',
+      name: 'goodsCar',
+      component: goodsCar
     },
     {
       path: '/write',
