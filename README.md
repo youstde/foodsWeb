@@ -42,3 +42,6 @@ https://cn.vuejs.org/v2/guide/components-slots.html
 
 ###checkbox在vue中的使用
 [ Vue 复选框 checkbox 全选与取消全选](https://c.runoob.com/codedemo/3870)
+
+###JavaScript 浮点数陷阱及解法
+[JavaScript 浮点数陷阱及解法](https://github.com/camsong/blog/issues/9)

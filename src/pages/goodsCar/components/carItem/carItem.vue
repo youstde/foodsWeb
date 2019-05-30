@@ -13,7 +13,7 @@
       </flexbox-item>
       <flexbox-item class='flex_item_bx' :span='8'>
         <div class="title">{{itemObj.title}}</div>
-        <div class="price_bx">{{itemObj.price}}</div>
+        <div class="price_bx">{{itemObj.price}}/{{itemObj.unit}}</div>
         <div class="car_input_num_out_bx">
           <input-num
           type='car'
@@ -42,8 +42,14 @@
       'itemObj',
       'disableScoll',
       'blurFun',
+      'changeCb',
       'checkList'
     ],
+    watch: {
+      checkList(value) {
+        this.updateMoneyObj(this.goodsNum)
+      }
+    },
     data () {
       return {
         goodsNum: 0
@@ -54,8 +60,14 @@
     },
     methods: {
       changeBack(num, type) {
-        console.log(num)
         this.goodsNum = num
+        this.updateMoneyObj(num)
+      },
+      updateMoneyObj(num) {
+        const { itemObj:{ id }, checkList } = this
+        this.changeCb({
+          [id]: checkList.indexOf(id) > -1?num: 0
+        })
       },
       blurBack(num) {
         this.blurFun()

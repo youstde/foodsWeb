@@ -23,3 +23,17 @@ if (!Array.prototype.some) {
     return false;
   };
 }
+
+window.onMessage = function(name,callback){
+  var msgs = window.onMessage[name] = window.onMessage[name] || [];
+  if(msgs.indexOf(callback)===-1){
+      msgs.push(callback);
+  }
+};
+
+window.sendMessage = function(name,param){
+  var msgs = window.onMessage[name] || [];
+  msgs.forEach(function(msg){
+      msg(param);
+  })
+};

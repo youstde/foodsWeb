@@ -2,5 +2,22 @@
   .sattis_item {
     height: 2.25rem;
     margin-left: 0 !important;
+    &.statis_item_left {
+      position: relative;
+      @include halfTopLine;
+    }
+    .local_layer_bx {
+      position: relative;
+      height: 2.25rem;
+      .local_check_inner_bx {
+        @include positionCenter;
+      }
+    }
+    .have_choosed_bx {
+      font-size: 12px;
+    }
+    .btn_layer_bx {
+      height: 100%;
+    }
   }
 }

@@ -24,12 +24,13 @@
                 v-for='(item,i) in lists'
                 :key='i'
                 :disableScoll='disableScoll'
-                :blurFun='enableScroll' />
+                :blurFun='enableScroll'
+                :changeCb='appendChooseGoods' />
           </div>
         </div>
      </cube-scroll>
      <div class='total_account_bx'>
-       <statistic-account />
+       <statistic-account :allMoney='allMoney' />
      </div>
     <bottom-nav></bottom-nav>
   </div>
@@ -40,6 +41,7 @@
   import BottomNav from '@/components/bottomNav/bottomNav'
   import CarItem from './components/carItem/carItem'
   import StatisticAccount from './components/statisticAccount/statisticAccount'
+  import { multiplyNum, addNum } from '@/util/tools'
 
   export default {
     name: 'goods-car',
@@ -57,57 +59,99 @@
             pullUpLoad: true,
             scrollbar: true
         },
-        checkList: [1,2,3,4],
+        allMoney: 0,  // 选择的商品总计金额
+        choosedGoods:{},
+        checkList: [],
         lists: [
           {
             id: 1,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
-            price: '39.9/瓶'
+            price: '39.9',
+            unit: '瓶'
           },
           {
             id: 2,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
-            price: '39.9/瓶'
+            price: '39.9',
+            unit: '瓶'
           },
           {
             id: 3,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
-            price: '39.9/瓶'
+            price: '39.9',
+            unit: '瓶'
           },
           {
             id: 4,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
-            price: '39.9/瓶'
+            price: '39.9',
+            unit: '瓶'
           },
           {
             id: 5,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
-            price: '39.9/瓶'
+            price: '39.9',
+            unit: '瓶'
           },
           {
             id: 6,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
-            price: '39.9/瓶'
+            price: '39.9',
+            unit: '瓶'
           },
           {
             id: 7,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
-            price: '39.9/瓶'
+            price: '39.9',
+            unit: '瓶'
           }
         ]
       }
     },
+    watch: {
+      checkList(value) {
+      console.log(value)
+      },
+      choosedGoods(value) {
+        const { lists } = this
+        let newMoney = 0
+        lists.some(item => {
+          if(value[item.id]) {
+            const multiplycurrentNum = multiplyNum(Number(item.price), Number(value[item.id]))
+            newMoney = addNum(newMoney, multiplycurrentNum)
+          }
+        })
+        this.allMoney = newMoney
+      }
+    },
     mounted() {
-
+      window.onMessage('update:checkList', arr => {
+        this.updateCheckList(arr)
+      })
+      window.onMessage('full-goods', bool => {
+        if(bool) {
+          const newCheckList = this.getFullGoodsId()
+          this.checkList = newCheckList.concat()
+        } else {
+          this.checkList = []
+        }
+      })
     },
     methods: {
+      getFullGoodsId() {
+        const { lists } = this
+        const idArr = lists.map((item) => {
+          return item.id
+        })
+        return idArr
+      },
       onScrollHandle(pos) {
         const pullDownY = pos.y
         if(pullDownY <= 0) {
@@ -124,7 +168,6 @@
       },
       onPullingUp() {
         // 更新数据
-        console.log(111)
         this.lists = this.lists.concat([
           {
             id: Date.now(),
@@ -149,6 +192,14 @@
         this.pullUpLoadIndex = pullUpLoadIndex + 1;
         this.$refs.scroll.refresh()
       },
+      appendChooseGoods(obj) {
+        console.log('obj:', obj)
+        const { choosedGoods } = this
+        this.choosedGoods = {...choosedGoods, ...obj}
+      },
+      updateCheckList(arr) {
+        this.checkList = arr.concat()
+      }
     }
   }
 </script>

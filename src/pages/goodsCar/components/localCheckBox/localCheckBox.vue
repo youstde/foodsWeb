@@ -1,8 +1,8 @@
 <template>
-  <div :class='{check_box_bx:true, active_bx:checkNames.indexOf(data.id) > -1}'>
+  <div :class='{check_box_bx:true, active_bx:checkName}'>
     <div class="binggou_bx">
       <span class='icon_bx'><svg-icon iconClass='bingou'></svg-icon></span>
-      <input class='check_input' :id='data.id'  :value='data.id' type='checkbox' v-model='checkNames' />
+      <input class='check_input' type='checkbox' v-model='checkName' />
     </div>
   </div>
 </template>
@@ -10,31 +10,18 @@
 <script>
 
   export default {
-    name: 'check-box',
+    name: 'local-check-box',
     props: [
-      'data',
-      'checkList'
+
     ],
+    watch: {
+      checkName(value) {
+        window.sendMessage('full-goods', value)
+      }
+    },
     data () {
       return {
-        localArr: []
-      }
-    },
-    watch: {
-      checkList(value) {
-        this.localArr = []
-      }
-    },
-    computed: {
-      checkNames: {
-        get: function() {
-          const { localArr, checkList } = this
-          return this.localArr.length? localArr:checkList
-        },
-        set: function(newValue) {
-          window.sendMessage('update:checkList', newValue)
-          this.localArr = newValue
-        }
+        checkName: ''
       }
     },
     mounted() {
