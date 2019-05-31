@@ -1,13 +1,24 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+
+// 首页
 const home = r => require.ensure([], () => r(require('../pages/home/home')), 'home')
+// 登录中心
 const loginIn = r => require.ensure([], () => r(require('../pages/sign/loginIn')), 'loginIn')
+// 个人中心
 const myZoe = r => require.ensure([], () => r(require('../pages/myZoe/myZoe')), 'myZoe')
+// 搜索页
 const search = r => require.ensure([], () => r(require('../pages/search/search')), 'search')
+// 切换商店
 const toggleShop = r => require.ensure([], () => r(require('../pages/toggleShop/toggleShop')), 'toggleShop')
+// 商品分类列表
 const goodsClassify = r => require.ensure([], () => r(require('../pages/goodsClassify/goodsClassify')), 'goodsClassify')
+// 商品详情
 const goodsDetail = r => require.ensure([], () => r(require('../pages/goodsDetail/goodsDetail')), 'goodsDetail')
+// 购物车
 const goodsCar = r => require.ensure([], () => r(require('../pages/goodsCar/goodsCar')), 'goodsCar')
+// 结算
+const budget = r => require.ensure([], () => r(require('../pages/budget/budget')), 'budget')
 const write = r => require.ensure([], () => r(require('../pages/write/write')), 'write')
 const articleDetail = r => require.ensure([], () => r(require('../pages/articleDetail/articleDetail')), 'articleDetail')
 
@@ -58,6 +69,11 @@ export default new Router({
       path: '/goodscar',
       name: 'goodsCar',
       component: goodsCar
+    },
+    {
+      path: '/budget',
+      name: 'budget',
+      component: budget
     },
     {
       path: '/write',

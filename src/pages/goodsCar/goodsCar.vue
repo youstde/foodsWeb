@@ -134,6 +134,7 @@
       choosedGoods(value) {
         const { lists } = this
         let newMoney = 0
+        // 商品金额计算
         lists.some(item => {
           if(value[item.id]) {
             const multiplycurrentNum = multiplyNum(Number(item.price), Number(value[item.id]))
@@ -233,7 +234,14 @@
         console.log(this.checkList)
         const { checkList } = this
         if(checkList.length) {
-
+          this.showAlert({
+            title: '提示',
+            content: `确定要删除这${checkList.length}种商品吗`,
+            confirmCb: () => {
+              // 发送删除商品的请求
+              console.log('删除商品')
+            }
+          })
         } else {
           this.showToast('请选择需要删除的商品', 'txt')
         }
@@ -245,6 +253,28 @@
           time: 2000
         })
         this.toast.show()
+      },
+       showAlert({title, content, confirmText='确定', cancelText='取消', confirmCb}) {
+        this.$createDialog({
+          type: 'confirm',
+          title,
+          content,
+          confirmBtn: {
+            text: confirmText,
+            active: true,
+            disabled: false,
+            href: 'javascript:;'
+          },
+          cancelBtn: {
+            text: cancelText,
+            active: false,
+            disabled: false,
+            href: 'javascript:;'
+          },
+          onConfirm: () => {
+            confirmCb && confirmCb()
+          }
+        }).show()
       }
     }
   }
