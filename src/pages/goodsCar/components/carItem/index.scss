@@ -12,6 +12,12 @@
     .check_in_car {
       @include positionMiddle;
     }
+    .out_time_goods {
+      font-size: 0.6rem;
+      color: $morenColor;
+      height: 3.5rem;
+      line-height: 3.5rem;
+    }
     img {
       display: block;
       width: 3.5rem;

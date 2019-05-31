@@ -98,7 +98,7 @@
           }
           .author-tips-bx {
             color: #969696;
-            font-size: 12px;
+            font-size: 0.6rem;
             font-weight: 500;
             padding-top: 6px;
           }

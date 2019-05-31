@@ -2,22 +2,30 @@
   <div id="app">
     <router-view/>
     <div v-if='isShowCover' class="coverage_bx" @touchmove.prevent @click='closeCover'></div>
+    <base-loading v-if='toggleLoading'></base-loading>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
+  import baseLoading from '@/components/baseLoading/baseLoading'
 
   export default {
     name: 'App',
+    components: {
+      baseLoading
+    },
     data() {
       return {
         type: '',
-        message: ''
+        message: '',
+        toggleLoading: false
       }
     },
     mounted() {
-
+      window.onMessage('toggle:loading', (bol) => {
+        this.toggleLoading = bol
+      })
     },
     computed: {
       ...mapGetters([

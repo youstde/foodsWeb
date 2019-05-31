@@ -44,7 +44,7 @@
       .hot_label_item {
         display: block;
         text-align: center;
-        font-size: 12px;
+        font-size: 0.6rem;
         display: inline-block;
         background-color: #f5f5f5;
         padding: 0.3rem 0.6rem;

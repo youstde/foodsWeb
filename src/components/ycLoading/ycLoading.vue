@@ -10,7 +10,7 @@
 <script>
 import { setTimeout } from 'timers';
   export default {
-    name: 'base-loading',
+    name: 'yc-loading',
     props: [
       'isLoading'
     ],

@@ -14,10 +14,25 @@
       }
     }
     .have_choosed_bx {
-      font-size: 12px;
+      font-size: 0.6rem;
     }
     .btn_layer_bx {
       height: 100%;
+    }
+    .grand_bx {
+      height: 2.25rem;
+      text-align: right;
+      padding-right: 0.3rem;
+      .top_bx {
+        font-size: 0.75rem;
+        color: $priceActiveColor;
+        padding-top: 0.4rem;
+      }
+      .bottom_bx {
+        color: $inputPlaceHolderColor;
+        font-size: 0.6rem;
+        padding-top: 0.2rem;
+      }
     }
   }
 }

@@ -2,10 +2,13 @@
   <div class='landscape_list_item'>
     <flexbox>
       <flexbox-item class='flex_item_bx' :span='1'>
-        <div class='check_in_car'>
+        <div class='check_in_car' v-if='itemObj.type===1'>
           <check-box
           :data='itemObj'
           :checkList='checkList' />
+        </div>
+        <div class='out_time_goods' v-else>
+          <span class='icon_bx'><svg-icon iconClass='failure' /></span>
         </div>
       </flexbox-item>
       <flexbox-item class='flex_item_bx' :span='3'>
@@ -14,7 +17,7 @@
       <flexbox-item class='flex_item_bx' :span='8'>
         <div class="title">{{itemObj.title}}</div>
         <div class="price_bx">{{itemObj.price}}/{{itemObj.unit}}</div>
-        <div class="car_input_num_out_bx">
+        <div class="car_input_num_out_bx" v-if='itemObj.type===1'>
           <input-num
           type='car'
           :changeBack='changeBack'

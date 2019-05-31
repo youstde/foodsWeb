@@ -50,15 +50,16 @@
       padding-bottom: 0.75rem;
       position: relative;
       .clear_history_label {
-        font-size: 12px;
+        font-size: 0.6rem;
         color: $inputPlaceHolderColor;
         padding-left: 0.7rem;
         position: absolute;
         top: 0;
         right: 0;
         .icon_bx {
-          width: 12px;
-          height: 12px;
+          color: #333;
+          width: 0.6rem;
+          height: 0.6rem;
           position: absolute;
           top: 0;
           left: 0;
@@ -70,7 +71,7 @@
       .history_label_item {
         display: block;
         text-align: center;
-        font-size: 12px;
+        font-size: 0.6rem;
         display: inline-block;
         background-color: #f5f5f5;
         padding: 0.3rem 0.6rem;

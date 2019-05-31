@@ -4,7 +4,7 @@
         <top-back type='radis' heightNum='1.95rem'>
           <div class='car_back_right_bx'>
             <div class="car_title">购物车</div>
-            <div class='delete_goods'>删除</div>
+            <div class='delete_goods' @click='deleteGoods'>删除</div>
           </div>
         </top-back>
     </div>
@@ -17,7 +17,6 @@
         @pulling-up='onPullingUp'>
         <div class='goods_car_inner'>
           <div class="car_scroll_out_bx">
-
               <car-item
                 :checkList='checkList'
                 :itemObj='item'
@@ -27,10 +26,16 @@
                 :blurFun='enableScroll'
                 :changeCb='appendChooseGoods' />
           </div>
+          <div class="clear_out_time_goods" @click='clearOutGoods'>
+            <span class='label_bx'>
+              清除失效商品
+              <span class='icon_bx'><svg-icon iconClass='garbage' /></span>
+            </span>
+          </div>
         </div>
      </cube-scroll>
      <div class='total_account_bx'>
-       <statistic-account :allMoney='allMoney' />
+       <statistic-account :allMoney='allMoney' :checkList='checkList' />
      </div>
     <bottom-nav></bottom-nav>
   </div>
@@ -65,6 +70,7 @@
         lists: [
           {
             id: 1,
+            type: 2,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
@@ -72,6 +78,7 @@
           },
           {
             id: 2,
+            type: 1,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
@@ -79,6 +86,7 @@
           },
           {
             id: 3,
+            type: 1,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
@@ -86,6 +94,7 @@
           },
           {
             id: 4,
+            type: 1,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
@@ -93,6 +102,7 @@
           },
           {
             id: 5,
+            type: 1,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
@@ -100,6 +110,7 @@
           },
           {
             id: 6,
+            type: 1,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
@@ -107,6 +118,7 @@
           },
           {
             id: 7,
+            type: 1,
             img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
@@ -117,7 +129,7 @@
     },
     watch: {
       checkList(value) {
-      console.log(value)
+        console.log(value.length)
       },
       choosedGoods(value) {
         const { lists } = this
@@ -147,9 +159,11 @@
     methods: {
       getFullGoodsId() {
         const { lists } = this
-        const idArr = lists.map((item) => {
-          return item.id
+        const idArr = []
+        lists.some((item) => {
+          if(item.type === 1) idArr.push(item.id)
         })
+        console.log('idArr:', idArr)
         return idArr
       },
       onScrollHandle(pos) {
@@ -168,26 +182,32 @@
       },
       onPullingUp() {
         // 更新数据
-        this.lists = this.lists.concat([
-          {
-            id: Date.now(),
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
-            title: '鲁花家香味浓压榨籽油',
-            price: '39.9/瓶'
-          },
-          {
-            id: Date.now(),
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
-            title: '鲁花家香味浓压榨籽油',
-            price: '39.9/瓶'
-          },
-          {
-            id: Date.now(),
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
-            title: '鲁花家香味浓压榨籽油',
-            price: '39.9/瓶'
-          }
-        ])
+        // this.lists = this.lists.concat([
+        //   {
+        //     id: Date.now(),
+        //     type: 1,
+        //     img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+        //     title: '鲁花家香味浓压榨籽油',
+        //     price: '39.9',
+        //     unit: '瓶'
+        //   },
+        //   {
+        //     id: Date.now(),
+        //     type: 2,
+        //     img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+        //     title: '鲁花家香味浓压榨籽油',
+        //     price: '39.9',
+        //     unit: '瓶'
+        //   },
+        //   {
+        //     id: Date.now(),
+        //     type: 2,
+        //     img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+        //     title: '鲁花家香味浓压榨籽油',
+        //     price: '39.9',
+        //     unit: '瓶'
+        //   }
+        // ])
         const { pullUpLoadIndex } = this;
         this.pullUpLoadIndex = pullUpLoadIndex + 1;
         this.$refs.scroll.refresh()
@@ -199,6 +219,32 @@
       },
       updateCheckList(arr) {
         this.checkList = arr.concat()
+      },
+      // 清除失效商品
+      clearOutGoods() {
+        window.sendMessage('toggle:loading', true)
+        setTimeout(() => {
+          window.sendMessage('toggle:loading', false)
+          this.showToast('失效商品已清空', 'txt')
+        }, 2e3)
+      },
+      // 删除指定商品
+      deleteGoods() {
+        console.log(this.checkList)
+        const { checkList } = this
+        if(checkList.length) {
+
+        } else {
+          this.showToast('请选择需要删除的商品', 'txt')
+        }
+      },
+      showToast(txt, type) {
+        this.toast = this.$createToast({
+          txt,
+          type,
+          time: 2000
+        })
+        this.toast.show()
       }
     }
   }

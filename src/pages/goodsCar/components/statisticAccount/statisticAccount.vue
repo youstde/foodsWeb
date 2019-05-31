@@ -10,10 +10,13 @@
                   <div class="local_check_inner_bx"><local-check-box /></div>
                 </div>
               </flexbox-item>
-              <flexbox-item class='have_choosed_bx'>已选(0)</flexbox-item>
+              <flexbox-item class='have_choosed_bx'>已选({{checkList.length}})</flexbox-item>
             </flexbox>
           </flexbox-item>
-          <flexbox-item :span='7'>{{allMoney}}</flexbox-item>
+          <flexbox-item :span='7' class='grand_bx'>
+            <div class="top_bx">合计: ￥{{allMoney}}</div>
+            <div class="bottom_bx">不含运费</div>
+          </flexbox-item>
         </flexbox>
       </flexbox-item>
       <flexbox-item class='sattis_item' :span='4'>
@@ -37,7 +40,8 @@
       MinButton
     },
     props: [
-      'allMoney'
+      'allMoney',
+      'checkList'
     ],
     watch: {
       allMoney(value) {

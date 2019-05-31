@@ -22,7 +22,7 @@
       }
     }
     .cancel_btn {
-      font-size: 12px;
+      font-size: 0.6rem;
       height: 2.5rem;
       line-height: 2.5rem;
       position: absolute;
@@ -36,7 +36,7 @@
       height: 2.5rem;
       padding: 1.4rem 0.65rem 0;
       color: $inputPlaceHolderColor;
-      font-size: 12px;
+      font-size: 0.6rem;
       position: relative;
       @include halfUnderLine;
     }
@@ -55,7 +55,7 @@
       .item_shop_adress {
         line-height: 1.3;
         color: $inputPlaceHolderColor;
-        font-size: 12px;
+        font-size: 0.6rem;
         @include txtLineShow(2);
       }
     }
