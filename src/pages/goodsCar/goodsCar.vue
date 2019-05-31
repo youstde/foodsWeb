@@ -1,7 +1,7 @@
 <template>
   <div class='goods_car'>
     <div class="go_back_out_bx" ref='carGoBackOutBx' :style="'background:rgba(255,255,255,'+pullDownY+')'">
-        <top-back type='radis' heightNum='1.95rem'>
+        <top-back type='radis' heightNum='1.5rem'>
           <div class='car_back_right_bx'>
             <div class="car_title">购物车</div>
             <div class='delete_goods' @click='deleteGoods'>删除</div>

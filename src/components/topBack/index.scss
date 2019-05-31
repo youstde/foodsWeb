@@ -12,7 +12,7 @@
       height: 1.5rem;
       @include borderRadius(50%);
       background-color: #fff;
-      position: relative;
+      @include positionMiddle;
     }
   }
   .left_bx {

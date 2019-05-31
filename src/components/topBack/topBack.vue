@@ -1,7 +1,7 @@
 <template>
   <div :class="{top_back_bx:true, clear:true,radis_type:type==='radis'}" :style='{paddingBottom:paddingBtm}'>
     <div class="left_bx" :style='{height:heightNum}'>
-      <div v-if="type==='radis'" class='radis_icon_bx'>
+      <div v-if="type==='radis'" class='radis_icon_bx' @click='goBack'>
         <span class='icon_bx'><svg-icon iconClass='back'></svg-icon></span>
       </div>
       <span v-else class='icon_bx'><svg-icon iconClass='back'></svg-icon></span>
@@ -31,7 +31,9 @@
       console.log(this.$children)
     },
     methods: {
-
+      goBack() {
+        console.log('back')
+      }
     }
   }
 </script>

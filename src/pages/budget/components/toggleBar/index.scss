@@ -1,0 +1,26 @@
+.toggle_bar_bx {
+  position: relative;
+  .toggle_item {
+    width: 50%;
+    font-size: 0.75rem;
+    height: 2rem;
+    line-height: 2rem;
+    position: absolute;
+    background-color: #fff;
+    @include borderRadius(1rem);
+    transition: all 0.5s;
+    &.active {
+      color: #fff;
+      background-color: $themeColor;
+      z-index: 1;
+    }
+    &.toggle_left {
+      top: 0;
+      left: 1rem;
+    }
+    &.toggle_right {
+      top: 0;
+      right: 0;
+    }
+  }
+}
