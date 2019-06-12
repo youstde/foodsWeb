@@ -14,12 +14,16 @@
         type: 0
       }
     },
+    props: [
+      'toggleBc'
+    ],
     mounted() {
 
     },
     methods: {
       toggleType(type) {
         this.type = type
+        this.toggleBc(type)
       }
     }
   }

@@ -1,36 +1,54 @@
 <template>
-  <div class='home_goods_list_bx'>
-    <flexbox>
-      <flexbox-item :span='20/24' class='swiper_out_layer_bx'>
-        <div class="swiper-container" id='budget_goods_swiper'>
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for='(item, i) in goodslist' :key='i'>
-              <img class='goods_img' :src="item.img" alt="">
-            </div>
-          </div>
+  <div class='goods_inventory_bx'>
+    <div class='top_out_color_bx'>
+        <top-back type='radis' heightNum='2rem' paddingBtm='1rem'>
+        <div class='goods_inventory_back_bx'>
+          商品清单
         </div>
-      </flexbox-item>
-      <flexbox-item :span='4/24'>
-        <div class='text_bx' @click='goToGoodsList'>共6件 ></div>
-      </flexbox-item>
-    </flexbox>
+        </top-back>
+    </div>
+    <div class='goods_inventory_detail'>
+      <div class="top_title">
+        <flexbox>
+          <flexbox-item>商品</flexbox-item>
+          <flexbox-item :style="{'text-align':'right'}">共6件</flexbox-item>
+        </flexbox>
+      </div>
+      <div class='goods_inventory_detail_out_bx'>
+        <cube-scroll
+        ref='scroll'
+        :data='dataSource'
+        :options='scrollOptions'
+        @pulling-up='onPullingUp'>
+          <inventory-item v-for='(item, i) in dataSource' :key='i' :dataItem='item' />
+        </cube-scroll>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   import { Flexbox, FlexboxItem } from 'vux'
-  import Swiper from 'swiper'
-  import 'swiper/dist/css/swiper.min.css'
+  import TopBack from '@/components/topBack/topBack'
+  import InventoryItem from './components/inventoryItem/inventoryItem'
 
   export default {
-    name: 'goods-swiper',
+    name: 'goods-inventory',
     components: {
+      TopBack,
       Flexbox,
-      FlexboxItem
+      FlexboxItem,
+      InventoryItem
     },
     data () {
       return {
-        goodslist: [
+        pullUpLoadIndex: 1,
+        scrollOptions: {
+          pullDownRefresh: false,
+          pullUpLoad: true,
+          scrollbar: true
+        },
+        dataSource: [
           {
             id: 1,
             img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/%E5%95%86%E5%93%81%E6%B8%85%E5%8D%951.jpg',
@@ -83,20 +101,16 @@
       }
     },
     mounted() {
-      var mySwiper = new Swiper('#budget_goods_swiper', {
-        freeMode : true,
-        slidesPerView: 5
-      })
+      const { query: { id } } = this.$route
+      if(id) {
+        this.id = id
+      }
     },
     methods: {
-      goToGoodsList() {
-        // 跳转到商品清单页
-        this.$router.push({
-          path: '/goodsinventory',
-          query: {
-            id: 123
-          }
-        })
+      onPullingUp() {
+        const { pullUpLoadIndex } = this;
+        this.pullUpLoadIndex = pullUpLoadIndex + 1;
+        this.$refs.scroll.refresh()
       }
     }
   }
@@ -104,28 +118,28 @@
 
 <style lang="scss" scoped>
   @import 'src/style/mixin';
-  .home_goods_list_bx {
-    .swiper-container {
-      .swiper-wrapper {
-        .swiper-slide {
-          // width: 5.75rem !important;
-          background-color: #fff;
-          .goods_img {
-            width: 2.5rem;
-            height: 2.5rem;
-            display: block;
-          }
-        }
+  .goods_inventory_bx {
+    background-color: #fff;
+    height: 100%;
+    .top_out_color_bx {
+      background-color: #f4f4f4;
+    }
+    .goods_inventory_back_bx {
+      font-size: 0.9rem;
+      width: 15rem;
+      height: 2rem;
+      line-height: 2rem;
+      text-align: center;
+    }
+    .goods_inventory_detail {
+      .top_title {
+        font-size: 0.6rem;
+        padding: 0.7rem 0.7rem 0.5rem;
+        border-bottom: 1px solid $morenColor;
       }
     }
-    .swiper_out_layer_bx {
-      padding-left: 0.75rem;
-    }
-    .text_bx {
-      font-size: 12px;
-      text-align: center;
-      color: $inputPlaceHolderColor;
-      @include singleLineView;
+    .goods_inventory_detail_out_bx {
+      height: 90vh;
     }
   }
 </style>

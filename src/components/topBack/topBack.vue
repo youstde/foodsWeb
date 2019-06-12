@@ -32,7 +32,7 @@
     },
     methods: {
       goBack() {
-        console.log('back')
+        this.$router.go(-1)
       }
     }
   }

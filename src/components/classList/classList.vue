@@ -39,43 +39,43 @@
         lists: [
           {
             id: 1,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9/瓶'
           },
           {
             id: 2,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9/瓶'
           },
           {
             id: 3,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9/瓶'
           },
           {
             id: 4,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9/瓶'
           },
           {
             id: 5,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9/瓶'
           },
           {
             id: 6,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9/瓶'
           },
           {
             id: 7,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9/瓶'
           }

@@ -3,7 +3,7 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide" v-for='(item, i) in bannerList' :key='i' @click='test'>
         <router-link to='/goodsdetail'>
-        <img :data-src="item.img" src='http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg' class="swiper-lazy">
+        <img :data-src="item.img" src='https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png' class="swiper-lazy">
         <div class="swiper-lazy-preloader"></div>
         </router-link>
       </div>
@@ -25,15 +25,15 @@
         bannerList: [
           {
             id: 1,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3dik1v7lej315g0xgk6x.jpg'
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png'
           },
           {
             id: 2,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3dik1v7lej315g0xgk6x.jpg'
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png'
           },
           {
             id: 3,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3dik1v7lej315g0xgk6x.jpg'
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png'
           },
         ]
       }

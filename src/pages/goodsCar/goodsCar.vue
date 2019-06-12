@@ -58,11 +58,11 @@
     },
     data () {
       return {
-          pullDownY: 0,
-          scrollOptions: {
-            pullDownRefresh: false,
-            pullUpLoad: true,
-            scrollbar: true
+        pullDownY: 0,
+        scrollOptions: {
+          pullDownRefresh: false,
+          pullUpLoad: true,
+          scrollbar: true
         },
         allMoney: 0,  // 选择的商品总计金额
         choosedGoods:{},

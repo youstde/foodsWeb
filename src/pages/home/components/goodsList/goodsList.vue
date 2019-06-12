@@ -24,25 +24,25 @@ import { setTimeout } from 'timers';
         const { goodslist } = this;
          const newList = [{
             id: 5,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质黄瓜',
             price: '1.46/斤'
           },
           {
             id: 6,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质南瓜',
             price: '0.99/斤'
           },
           {
             id: 7,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质南瓜',
             price: '0.99/斤'
           },
           {
             id: 8,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质黄瓜',
             price: '1.46/斤'
           }]
@@ -55,49 +55,49 @@ import { setTimeout } from 'timers';
         goodslist: [
           {
             id: 1,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质黄瓜',
             price: '1.46/斤'
           },
           {
             id: 2,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质南瓜',
             price: '0.99/斤'
           },
           {
             id: 3,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质黄瓜',
             price: '1.46/斤'
           },
           {
             id: 4,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质南瓜',
             price: '0.99/斤'
           },
           {
             id: 5,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质黄瓜',
             price: '1.46/斤'
           },
           {
             id: 6,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质南瓜',
             price: '0.99/斤'
           },
           {
             id: 7,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质南瓜',
             price: '0.99/斤'
           },
           {
             id: 8,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
             title: '精选优质黄瓜',
             price: '1.46/斤'
           },

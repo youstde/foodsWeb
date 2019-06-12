@@ -1,22 +1,34 @@
 <template>
   <div class='input_out_bx'>
-      <div class='input_num'>
-      <div class='minus_bt' @click='deleteNum'>
-        <span class='icon_bx'><svg-icon iconClass='jian' /></span>
-      </div>
-      <input class='num_input' ref='numInput' v-model="goodsNum" type="number" @focus="onFocus" @blur='onBulr' @keypress="updateNum" />
-      <div class='add_bt' @click='addNum'>
-        <span class='icon_bx'><svg-icon iconClass='add' /></span>
-      </div>
-    </div>
+    <flexbox>
+      <flexbox-item :span='4'>
+        <div class='minus_bt' :style='{height:itemHeight}' @click='deleteNum'>
+          <span class='icon_bx'><svg-icon iconClass='jian' /></span>
+        </div>
+      </flexbox-item>
+      <flexbox-item :span='4'>
+        <input class='num_input' :style='{height:itemHeight}' ref='numInput' v-model="goodsNum" type="number" @focus="onFocus" @blur='onBulr' @keypress="updateNum" />
+      </flexbox-item>
+      <flexbox-item :span='4'>
+        <div class='add_bt' :style='{height:itemHeight}' @click='addNum'>
+          <span class='icon_bx'><svg-icon iconClass='add' /></span>
+        </div>
+      </flexbox-item>
+    </flexbox>
   </div>
 </template>
 
 <script>
+  import { Flexbox, FlexboxItem } from 'vux'
 
   export default {
     name: 'input-num',
+    components: {
+      Flexbox,
+      FlexboxItem,
+    },
     props: [
+      'itemHeight',
       'type',
       'changeBack',
       'blurBack'
@@ -84,47 +96,39 @@
 
 <style lang="scss" scoped>
   @import 'src/style/mixin';
-  .input_out_bx {
+   .input_out_bx {
     position: relative;
     @include halfUnderLine;
     @include halfTopLine;
   }
-  .input_num {
-    height: 1.6rem;
-    .minus_bt {
-      float: left;
-      width: 1.6rem;
-      height: 1.6rem;
-      position: relative;
-      @include halfLeftLine;
-      @include halfRightLine;
-      .icon_bx {
+  .minus_bt {
+    position: relative;
+    @include halfLeftLine;
+    @include halfRightLine;
+    .icon_bx {
         color: #9b9b9b;
         width: 0.5rem;
         height: 0.5rem;
         @include positionCenter;
-      }
     }
-    .num_input {
+  }
+  .num_input {
       font-size: 0.8rem;
-      float: left;
-      width: 1.5rem;
-      height: 1.6rem;
+      width: 100%;
       text-align: center;
-    }
-    .add_bt {
-      float: left;
-      width: 1.6rem;
-      height: 1.6rem;
-      position: relative;
-      @include halfLeftLine;
-      @include halfRightLine;
-      .icon_bx {
+  }
+  .add_bt {
+    position: relative;
+    @include halfLeftLine;
+    @include halfRightLine;
+    .icon_bx {
         color: #9b9b9b;
         width: 0.5rem;
         height: 0.5rem;
         @include positionCenter;
-      }
     }
+  }
+  .vux-flexbox-item {
+    margin-left: 0 !important;
   }
 </style>

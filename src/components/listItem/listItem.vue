@@ -11,7 +11,7 @@
       <div class='buy_btn'>购买</div>
     </div>
     <div v-else class='input_num_bx'>
-      <input-num :changeBack='changeBack' :blurBack='blurBack'></input-num>
+      <input-num itemHeight='1.6rem' :changeBack='changeBack' :blurBack='blurBack'></input-num>
     </div>
   </div>
 </template>

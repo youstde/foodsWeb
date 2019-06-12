@@ -4,7 +4,7 @@
         <div class="swiper-wrapper">
           <div class="swiper-slide" v-for='(item, i) in goods.imgList' :key='i'>
             <router-link to='/goodsdetail'>
-            <img :data-src="item" src='http://ww1.sinaimg.cn/large/005QDhBjly1g3dik1v7lej315g0xgk6x.jpg' class="swiper-lazy">
+            <img :data-src="item" src='https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png' class="swiper-lazy">
             <div class="swiper-lazy-preloader"></div>
             </router-link>
           </div>
@@ -80,10 +80,10 @@
           richTxt: "<h1 style='height:200px'>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1>",
           title: '【满199减120】 三只松鼠夏威夷果160g 小零食坚果炒货孕妇坚果每日坚果干果休闲零食送开口器 160g',
           imgList: [
-            'http://ww1.sinaimg.cn/large/005QDhBjly1g3dik1v7lej315g0xgk6x.jpg',
-            'http://ww1.sinaimg.cn/large/005QDhBjly1g3dik1v7lej315g0xgk6x.jpg',
-            'http://ww1.sinaimg.cn/large/005QDhBjly1g3dik1v7lej315g0xgk6x.jpg',
-            'http://ww1.sinaimg.cn/large/005QDhBjly1g3dik1v7lej315g0xgk6x.jpg'
+            'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png',
+            'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png',
+            'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png',
+            'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png'
           ]
         }
       }

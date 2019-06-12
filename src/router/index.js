@@ -19,6 +19,13 @@ const goodsDetail = r => require.ensure([], () => r(require('../pages/goodsDetai
 const goodsCar = r => require.ensure([], () => r(require('../pages/goodsCar/goodsCar')), 'goodsCar')
 // 结算
 const budget = r => require.ensure([], () => r(require('../pages/budget/budget')), 'budget')
+// 发票填写
+const writeInvoice = r => require.ensure([], () => r(require('../pages/budget/writeInvoice')), 'writeInvoice')
+// 填写备注页面
+const writeMark = r => require.ensure([], () => r(require('../pages/budget/writeMark')), 'writeMark')
+// 商品清单页
+const goodsInventory = r => require.ensure([], () => r(require('../pages/budget/goodsInventory')), 'goodsInventory')
+
 const write = r => require.ensure([], () => r(require('../pages/write/write')), 'write')
 const articleDetail = r => require.ensure([], () => r(require('../pages/articleDetail/articleDetail')), 'articleDetail')
 
@@ -74,6 +81,21 @@ export default new Router({
       path: '/budget',
       name: 'budget',
       component: budget
+    },
+    {
+      path: '/writeinvoice',
+      name: 'writeInvoice',
+      component: writeInvoice
+    },
+    {
+      path: '/writemark',
+      name: 'writeMark',
+      component: writeMark
+    },
+    {
+      path: '/goodsinventory',
+      name: 'goodsInventory',
+      component: goodsInventory
     },
     {
       path: '/write',

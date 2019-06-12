@@ -9,7 +9,7 @@
     </top-back>
     <!-- S=搜索标签 -->
     <div class='label_container' v-if='showAllLabel'>
-      <hot-label v-show='showHotLabel' :hotList='hotList' />
+      <!-- <hot-label v-show='showHotLabel' :hotList='hotList' /> -->
       <history-label v-show='showClearHistoryLabel' :historyList='historyList' :clearHistoryLabel='clearHistoryLabel' />
     </div>
     <!-- E=搜索标签 -->

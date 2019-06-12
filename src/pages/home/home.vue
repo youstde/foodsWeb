@@ -35,7 +35,7 @@
         <div class='time_discount'>
           <div class='title'>
             <span>限时优惠</span>
-            <span class='get_more'><router-link to='/list'>查看更多 ></router-link></span>
+            <span class='get_more'><router-link to='/goodsclassify'>查看更多 ></router-link></span>
           </div>
           <time-discount />
         </div>
@@ -88,14 +88,14 @@ import { setTimeout } from 'timers';
         goodslist: [
           {
             id: 1,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/test12323.jpg',
+            img: '@/assets/test/time-discount-2.jpg',
             title: '精选优质黄瓜',
             odderPrice: '14.6/斤',
             cheapPrice: '1.46/斤'
           },
           {
             id: 2,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g381yjn24kj305k055wfj.jpg',
+            img: '@/assets/test/time-discount-1.jpg',
             title: '精选优质南瓜',
             odderPrice: '2.6/斤',
             cheapPrice: '0.99/斤'

@@ -8,9 +8,9 @@
       </div>
     </div>
     <div class="history_label_list">
-      <router-link to='/searchList' class="history_label_item" v-for='(item, i) in historyList' :key='i'>
+      <a herf='javascript:void(0)' @click='handleJump(item.label)' class="history_label_item" v-for='(item, i) in historyList' :key='i'>
         {{item.label}}
-      </router-link>
+      </a>
     </div>
   </div>
 </template>
@@ -32,6 +32,10 @@
       clearHistory() {
         // 调用接口清除历史搜索
         this.clearHistoryLabel()
+      },
+      handleJump(label) {
+        this.$router.push(`/search?key=${label}`)
+        window.location.reload()
       }
     }
   }
