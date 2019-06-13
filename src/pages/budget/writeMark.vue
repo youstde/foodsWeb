@@ -9,7 +9,7 @@
       <textarea v-model="markValue" class='detail_textarea' cols="25" rows="5" placeholder="请输入备注、地址、开户行等（非必填）"></textarea>
     </div>
     <div class='button_out_bx' @click='handleSubmit'>
-      <base-button label='确定' />
+      <base-button height='2rem' label='确定' isRadius=true />
     </div>
   </div>
 </template>

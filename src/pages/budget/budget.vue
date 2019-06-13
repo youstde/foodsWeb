@@ -7,7 +7,10 @@
     </top-back>
     <!-- 自提 -->
     <get-by-self v-if='deliveryType===0' />
+    <!-- 送货上门 -->
     <home-delivery v-else />
+    <!-- 底部确认下单区 -->
+    <bottom-confirm />
   </div>
 </template>
 
@@ -16,6 +19,7 @@
   import ToggleBar from './components/toggleBar/toggleBar'
   import GetBySelf from './getBySelf'
   import HomeDelivery from './ homeDelivery'
+  import BottomConfirm from './components/bottomConfirm/bottomConfirm'
 
   export default {
     name: 'budget',
@@ -23,7 +27,8 @@
       TopBack,
       ToggleBar,
       GetBySelf,
-      HomeDelivery
+      HomeDelivery,
+      BottomConfirm
     },
     data () {
       return {

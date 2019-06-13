@@ -89,7 +89,7 @@
       <!-- E=单位发票 -->
     </div>
     <div class='button_out_bx' @click='handleSubmit'>
-      <base-button label='确定' />
+      <base-button height='2rem' label='确定' isRadius=true />
     </div>
   </div>
 </template>

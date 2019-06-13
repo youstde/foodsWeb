@@ -4,7 +4,20 @@
       <goods-swiper />
     </div>
     <div class='adress_layer_out_bx'>
-      test
+      <flexbox class='layer_item have_under_line'>
+        <flexbox-item :span='2/24'>
+          <div class='position_icon_bx'><span class='icon_bx'><svg-icon iconClass='position' /></span></div>
+        </flexbox-item>
+         <flexbox-item class='label' :span='5/24'>营业地址</flexbox-item>
+          <flexbox-item class='adress_detail' :span='17/24'>浙江杭州余杭区未央区草滩八路中心房地大厦北 苑东方明珠小区5排35号</flexbox-item>
+      </flexbox>
+      <flexbox class='layer_item'>
+        <flexbox-item :span='2/24'>
+          <div class='position_icon_bx'><span class='icon_bx'><svg-icon iconClass='time' /></span></div>
+        </flexbox-item>
+         <flexbox-item class='label' :span='5/24'>营业时间</flexbox-item>
+          <flexbox-item class='time_detail' :span='17/24'>8:00-22:00</flexbox-item>
+      </flexbox>
     </div>
     <!-- S=备注 -->
     <div class='mark_bx'>
@@ -94,4 +107,34 @@
 <style lang="scss" scoped>
   @import 'src/style/mixin';
   @import './index.scss';
+  .adress_layer_out_bx {
+    background-color: #fff;
+    padding: 0 0.65rem;
+    .layer_item {
+      height: 2.8rem;
+      &.have_under_line {
+        position: relative;
+        @include halfUnderLine;
+      }
+    }
+    .position_icon_bx {
+      position: relative;
+      .icon_bx {
+        width: 1rem;
+        height: 1rem;
+        @include positionMiddle;
+        left: 0;
+      }
+    }
+    .label {
+      font-size: 0.75rem;
+    }
+    .adress_detail {
+      font-size: 0.6rem;
+      @include txtLineShow(2);
+    }
+    .time_detail {
+      font-size: 0.75rem;
+    }
+  }
 </style>

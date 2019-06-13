@@ -25,7 +25,7 @@
         <p>400-5486-4354</p>
       </div>
       <div class='statement_bx'>
-        <router-link to='/statement'>
+        <router-link to='/useragreement'>
         《用户使用条款和隐私声明》
         </router-link>
       </div>
@@ -54,7 +54,7 @@
             label: '我的订单'
           },
           {
-            path: '/addressmanagement',
+            path: '/adressmanagement',
             icon: 'adress-manament',
             label: '地址管理'
           }
