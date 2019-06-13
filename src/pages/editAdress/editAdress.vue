@@ -51,7 +51,14 @@
     },
     data () {
       return {
+        dataObj: {
+          0: [],
+          1: [],
+          2: []
+        },
         asyncPicker: '',
+        selectData: [],
+        selectedIndex: [0],
         id: '',
         label: '新增收货地址'
       }
@@ -64,24 +71,24 @@
       if(label) {
         this.label = label
       }
-      this.handleInitCityData()
-      this.asyncPicker = this.$createCascadePicker({
-          title: '选择地址',
-          async: true,
-          data: [
-            {
-              value: '3000',
-              text: '杭州'
-            }
-          ],
-          selectedIndex: [0,0,0],
-          onSelect: this.selectHandle,
-          onCancel: this.cancelHandle,
-          onChange: this.asyncChangeHandle
+      this.handleInitCityData(null, null, () => {
+        this.selectData = this.jointData()
+        const code = this.selectData[0].value
+        this.handleInitCityData(code, 1, () => {
+          this.selectedIndex.push(0)
+          this.selectData = this.jointData()
+          const code = this.selectData[0].children[0].value
+          this.handleInitCityData(code, 2, () => {
+            this.selectedIndex.push(0)
+            this.selectData = this.jointData()
+            // 如果asyncPicker不存在
+            if(!this.asyncPicker) this.initPicker()
+          })
+        })
       })
     },
     methods: {
-        handleInitCityData(code) {
+        handleInitCityData(code, index, callback) {
           const params = {
             t: 'regions'
           }
@@ -90,13 +97,84 @@
           }
           getRegions(params).then(res => {
             console.log(res)
+            if(res && res.errcode === 0) {
+              if(!code) {
+                this.dataObj[0] = this.cleanoutData(res.data)
+              } else {
+                this.dataObj[index] = this.cleanoutData(res.data)
+              }
+              callback()
+            }
           })
+        },
+        initPicker() {
+          this.asyncPicker = this.$createCascadePicker({
+            title: '选择地址',
+            async: true,
+            data: this.selectData,
+            selectedIndex: [],
+            onSelect: this.selectHandle,
+            onCancel: this.cancelHandle,
+            onChange: this.asyncChangeHandle
+          })
+        },
+        cleanoutData(data) {
+          const newData = data.map(item => {
+            return {
+              value: item.code,
+              text: item.name,
+              children: ''
+            }
+          })
+          return newData
+        },
+        jointData() {
+          const { dataObj, selectedIndex } = this
+          const selectedIndexLength = selectedIndex.length
+          console.log(dataObj[0])
+          let newArr = dataObj[0].slice()
+          if(selectedIndexLength === 2) {
+            newArr[selectedIndex[0]].children = dataObj[1].slice()
+          }
+          if(selectedIndexLength === 3) {
+            let twoArr = dataObj[2].slice()
+            dataObj[1][selectedIndex[1]].children = twoArr.slice()
+            this.dataObj = dataObj
+            newArr[selectedIndex[0]].children = dataObj[1].slice()
+          }
+          // console.log('selectedIndex:', selectedIndex)
+          // console.log('newArr:', newArr)
+          return newArr.slice()
         },
         showPicker() {
           this.asyncPicker.show()
         },
-        asyncChangeHandle() {
-
+        asyncChangeHandle(i, newIndex) {
+          console.log(i, newIndex, this.selectedIndex)
+          this.selectedIndex[i] = newIndex
+          if(i === 0) {
+            this.hanleTwo()
+          } else if(i === 1) {
+            this.handleOne()
+          }
+        },
+        handleOne() {
+          const index = this.selectedIndex[1]
+          const code = this.dataObj[1][index].value
+          this.handleInitCityData(code, 2, () => {
+            this.selectedIndex[2] = 0
+            this.selectData = this.jointData()
+            this.asyncPicker.setData(this.jointData(), this.selectedIndex)
+          })
+        },
+        hanleTwo() {
+          const index = this.selectedIndex[0]
+          const code = this.dataObj[0][index].value
+          this.handleInitCityData(code, 1, () => {
+            this.selectedIndex[1] = 0
+            this.selectData = this.jointData()
+            this.handleOne()
+          })
         },
         selectHandle(selectedVal, selectedIndex, selectedText) {
           this.$createDialog({
