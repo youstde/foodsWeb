@@ -1,5 +1,5 @@
 <template>
-  <div class='adress_list_item'>
+  <div class='adress_list_item' @click='goToEditAdress'>
     <flexbox>
       <flexbox-item class='flex_item_bx' :span='2/24'>
         <div class='adress_icon_bx'>
@@ -43,7 +43,15 @@
 
     },
     methods: {
-
+      goToEditAdress() {
+        this.$router.push({
+          path: '/editadress',
+          query: {
+            id: 123,
+            label: '编辑地址'
+          }
+        })
+      }
     }
   }
 </script>

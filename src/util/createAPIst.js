@@ -125,14 +125,27 @@ import { md5 } from 'vux'
 
     export default (url, method, config) => {
         const { params } = config;
-        params.sk = uuid();
-        params.uk = '';
-        params.ver = '0.0.1';
-        params.ts = (Date.parse(new Date().toUTCString()))/1000;
-        let paramsArr = Object.keys(params).map((key) => {
-          return params[key];
+        const uuId = localStorage.getItem('uuId')
+        if (uuId) {
+          params.sk = uuId
+        } else {
+            params.sk = uuid()
+            localStorage.setItem('uuId', params.sk)
+        }
+        const userInfoStr = localStorage.getItem('user_info')
+        let localUk = ''
+        if (userInfoStr) {
+            const userInfo = JSON.parse(userInfoStr)
+            localUk = userInfo.uk
+        }
+        params.uk = localUk
+        params.ver = '1.0.0'
+        params.ts = Date.parse(new Date().toUTCString()) / 1000
+        const paramsArr = Object.keys(params).map(key => {
+            return params[key]
         })
-        params.sign = md5(createSign(paramsArr));
+        params.sign = md5(createSign(paramsArr))
+        config.params = params
 
         return instance({
             url,

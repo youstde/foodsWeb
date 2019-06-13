@@ -29,6 +29,8 @@ const goodsInventory = r => require.ensure([], () => r(require('../pages/budget/
 const userAgreement = r => require.ensure([], () => r(require('../pages/userAgreement/userAgreement')), 'userAgreement')
 // 地址管理
 const adressManagement = r => require.ensure([], () => r(require('../pages/adressManagement/adressManagement')), 'adressManagement')
+// 地址编辑
+const editAdress = r => require.ensure([], () => r(require('../pages/editAdress/editAdress')), 'editAdress')
 
 const write = r => require.ensure([], () => r(require('../pages/write/write')), 'write')
 const articleDetail = r => require.ensure([], () => r(require('../pages/articleDetail/articleDetail')), 'articleDetail')
@@ -103,13 +105,18 @@ export default new Router({
     },
     {
       path: '/useragreement',
-      name: userAgreement,
+      name: 'userAgreement',
       component: userAgreement
     },
     {
       path: '/adressmanagement',
-      name: adressManagement,
+      name: 'adressManagement',
       component: adressManagement
+    },
+    {
+      path: '/editadress',
+      name: 'editAdress',
+      component: editAdress
     },
     {
       path: '/write',

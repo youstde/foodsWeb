@@ -11,6 +11,9 @@
       :options='scrollOptions'>
         <div class='address_item'><adress-item /></div>
         <div class='address_item'><adress-item /></div>
+        <div class='add_adress_bt'>
+          <base-button height='2rem' label='+ 新增收获地址' isRadius=true />
+        </div>
       </cube-scroll>
     </div>
   </div>
@@ -19,12 +22,14 @@
 <script>
   import TopBack from '@/components/topBack/topBack'
   import AdressItem from '@/components/adressItem/adressItem'
+  import BaseButton from '@/components/baseButton/baseButton'
 
   export default {
     name: 'adress-management',
     components: {
       TopBack,
-      AdressItem
+      AdressItem,
+      BaseButton
     },
     data() {
       return {
@@ -54,7 +59,13 @@
       line-height: 2rem;
       text-align: center;
     }
+    .goods_inventory_detail_out_bx {
+      height: 90vh;
+    }
     .address_item {
       padding-bottom: 0.25rem;
+    }
+    .add_adress_bt {
+      padding: 1.5rem 1.5rem 0;
     }
 </style>
