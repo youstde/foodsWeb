@@ -30,42 +30,42 @@
           {
             label: '超市便利',
             img: '@/assets/home-nav.jpeg',
-            link: '/msite'
+            link: '/goodsclassify'
           },
           {
             label: '水果',
             img: '@/assets/home-nav.jpeg',
-            link: '/msite'
+            link: '/goodsclassify'
           },
           {
             label: '蔬菜生鲜',
             img: '@/assets/home-nav.jpeg',
-            link: '/msite'
+            link: '/goodsclassify'
           },
           {
             label: '卤味',
             img: '@/assets/home-nav.jpeg',
-            link: '/msite'
+            link: '/goodsclassify'
           },
           {
             label: '休闲零食',
             img: '@/assets/home-nav.jpeg',
-            link: '/msite'
+            link: '/goodsclassify'
           },
           {
             label: '蔬菜生鲜',
             img: '@/assets/home-nav.jpeg',
-            link: '/msite'
+            link: '/goodsclassify'
           },
           {
             label: '卤味',
             img: '@/assets/home-nav.jpeg',
-            link: '/msite'
+            link: '/goodsclassify'
           },
           {
             label: '休闲零食',
             img: '@/assets/home-nav.jpeg',
-            link: '/msite'
+            link: '/goodsclassify'
           }
         ]
       }

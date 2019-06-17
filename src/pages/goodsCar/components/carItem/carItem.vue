@@ -19,6 +19,7 @@
         <div class="price_bx">{{itemObj.price}}/{{itemObj.unit}}</div>
         <div class="car_input_num_out_bx" v-if='itemObj.type===1'>
           <input-num
+          itemHeight='1.2rem'
           type='car'
           :changeBack='changeBack'
           :blurBack='blurBack' />

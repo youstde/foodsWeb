@@ -76,9 +76,9 @@
         console.log(e.currentTarget.getAttribute('data-id'))
       },
       changeBack(num) {
-        if(num === 0) {
-          this.isShowCar = true
-        }
+        // if(num === 0) {
+        //   this.isShowCar = true
+        // }
       },
       blurBack(num) {
         if(num === 0) {

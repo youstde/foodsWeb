@@ -71,7 +71,7 @@
           {
             id: 1,
             type: 2,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
             unit: '瓶'
@@ -79,7 +79,7 @@
           {
             id: 2,
             type: 1,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
             unit: '瓶'
@@ -87,7 +87,7 @@
           {
             id: 3,
             type: 1,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
             unit: '瓶'
@@ -95,7 +95,7 @@
           {
             id: 4,
             type: 1,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
             unit: '瓶'
@@ -103,7 +103,7 @@
           {
             id: 5,
             type: 1,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
             unit: '瓶'
@@ -111,7 +111,7 @@
           {
             id: 6,
             type: 1,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
             unit: '瓶'
@@ -119,7 +119,7 @@
           {
             id: 7,
             type: 1,
-            img: 'http://ww1.sinaimg.cn/large/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
+            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
             title: '鲁花家香味浓压榨籽油',
             price: '39.9',
             unit: '瓶'

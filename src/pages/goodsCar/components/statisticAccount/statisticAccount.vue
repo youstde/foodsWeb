@@ -61,6 +61,7 @@
     methods: {
       submit() {
         console.log(1)
+        this.$router.push('/budget')
       }
     }
   }

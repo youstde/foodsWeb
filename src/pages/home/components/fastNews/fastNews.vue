@@ -5,7 +5,7 @@
         <img class='fast_news_img' src="@/assets/fast-news.png" alt="">
       </flexbox-item>
       <flexbox-item :span="9">
-        <div class="swiper-container" id='fast_news_swiper'>
+        <div class="swiper-container swiper-no-swiping" id='fast_news_swiper'>
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for='(item, i) in fastNews' :key='i'>
               <div class='news_title'>{{item.title}}</div>
