@@ -8,18 +8,25 @@
         @pulling-down='onPullingDown'
         @pulling-up='onPullingUp'>
         <div class='home_banner_outbx'>
-          <div class='home_banner_swiper_bx'><home-banner></home-banner></div>
-          <!-- S=门店切换 -->
-          <div class='home_top_container'>
-            <router-link class='shop_name' to='/toggleshop'>
-              {{shop}}
-              <span class='icon_bx'><svg-icon iconClass='arrowdown' /></span>
-            </router-link>
-          </div>
-          <!-- E=门店切换 -->
-          <!-- S=搜索 -->
-          <div class='search_out_bx'><search /></div>
-          <!-- E=搜索 -->
+          <div class='home_banner_swiper_bx'><home-banner /></div>
+          <flexbox :style="{'padding-top':'0.5rem'}">
+            <flexbox-item :span='5/24'>
+              <!-- S=门店切换 -->
+              <div class='home_top_container'>
+                <router-link class='shop_name' to='/toggleshop'>
+                  {{shop}}
+                  <span class='icon_bx'><svg-icon iconClass='arrowdown' /></span>
+                </router-link>
+              </div>
+               <!-- E=门店切换 -->
+            </flexbox-item>
+            <flexbox-item :span='19/24'>
+              <!-- S=搜索 -->
+              <div class='search_out_bx'><search /></div>
+              <!-- E=搜索 -->
+            </flexbox-item>
+          </flexbox>
+
           <!-- S=顶部导航 -->
           <div class='home_nav_bx'>
             <HomeNav />
@@ -47,13 +54,16 @@
       </cube-scroll>
      </div>
      <bottom-nav />
+     <skeleton-load :isShow='isLoading' />
   </div>
 </template>
 
 <script>
   import { mapState } from 'vuex'
   import tools from '@/util/tools'
+  import { Flexbox, FlexboxItem } from 'vux'
   import BottomNav from '@/components/bottomNav/bottomNav'
+  import SkeletonLoad from '@/components/skeletonLoad/index'
   import Search from './components/search/search'
   import HomeBanner from './components/homeBanner/homeBanner'
   import HomeNav from './components/homeNav/homeNav'
@@ -66,7 +76,10 @@ import { setTimeout } from 'timers';
   export default {
     name: 'home',
     components: {
+      Flexbox,
+      FlexboxItem,
       HomeBanner,
+      SkeletonLoad,
       BottomNav,
       Search,
       HomeNav,
@@ -151,7 +164,9 @@ import { setTimeout } from 'timers';
 //      ])
 //    },
     mounted() {
-
+      setTimeout(() => {
+        this.isLoading = false
+      }, 2e3)
     },
     methods: {
       onPullingDown() {

@@ -4,7 +4,7 @@
       <div v-if="type==='radis'" class='radis_icon_bx' @click='goBack'>
         <span class='icon_bx'><svg-icon iconClass='back'></svg-icon></span>
       </div>
-      <span v-else class='icon_bx'><svg-icon iconClass='back'></svg-icon></span>
+      <span v-else class='icon_bx' @click='goBack'><svg-icon iconClass='back'></svg-icon></span>
     </div>
     <div class='right_bx'><slot></slot></div>
   </div>
