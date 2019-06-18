@@ -143,24 +143,6 @@ html,body{
   border: 0 none !important;
 }
 
-.cube-tab-bar {
-  display: block !important;
-  padding-top: 0.2rem !important;
-  .cube-tab {
-    margin: 0 1rem;
-    height: 1.5rem;
-    display: inline-block;
-    div {
-      font-size: 0.6rem !important;
-    }
-  }
-  .cube-tab_active {
-    div {
-      font-size: 0.8rem !important;
-    }
-  }
-}
-
 // vux
 .vux-flexbox-item {
   margin-left: 0 !important;

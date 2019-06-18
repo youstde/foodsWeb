@@ -31,9 +31,8 @@ const userAgreement = r => require.ensure([], () => r(require('../pages/userAgre
 const adressManagement = r => require.ensure([], () => r(require('../pages/adressManagement/adressManagement')), 'adressManagement')
 // 地址编辑
 const editAdress = r => require.ensure([], () => r(require('../pages/editAdress/editAdress')), 'editAdress')
-
-const write = r => require.ensure([], () => r(require('../pages/write/write')), 'write')
-const articleDetail = r => require.ensure([], () => r(require('../pages/articleDetail/articleDetail')), 'articleDetail')
+// 订单列表
+const orderList = r => require.ensure([], () => r(require('../pages/orderList/index')), 'orderList')
 
 Vue.use(Router)
 
@@ -119,14 +118,9 @@ export default new Router({
       component: editAdress
     },
     {
-      path: '/write',
-      name: 'write',
-      component: write
+      path: '/orderlist',
+      name: 'orderList',
+      component: orderList
     },
-    {
-      path: '/articleDetail',
-      name: 'articleDetail',
-      component: articleDetail
-    }
   ]
 })
