@@ -20,6 +20,7 @@
     components: {
       HomeGoodsItem
     },
+    props: [],
     data () {
       return {
         goodslist: [

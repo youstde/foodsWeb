@@ -2,7 +2,7 @@ import axios from 'axios'
 import { uuid, createSign } from './tools'
 import { md5 } from 'vux'
 
-    const devUrl = '/api';
+    const devUrl = '//api.fresh.laoniutech.com';
     const prodTag = '/api';
     const codeMessage = {
         200: '服务器成功返回请求的数据。',
@@ -76,10 +76,12 @@ import { md5 } from 'vux'
     instance.interceptors.request.use(
         config => {
             // loading.show()
+            window.sendMessage('toggle:loading', true)
             return config
         },
         error => {
             // loading.hide()
+            window.sendMessage('toggle:loading', false)
             Promise.reject(error)
         }
     )
@@ -89,7 +91,7 @@ import { md5 } from 'vux'
         res => {
             const { data } = res
             // loading.hide()
-
+            window.sendMessage('toggle:loading', false)
             // code 500 处理菜单没有权限
             if (!data.success && data.code === 500) {
                 // Modal.error({
@@ -103,6 +105,12 @@ import { md5 } from 'vux'
             }
             if (data.errcode !== 0) {
                 // 请求出错
+                if(data.errcode === 2000) {
+                  console.log('from:', window.location.href)
+                  const fromHref = window.location.href
+                  const host = window.location.host
+                  window.location.href = `//${host}/sign?from=${fromHref}`
+                }
             }
             return data
         },
@@ -110,6 +118,7 @@ import { md5 } from 'vux'
             // 如果跨域，则拿不到response
             const res = error.response
             // loading.hide()
+            window.sendMessage('toggle:loading', false)
 
             if (res) {
                 checkStatus(res)
@@ -129,8 +138,9 @@ import { md5 } from 'vux'
         if (uuId) {
           params.sk = uuId
         } else {
-            params.sk = uuid()
-            localStorage.setItem('uuId', params.sk)
+          // uuid()
+            // params.sk = uuid()
+            // localStorage.setItem('uuId', params.sk)
         }
         const userInfoStr = localStorage.getItem('user_info')
         let localUk = ''
@@ -138,7 +148,7 @@ import { md5 } from 'vux'
             const userInfo = JSON.parse(userInfoStr)
             localUk = userInfo.uk
         }
-        params.uk = localUk
+        if(localUk) params.uk = localUk
         params.ver = '1.0.0'
         params.ts = Date.parse(new Date().toUTCString()) / 1000
         const paramsArr = Object.keys(params).map(key => {

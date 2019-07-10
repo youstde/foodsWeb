@@ -8,7 +8,7 @@
         @pulling-down='onPullingDown'
         @pulling-up='onPullingUp'>
         <div class='home_banner_outbx'>
-          <div class='home_banner_swiper_bx'><home-banner /></div>
+          <div class='home_banner_swiper_bx'><home-banner :lunboData='lunboData' /></div>
           <flexbox :style="{'padding-top':'0.5rem'}">
             <flexbox-item :span='5/24'>
               <!-- S=门店切换 -->
@@ -29,13 +29,13 @@
 
           <!-- S=顶部导航 -->
           <div class='home_nav_bx'>
-            <HomeNav />
+            <HomeNav :categorysData='categorysData' />
           </div>
           <!-- E=顶部导航 -->
         </div>
         <div class='center_container'>
           <!-- S=快讯 -->
-          <fast-news />
+          <fast-news :fastNewsData='fastNewsData' />
           <!-- E=快讯 -->
         </div>
         <!-- S=限时优惠 -->
@@ -71,7 +71,9 @@
   import TimeDiscount from './components/timeDiscount/timeDiscount'
   import GoodsList from './components/goodsList/goodsList'
 
-import { setTimeout } from 'timers';
+  import { getHomeData } from './service'
+
+  import { setTimeout } from 'timers';
 
   export default {
     name: 'home',
@@ -98,6 +100,9 @@ import { setTimeout } from 'timers';
           pullUpLoad: true,
           scrollbar: true
         },
+        fastNewsData: [],
+        lunboData: [],
+        categorysData: [], // 商品分类
         goodslist: [
           {
             id: 1,
@@ -164,11 +169,23 @@ import { setTimeout } from 'timers';
 //      ])
 //    },
     mounted() {
-      setTimeout(() => {
-        this.isLoading = false
-      }, 2e3)
+      this.getHomeData()
     },
     methods: {
+      getHomeData() {
+        getHomeData({
+          t: 'infos',
+          mch_id: '107'
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            const { notice, lunbo, categorys } = res.data
+            this.fastNewsData = notice
+            this.lunboData = lunbo
+            this.categorysData = categorys
+            this.isLoading = false
+          }
+        })
+      },
       onPullingDown() {
         setTimeout(() => {
           // this.$refs.scroll.forceUpdate()

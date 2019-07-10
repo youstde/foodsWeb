@@ -77,6 +77,8 @@
       deleteNum() {
         const { goodsNum } = this
         const num = Number(goodsNum)
+        console.log('goodsNum:', goodsNum)
+        if(goodsNum === '1') return
         if(num === 0) {
           this.goodsNum = 0 + ''
         } else {

@@ -1,62 +1,15 @@
-import request from '../util/request';
+import createAPI from '@/util/createAPIst';
 
-/**
- * 获取文章
- */
-export const getArticle = () => {
-  return request('/getArticle');
+// 门店信息
+export const getStoreData = (params={}) => {
+  return createAPI('/merchant', 'get', {
+    params
+  });
 };
-/**
- * 通过文章ID获取文章
- * @param params
- */
-export const getArticleById = (params) => {
-  return request('/getArticleById',{params: params});
+
+
+export const getAccountBase = (params={}) => {
+  return createAPI('/account', 'get', {
+    params
+  })
 };
-/**
- * 通过labelID获取文章
- * @param params
- */
-export const getArticleByLabel = (params) => {
-  return request('/getArticleByLabel',{params: params});
-};
-/**
- * 获取用户信息
- */
-export const getUserInfo = () => {
-  return request('/getUserInfo');
-};
-/**
- * 获取所有label
- */
-export const getLabel = () => {
-  return request('/label');
-};
-/**
- * 注册
- * @param params
- */
-export const signUp = (params) => {
-  return request('/signUp', {params: params,method: 'POST'});
-}
-/**
- * 登录
- * @param params
- */
-export const signIn = (params) => {
-  return request('/signIn', {params: params,method: 'POST'});
-}
-/**
- * 发布文章
- * @param params
- */
-export const publicArticle = (params) => {
-  return request('/publicArticle', {params: params,method: 'POST'});
-}
-/**
- * 图片上传
- * @param params
- */
-export const imageUpload = (params) => {
-  return request('/imageUpload', {params: params,method: 'POST'});
-}

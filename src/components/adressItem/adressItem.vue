@@ -8,10 +8,10 @@
       </flexbox-item>
       <flexbox-item class='flex_item_bx' :span='19/24'>
         <div class='top_info_bx'>
-          <span class='user_name'>小李子</span>
-          <span class='user_phone'>18649583456</span>
+          <span class='user_name'>{{dataItem.contacter}}</span>
+          <span class='user_phone'>{{dataItem.mobile}}</span>
         </div>
-        <div class="user_adress_detail">杭州市西湖区西溪北苑11幢2单元杭州市西湖区西溪北苑11幢2单元501室杭州市西湖区西溪北苑11幢2单元501室501室</div>
+        <div class="user_adress_detail">{{`${dataItem.region_lv1}${dataItem.region_lv2}${dataItem.region_lv3}${dataItem.region_lv3}${dataItem.address}`}}</div>
       </flexbox-item>
       <flexbox-item class='flex_item_bx' :span='3/24'>
         <div class='arrow_right_bx'>
@@ -32,7 +32,7 @@
       FlexboxItem
     },
     props: [
-
+      'dataItem'
     ],
     data () {
       return {
@@ -47,8 +47,8 @@
         this.$router.push({
           path: '/editadress',
           query: {
-            id: 123,
-            label: '编辑地址'
+            label: '编辑收货地址',
+            dataItem: JSON.stringify(this.dataItem)
           }
         })
       }

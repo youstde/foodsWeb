@@ -11,7 +11,9 @@
           收货人
         </flexbox-item>
         <flexbox-item :span='7'>
-          <input class='item_input' type="text" placeholder="请输入收货人姓名">
+          <cube-validator ref='contacterValidator' :model="contacter" :rules="baseRules" :messages="baseMessages">
+            <input class='item_input' type="text" placeholder="请输入收货人姓名" v-model="contacter">
+          </cube-validator>
         </flexbox-item>
       </flexbox>
       <flexbox>
@@ -19,7 +21,9 @@
           手机号
         </flexbox-item>
         <flexbox-item :span='7'>
-          <input class='item_input' type="number" placeholder="请输入手机号">
+          <cube-validator ref='mobileValidator' :model="mobile" :rules="phoneRules" :messages="phoneMessages">
+            <input class='item_input' type="number" placeholder="请输入手机号" v-model="mobile">
+          </cube-validator>
         </flexbox-item>
       </flexbox>
       <flexbox>
@@ -27,10 +31,27 @@
           所在城市
         </flexbox-item>
         <flexbox-item :span='7'>
-          <div class='item_input' @click='showPicker'></div>
+          <div class='item_input' @click='showPicker'>
+            <p class='area_str_bx' v-if='areaStr'>{{areaStr}}</p>
+            <p class='area_str_bx placeholder_bx' v-else>请选择地域</p>
+          </div>
+        </flexbox-item>
+      </flexbox>
+      <flexbox>
+        <flexbox-item class='label' :span='5'>
+          详细地址
+        </flexbox-item>
+        <flexbox-item :span='7'>
+          <cube-validator ref='addressValidator' :model="address" :rules="baseRules" :messages="baseMessages">
+            <input class='item_input' type="text" placeholder="街道，楼牌号等" v-model="address">
+          </cube-validator>
         </flexbox-item>
       </flexbox>
     </div>
+    <div class='add_adress_bt' @click='handleSubmit'>
+      <base-button height='2rem' label='确定' isRadius=true />
+    </div>
+    <base-toast ref='baseToast' />
   </div>
 </template>
 
@@ -38,6 +59,8 @@
   import { Flexbox, FlexboxItem } from 'vux'
   import TopBack from '@/components/topBack/topBack'
   import BaseButton from '@/components/baseButton/baseButton'
+  import BaseToast from '@/components/baseToast/baseToast'
+  import { getAccountBase } from '@/service/getData'
 
   import { getRegions } from './service'
 
@@ -47,26 +70,53 @@
       Flexbox,
       FlexboxItem,
       TopBack,
-      BaseButton
+      BaseButton,
+      BaseToast
     },
     data () {
       return {
+        baseRules: {
+          required: true
+        },
+        baseMessages: {
+          pattern: '请输入正确手机号'
+        },
+        phoneRules: {
+          required: true,
+          type: 'number',
+          pattern: /^1[34578]\d{9}$/
+        },
+        phoneMessages: {
+          pattern: '请输入正确手机号'
+        },
         dataObj: {
           0: [],
           1: [],
           2: []
         },
+        areaStr: '',
         asyncPicker: '',
         selectData: [],
         selectedIndex: [0],
-        id: '',
-        label: '新增收货地址'
+        dataItem: '',
+        label: '新增收货地址',
+        contacter: '',
+        mobile: '',
+        address: '',
+        regionId: ''
       }
     },
     mounted() {
-      const { query: { id, label } } = this.$route
-      if(id) {
-        this.id = id
+      const { query: { dataItem, label } } = this.$route
+      console.log('dataItem:', dataItem)
+      if(dataItem) {
+        const newDataItem = JSON.parse(dataItem)
+        this.dataItem = newDataItem
+        this.areaStr = `${newDataItem.region_lv1}${newDataItem.region_lv2}${newDataItem.region_lv3}`
+        this.mobile = newDataItem.mobile
+        this.address = newDataItem.address
+        this.regionId = newDataItem.region_id
+        this.contacter = newDataItem.contacter
       }
       if(label) {
         this.label = label
@@ -88,6 +138,42 @@
       })
     },
     methods: {
+        handleSubmit() {
+          const vContacter = this.$refs.contacterValidator.validate()
+          const vMobile = this.$refs.mobileValidator.validate()
+          const vAddress = this.$refs.addressValidator.validate()
+          this.$refs.baseToast.onShowToast('warn', '请输入完整的的信息')
+          let isLegal = true
+          Promise.all([vContacter, vMobile, vAddress]).then((validResult) => {
+            validResult.some((valid) => {
+              if(!valid) isLegal = false
+              return !valid
+            })
+            if(!this.regionId) isLegal = false
+            if(isLegal) {
+              // 发送请求
+              const params = {
+                t: 'address.save',
+                contacter: this.contacter,
+                mobile: this.mobile,
+                address: this.address,
+                region_id: this.regionId
+              }
+              if(this.dataItem) params.id = this.dataItem.id
+              getAccountBase(params).then(res => {
+                if(res && res.errcode === 0) {
+                  this.$refs.baseToast.onShowToast('success', '操作成功!', () => {
+                    this.$router.push({path: '/adressmanagement'})
+                  })
+                }
+              })
+            } else {
+              // 警告提醒
+              this.$refs.baseToast.onShowToast('warn', '请输入完整的的信息')
+            }
+            // this.isSending = false;
+          })
+        },
         handleInitCityData(code, index, callback) {
           const params = {
             t: 'regions'
@@ -121,6 +207,7 @@
         cleanoutData(data) {
           const newData = data.map(item => {
             return {
+              id: item.id,
               value: item.code,
               text: item.name,
               children: ''
@@ -177,11 +264,12 @@
           })
         },
         selectHandle(selectedVal, selectedIndex, selectedText) {
-          this.$createDialog({
-            type: 'warn',
-            content: `Selected Item: <br/> - value: ${selectedVal.join(', ')} <br/> - index: ${selectedIndex.join(', ')} <br/> - text: ${selectedText.join(' ')}`,
-            icon: 'cubeic-alert'
-          }).show()
+          this.areaStr = selectedText.join(' ')
+          const index = selectedVal.length - 1
+          const code = selectedVal[index]
+          this.dataObj[2].forEach(item => {
+            if(code === item.value) this.regionId = item.id
+          })
         },
          cancelHandle() {
           this.$createToast({
@@ -217,7 +305,17 @@
         display: block;
         text-align: right;
         @include placeholderStyle($inputPlaceHolderColor);
+        .area_str_bx {
+          height: 2.1rem;
+          line-height: 2.1rem;
+          &.placeholder_bx {
+            color: $inputPlaceHolderColor;
+          }
+        }
       }
     }
   }
+  .add_adress_bt {
+      padding: 1.5rem 1.5rem 0;
+    }
 </style>

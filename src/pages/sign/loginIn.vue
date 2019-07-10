@@ -16,7 +16,7 @@
       <div class='input_bx'>
         <cube-validator ref='codeValidator' :model="phoneCode" :rules="codeRules" :messages="codeMessages">
           <input class='telphone_code' v-model="phoneCode" type="number" placeholder="请输入验证码" />
-          <send-code></send-code>
+          <send-code :phone='telphone'></send-code>
         </cube-validator>
         <span class='line'></span>
       </div>
@@ -31,6 +31,7 @@
   import ToastType from '@/components/toastType/toastType'
   import SendCode from './components/sendCode/sendCode'
   import { login } from './service'
+  import { setTimeout } from 'timers';
 
   export default {
     name: 'sign',
@@ -40,6 +41,7 @@
     },
     data () {
       return {
+        fromLink: '',
         showWarningToast:false,
         isSending: false,
         showToastType: '',
@@ -67,7 +69,13 @@
       }
     },
     mounted() {
-
+      console.log('this.$route:', this.$route)
+      const userInfo = localStorage.getItem('user_info')
+      if(userInfo) this.$router.push({path:'/myzoe'})
+      const { query: {from} } = this.$route
+      if(from) {
+        this.fromLink = from
+      }
     },
     methods: {
       submit() {
@@ -90,7 +98,12 @@
               c: 'weixin'
             }).then((res) => {
               if(res.errcode === 0) {
+                localStorage.setItem('user_info', JSON.stringify(res.data))
                 this.onShowToast('success', '登录成功!')
+                setTimeout(() => {
+                  if(this.fromLink) window.location.href = this.fromLink
+                  this.$router.push({path:'/myzoe'})
+                }, 1e3)
               } else {
                 const toast = this.$createToast({
                   txt: res.message,

@@ -2,11 +2,16 @@
   <div class='home_nav_bx'>
     <div class="swiper-container" id='home_nav_swiper'>
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for='(item, index) in navList' :key='index'>
+        <div class="swiper-slide" v-for='(item, index) in categorysData' :key='index'>
             <div class='home_nav_item'>
-              <router-link :to='item.link'>
+              <router-link :to="{
+                path: '/goodsclassify',
+                query: {
+                  id: item.id
+                }
+              }">
                 <span class='icon_bx'><img src="@/assets/home-nav.jpeg" alt=""></span>
-                <p class='item_label'>{{item.label}}</p>
+                <p class='item_label'>{{item.name}}</p>
               </router-link>
             </div>
         </div>
@@ -23,6 +28,21 @@
     name: 'home-nav',
     components: {
 
+    },
+    props: [
+      'categorysData'
+    ],
+    watch: {
+      categorysData (val) {
+        if(typeof val === 'object' && val.length) {
+          setTimeout(() => {
+            var mySwiper = new Swiper('#home_nav_swiper', {
+              slidesPerView: 5,
+              freeMode : true
+            })
+          }, 1)
+        }
+      }
     },
     data () {
       return {
@@ -71,10 +91,7 @@
       }
     },
     mounted() {
-      var mySwiper = new Swiper('#home_nav_swiper', {
-        slidesPerView: 5,
-        freeMode : true
-      })
+
     },
     methods: {
 

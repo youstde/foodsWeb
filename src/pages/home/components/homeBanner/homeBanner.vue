@@ -1,11 +1,11 @@
 <template>
   <div class="swiper-container" id='home_banner_swiper'>
     <div class="swiper-wrapper">
-      <div class="swiper-slide" v-for='(item, i) in bannerList' :key='i' @click='test'>
-        <router-link to='/goodsdetail'>
-        <img :data-src="item.img" src='https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png' class="swiper-lazy">
+      <div class="swiper-slide" v-for='item in lunboData' :key='item.ssid' @click='test'>
+        <a :href='item.link'>
+        <img :data-src="item.pictures" src='https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png' class="swiper-lazy">
         <div class="swiper-lazy-preloader"></div>
-        </router-link>
+        </a>
       </div>
     </div>
   </div>
@@ -14,6 +14,7 @@
 <script>
   import Swiper from 'swiper'
   import 'swiper/dist/css/swiper.min.css'
+import { setTimeout } from 'timers';
 
   export default {
     name: 'home-banner',
@@ -38,17 +39,29 @@
         ]
       }
     },
+    props: [
+      'lunboData'
+    ],
+    watch: {
+      lunboData (val) {
+        if(typeof val === 'object' && val.length) {
+          setTimeout(() => {
+            var mySwiper = new Swiper('#home_banner_swiper', {
+              autoplay:{
+                  delay: 5000,
+                  disableOnInteraction: false,
+              },//可选选项，自动滑动
+              loop : true,
+              lazy: {
+                loadPrevNext: true,
+              },
+            })
+          }, 1)
+        }
+      }
+    },
     mounted() {
-      var mySwiper = new Swiper('#home_banner_swiper', {
-        autoplay:{
-            delay: 5000,
-            disableOnInteraction: false,
-        },//可选选项，自动滑动
-        loop : true,
-        lazy: {
-          loadPrevNext: true,
-        },
-      })
+
     },
     methods: {
       test(e) {

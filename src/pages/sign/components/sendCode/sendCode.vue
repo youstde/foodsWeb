@@ -15,7 +15,7 @@ import { setTimeout } from 'timers';
 
     },
     props: [
-
+      'phone'
     ],
     data () {
       return {
@@ -29,23 +29,26 @@ import { setTimeout } from 'timers';
     },
     methods: {
       sendCode() {
-        const { time } = this;
-        this.isSending = true;
-        sendCode({
-          t: 'send.code',
-          mobile: '18626875836',
-          type: 'login'
-        }).then((res) => {
-          if(res.errcode === 0) {
-            // 请求成功
-          } else {
-            const { baseTime } = this;
-            this.isSending = false;
-            this.time = baseTime;
-          }
-          console.log(res)
-        })
-        this.countDown(time);
+        if(/^[1]([3-9])[0-9]{9}$/.test(this.phone)) {
+          const { time } = this;
+          this.isSending = true;
+          sendCode({
+            t: 'send.code',
+            mobile: this.phone,
+            type: 'login'
+          }).then((res) => {
+            if(res.errcode === 0) {
+              // 请求成功
+            } else {
+              const { baseTime } = this;
+              this.isSending = false;
+              this.time = baseTime;
+            }
+          })
+          this.countDown(time);
+        } else {
+
+        }
       },
       countDown(time) {
         this.time = time - 1;

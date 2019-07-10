@@ -7,7 +7,8 @@
       <div class='user_avatar'>
         <span class='not_login'><svg-icon iconClass='my-moren'></svg-icon></span>
       </div>
-      <div class='login_link'><router-link to='/sign'>登录/注册</router-link></div>
+      <div class='user_name_bx' v-if='userInfo'>{{userInfo.name}}</div>
+      <div class='login_link' v-else><router-link to='/sign'>登录/注册</router-link></div>
     </div>
     <div class='middle_center_bx'>
       <div class="nav_list">
@@ -58,11 +59,15 @@
             icon: 'adress-manament',
             label: '地址管理'
           }
-        ]
+        ],
+        userInfo: null
       }
     },
     mounted() {
-
+      const userInfoStr = localStorage.getItem('user_info')
+      if(userInfoStr) {
+        this.userInfo = JSON.parse(userInfoStr)
+      }
     },
     methods: {
 

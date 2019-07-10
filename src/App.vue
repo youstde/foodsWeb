@@ -9,6 +9,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import baseLoading from '@/components/baseLoading/baseLoading'
+  import { getAccountBase } from '@/service/getData'
 
   export default {
     name: 'App',
@@ -23,6 +24,16 @@
       }
     },
     mounted() {
+      const uuId = localStorage.getItem('uuId')
+      if(!uuId) {
+        getAccountBase({
+          t: 'guid'
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            localStorage.setItem('uuId', res.data)
+          }
+        })
+      }
       window.onMessage('toggle:loading', (bol) => {
         this.toggleLoading = bol
       })

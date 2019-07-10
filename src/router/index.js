@@ -33,6 +33,9 @@ const adressManagement = r => require.ensure([], () => r(require('../pages/adres
 const editAdress = r => require.ensure([], () => r(require('../pages/editAdress/editAdress')), 'editAdress')
 // 订单列表
 const orderList = r => require.ensure([], () => r(require('../pages/orderList/index')), 'orderList')
+// 订单详情
+const orderDetail = r => require.ensure([], () => r(require('../pages/orderDetail/index')), 'orderDetail')
+
 
 Vue.use(Router)
 
@@ -122,5 +125,10 @@ export default new Router({
       name: 'orderList',
       component: orderList
     },
+    {
+      path: '/orderdetail',
+      name: 'orderDetail',
+      component: orderDetail
+    }
   ]
 })

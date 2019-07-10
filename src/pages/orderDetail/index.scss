@@ -1,0 +1,43 @@
+.order_detail_bx {
+  .local_top_back_bx {
+    padding: 0.5rem 0 0.5rem 0.7rem;
+    background-color: $themeColor;
+    position: relative;
+    z-index: 11;
+    .top_back_item {
+      height: 1.95rem;
+      position: relative;
+      &.title {
+        span {
+          @include positionMiddle;
+          left: 4rem;
+          font-size: 0.9rem;
+          color: #fff;
+        }
+        .status_label {
+          font-size: 0.6rem;
+          color: #fff;
+          padding: 0.2rem 0.75rem;
+          border-top-left-radius: 0.5rem;
+          border-bottom-left-radius: 0.5rem;
+          background: $priceActiveColor;
+          @include positionMiddle;
+          right: 0;
+        }
+      }
+      .icon_bx {
+        width: 1.5rem;
+        height: 1.5rem;
+        display: inline-block;
+        padding: 0.3rem;
+        background-color: #fff;
+        @include borderRadius(50%);
+        @include positionMiddle;
+        left: 0;
+      }
+    }
+  }
+  .container_out_bx {
+    padding: 0 0.7rem;
+  }
+}

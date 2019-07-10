@@ -9,9 +9,8 @@
       <cube-scroll
       ref='scroll'
       :options='scrollOptions'>
-        <div class='address_item'><adress-item /></div>
-        <div class='address_item'><adress-item /></div>
-        <div class='add_adress_bt'>
+        <div class='address_item' v-for='item in addressData' :key='item.id'><adress-item :dataItem='item' /></div>
+        <div class='add_adress_bt' @click='addAddress'>
           <base-button height='2rem' label='+ 新增收获地址' isRadius=true />
         </div>
       </cube-scroll>
@@ -23,6 +22,7 @@
   import TopBack from '@/components/topBack/topBack'
   import AdressItem from '@/components/adressItem/adressItem'
   import BaseButton from '@/components/baseButton/baseButton'
+  import { getAccountBase } from '@/service/getData'
 
   export default {
     name: 'adress-management',
@@ -33,6 +33,7 @@
     },
     data() {
       return {
+        addressData: [],
         scrollOptions: {
           pullDownRefresh: false,
           pullUpLoad: false,
@@ -41,10 +42,23 @@
       }
     },
     mounted() {
-
+      this.fetchAddressData()
     },
     methods: {
-
+      fetchAddressData () {
+        getAccountBase({
+          t: 'address.list'
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            this.addressData = res.data
+          }
+        })
+      },
+      addAddress() {
+        this.$router.push({
+          path: '/editadress'
+        })
+      }
     }
   }
 </script>

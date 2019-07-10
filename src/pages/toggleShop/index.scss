@@ -46,6 +46,9 @@
       position: relative;
       @include halfUnderLine;
       padding: 0 0.65rem;
+      &.active_shop_item {
+        color: $themeColor;
+      }
       .item_shop_name {
         font-size: 0.75rem;
         padding-top: 0.7rem;
@@ -60,4 +63,8 @@
       }
     }
   }
+}
+
+.cube-scroll-wrapper {
+  height: 86vh;
 }
