@@ -2,7 +2,7 @@
   <div class='home_goods_list_bx'>
     <div class="swiper-container" id='time_discount_swiper'>
       <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for='(item, i) in goodslist' :key='i'>
+        <div class="swiper-slide" v-for='(item, i) in rushGoodsData' :key='i'>
           <HomeGoodsItem isSlide=true :goodsItem='item' type='1' />
         </div>
      </div>
@@ -20,7 +20,19 @@
     components: {
       HomeGoodsItem
     },
-    props: [],
+    props: ['rushGoodsData'],
+    watch: {
+      rushGoodsData (val) {
+        if(typeof val === 'object' && val.length) {
+          setTimeout(() => {
+            var mySwiper = new Swiper('#time_discount_swiper', {
+              freeMode : true,
+              slidesPerView: 3.2
+            })
+          }, 1)
+        }
+      }
+    },
     data () {
       return {
         goodslist: [
@@ -84,10 +96,7 @@
       }
     },
     mounted() {
-      var mySwiper = new Swiper('#time_discount_swiper', {
-        freeMode : true,
-        slidesPerView: 3.2
-      })
+
     },
     methods: {
 

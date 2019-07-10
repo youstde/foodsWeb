@@ -1,28 +1,28 @@
 <template>
   <div :class="{home_goods_item_bx:true, goods_item_mormal:type==='1'}">
-    <img :src="goodsItem.img" alt="" @click='handleToDetail'>
-    <div class='goods_title'>{{goodsItem.title}}</div>
+    <img :src="goodsItem.picture" alt="" @click='handleToDetail'>
+    <div class='goods_title'>{{goodsItem.alias}}</div>
     <flexbox class='goods_detail_bx'>
       <flexbox-item v-if='isSlide' class='goods_price' :span='isShowCar?7:4'>
         <!-- 有打折价 -->
         <div v-if='goodsItem.cheapPrice'>
-          <p class='fresh_price'>￥{{goodsItem.cheapPrice}}</p>
-          <p class='past_price'>￥{{goodsItem.odderPrice}}</p>
+          <p class='fresh_price'>￥{{goodsItem.price_rush}}/{{goodsItem.specification_name}}</p>
+          <p class='past_price'>￥{{goodsItem.price_sale}}/{{goodsItem.specification_name}}</p>
         </div>
         <!-- 无打折价 -->
         <div v-else>
-          <p class='normal_price'>￥{{goodsItem.price}}</p>
+          <p class='normal_price'>￥{{goodsItem.price_sale}}/{{goodsItem.specification_name}}</p>
         </div>
       </flexbox-item>
       <flexbox-item v-else class='goods_price' :span='7'>
         <!-- 有打折价 -->
         <div v-if='goodsItem.cheapPrice'>
-          <p class='fresh_price'>￥{{goodsItem.cheapPrice}}</p>
-          <p class='past_price'>￥{{goodsItem.odderPrice}}</p>
+          <p class='fresh_price'>￥{{goodsItem.price_rush}}/{{goodsItem.specification_name}}</p>
+          <p class='past_price'>￥{{goodsItem.price_sale}}/{{goodsItem.specification_name}}</p>
         </div>
         <!-- 无打折价 -->
         <div v-else>
-          <p class='normal_price'>￥{{goodsItem.price}}</p>
+          <p class='normal_price'>￥{{goodsItem.price_sale}}/{{goodsItem.specification_name}}</p>
         </div>
       </flexbox-item>
       <flexbox-item v-if='isSlide' class='add_to_car' :span='isShowCar?5:8'>
@@ -86,8 +86,8 @@
         }
       },
       handleToDetail() {
-        const { id } = this.goodsItem
-        this.$router.push(`/goodsdetail?id=${id}`)
+        const { serial_no } = this.goodsItem
+        this.$router.push(`/goodsdetail?serialNo=${serial_no}`)
       }
     }
   }

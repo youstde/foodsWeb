@@ -13,3 +13,7 @@ export const SET_IS_SHOW_COVER = (state, value) => {
   state.isShowCover = value;
 }
 
+export const SET_MERCHANT = (state, value) => {
+  state.merchant = value;
+}
+

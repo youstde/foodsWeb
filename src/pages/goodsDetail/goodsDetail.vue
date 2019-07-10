@@ -14,16 +14,19 @@
     <cube-scroll
         ref='scroll'
         :options='scrollOptions'>
-      <detail-swiper></detail-swiper>
+      <detail-swiper :detailData='detailData' />
       </cube-scroll>
-      <append-car></append-car>
+      <append-car :dataSource='detailData' ></append-car>
   </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import TopBack from '@/components/topBack/topBack'
   import AppendCar from '@/components/appendCar/appendCar'
   import DetailSwiper from './components/detailSwiper/detailSwiper'
+
+  import { getGoodsBase } from '@/service/getData'
 
   export default {
     name: 'goods-detail',
@@ -34,18 +37,37 @@
     },
     data () {
       return {
-         scrollOptions: {
+        detailData: {},
+        scrollOptions: {
           pullDownRefresh: false,
           pullUpLoad: false,
           scrollbar: true
         },
       }
     },
+    computed: {
+      ...mapGetters([
+        'merchant'
+      ])
+    },
     mounted() {
-
+      console.log(this.merchant)
+      const { query: { serialNo } } = this.$route
+      this.fetchDetailData(serialNo)
     },
     methods: {
-
+      // 暂时门店的id都是固定为107
+      fetchDetailData(serialNo) {
+        getGoodsBase({
+          t: 'detail',
+          serial_no: serialNo,
+          mch_id: 107
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            this.detailData = res.data
+          }
+        })
+      }
     }
   }
 </script>

@@ -147,3 +147,13 @@ html,body{
 .vux-flexbox-item {
   margin-left: 0 !important;
 }
+
+.detail_rich_txt {
+  margin-top: 0.25rem;
+  background-color: #fff;
+  padding-bottom: 2.5rem;
+  img {
+    width: 100% !important;
+    display: block;
+  }
+}

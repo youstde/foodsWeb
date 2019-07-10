@@ -9,7 +9,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import baseLoading from '@/components/baseLoading/baseLoading'
-  import { getAccountBase } from '@/service/getData'
+  import { getAccountBase, getStoreData } from '@/service/getData'
 
   export default {
     name: 'App',
@@ -24,6 +24,7 @@
       }
     },
     mounted() {
+      this.fetchStoreData()
       const uuId = localStorage.getItem('uuId')
       if(!uuId) {
         getAccountBase({
@@ -44,6 +45,16 @@
       ])
     },
     methods: {
+      fetchStoreData() {
+        getStoreData({
+          t: 'list'
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            const { merchant } = res.data
+            this.$store.commit('SET_MERCHANT', merchant)
+          }
+        })
+      },
       closeCover() {
         console.log('close')
         this.$store.commit('SET_IS_SHOW_COVER', false)

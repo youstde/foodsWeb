@@ -13,7 +13,8 @@ const state = {
     labels: []
   },
   isFirstLoading: true,
-  isShowCover: false
+  isShowCover: false,
+  merchant: {}
 }
 
 export default new Vuex.Store({

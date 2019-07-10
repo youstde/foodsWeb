@@ -26,7 +26,7 @@
           </flexbox-item>
         </flexbox>
         <div class="key_borad" v-show='showAddNum'>
-          <div class="title">请输入所需数量</div>
+          <div class="title">{{keyNum || '请输入所需数量'}}</div>
             <div class='keys_out_bx' @click='getKey'>
               <flexbox v-for='(itemLine, i) in keyboradKeys' :key='i'>
                 <flexbox-item :span='4' class='borad_item'><div class='have_right_line'>{{itemLine[0]}}</div></flexbox-item>
@@ -42,20 +42,26 @@
            </flexbox>
         </div>
     </div>
+    <base-toast ref='baseToast' />
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex'
   import { Flexbox, FlexboxItem } from 'vux'
+  import BaseToast from '@/components/baseToast/baseToast'
   import { setTimeout } from 'timers';
+
+  import { getGoodsBase } from '@/service/getData'
 
   export default {
     name: 'append-car',
     components: {
       Flexbox,
-      FlexboxItem
+      FlexboxItem,
+      BaseToast
     },
+    props: ['dataSource'],
     data () {
       return {
         showAddNum: false,
@@ -123,9 +129,27 @@
         }
       },
       addToCar() {
-        if(this.showAddNum) return
+        if(this.showAddNum) {
+          this.handleToCar()
+          return
+        }
         this.showAddNum = true
         this.$store.commit('SET_IS_SHOW_COVER', true)
+      },
+      handleToCar() {
+        console.log(this.dataSource)
+        const { serial_no } = this.dataSource
+        getGoodsBase({
+          t: 'cart.add',
+          serial_no,
+          mch_id: 107,
+          quantity: this.goodsNum
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            this.$refs.baseToast.onShowToast('success', '添加购物车成功!')
+            this.cancelNum()
+          }
+        })
       },
       subtractNum() {
         const { goodsNum } = this

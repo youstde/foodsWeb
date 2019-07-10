@@ -44,7 +44,7 @@
             <span>限时优惠</span>
             <span class='get_more'><router-link to='/goodsclassify'>查看更多 ></router-link></span>
           </div>
-          <time-discount />
+          <time-discount :rushGoodsData='rushGoodsData' />
         </div>
         <!-- E=限时优惠 -->
         <div class='goods_list'>
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex'
   import { mapState } from 'vuex'
   import tools from '@/util/tools'
   import { Flexbox, FlexboxItem } from 'vux'
@@ -101,6 +102,7 @@
           scrollbar: true
         },
         fastNewsData: [],
+        rushGoodsData: [],  // 限时优惠
         lunboData: [],
         categorysData: [], // 商品分类
         goodslist: [
@@ -163,12 +165,13 @@
         ]
       }
     },
-//    computed: {
-//      ...mapGetters([
-//        'labels'
-//      ])
-//    },
+    computed: {
+      ...mapGetters([
+        'merchant'
+      ])
+    },
     mounted() {
+      console.log('merchant:', this.merchant)
       this.getHomeData()
     },
     methods: {
@@ -178,10 +181,11 @@
           mch_id: '107'
         }).then(res => {
           if(res && res.errcode === 0) {
-            const { notice, lunbo, categorys } = res.data
+            const { notice, lunbo, categorys, rush } = res.data
             this.fastNewsData = notice
             this.lunboData = lunbo
             this.categorysData = categorys
+            this.rushGoodsData = rush
             this.isLoading = false
           }
         })

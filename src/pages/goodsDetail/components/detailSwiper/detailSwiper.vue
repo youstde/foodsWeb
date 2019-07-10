@@ -2,20 +2,19 @@
     <div class='detail_swiper_bx'>
       <div class="swiper-container" id='goods_detail_swiper'>
         <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for='(item, i) in goods.imgList' :key='i'>
+          <div class="swiper-slide" v-for='(item, i) in detailData.picture' :key='i'>
             <router-link to='/goodsdetail'>
-            <img :data-src="item" src='https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png' class="swiper-lazy">
-            <div class="swiper-lazy-preloader"></div>
+              <img :src='item.url' />
             </router-link>
           </div>
         </div>
         <div class="swiper-pagination"></div>
       </div>
       <div class='detail_swiper_detail'>
-        <div class='title'>{{goods.title}}</div>
+        <div class='title'>{{detailData.alias}}</div>
         <div class='botttom_bx'>
-          <div class='left_price'>￥{{goods.price}}</div>
-          <div class='right_warehouse'>库存: {{goods.warehouse}}件</div>
+          <div class='left_price'>￥{{detailData.price_sale}}/{{detailData.specification_name}}</div>
+          <div class='right_warehouse'>库存: {{detailData.stock_now}}{{detailData.specification_name}}</div>
         </div>
       </div>
       <!-- S=产品规格 -->
@@ -26,13 +25,13 @@
             <flexbox-item :span='6'>
               <flexbox>
               <flexbox-item :span='4' class='item_label'>产地</flexbox-item>
-              <flexbox-item :span='8' class='item_info'>内蒙古</flexbox-item>
+              <flexbox-item :span='8' class='item_info'>{{detailData.region_name}}</flexbox-item>
               </flexbox>
             </flexbox-item>
             <flexbox-item :span='6' class='after_flex_bx'>
               <flexbox>
               <flexbox-item :span='4' class='item_label'>等级</flexbox-item>
-              <flexbox-item :span='8' class='item_info'>一级</flexbox-item>
+              <flexbox-item :span='8' class='item_info'>{{detailData.levels}}</flexbox-item>
               </flexbox>
             </flexbox-item>
           </flexbox>
@@ -42,21 +41,64 @@
             <flexbox-item :span='6'>
               <flexbox>
               <flexbox-item :span='4' class='item_label'>品牌</flexbox-item>
-              <flexbox-item :span='8' class='item_info'>小露珠圣女果</flexbox-item>
+              <flexbox-item :span='8' class='item_info'>{{detailData.brand_name}}</flexbox-item>
               </flexbox>
             </flexbox-item>
             <flexbox-item :span='6' class='after_flex_bx'>
               <flexbox>
-              <flexbox-item :span='4' class='item_label'>型号</flexbox-item>
-              <flexbox-item :span='8' class='item_info'>MD68GHDSO8D68GDSP</flexbox-item>
+              <flexbox-item :span='4' class='item_label'>存储情况</flexbox-item>
+              <flexbox-item :span='8' class='item_info'>{{detailData.storage_name}}</flexbox-item>
               </flexbox>
             </flexbox-item>
+          </flexbox>
+        </div>
+        <div class="size_item">
+          <flexbox>
+            <flexbox-item :span='6'>
+              <flexbox>
+              <flexbox-item :span='4' class='item_label'>外包装</flexbox-item>
+              <flexbox-item :span='8' class='item_info'>{{detailData.packing_name_a}}</flexbox-item>
+              </flexbox>
+            </flexbox-item>
+            <flexbox-item :span='6' class='after_flex_bx'>
+              <flexbox>
+              <flexbox-item :span='4' class='item_label'>内包装</flexbox-item>
+              <flexbox-item :span='8' class='item_info'>{{detailData.packing_name_b}}</flexbox-item>
+              </flexbox>
+            </flexbox-item>
+          </flexbox>
+        </div>
+        <div class="size_item">
+          <flexbox>
+            <flexbox-item :span='6'>
+              <flexbox>
+              <flexbox-item :span='4' class='item_label'>品类</flexbox-item>
+              <flexbox-item :span='8' class='item_info'>{{detailData.category_name}}</flexbox-item>
+              </flexbox>
+            </flexbox-item>
+            <flexbox-item :span='6' class='after_flex_bx'>
+              <flexbox>
+              <flexbox-item :span='4' class='item_label'>加工情况</flexbox-item>
+              <flexbox-item :span='8' class='item_info'>{{detailData.process_name}}</flexbox-item>
+              </flexbox>
+            </flexbox-item>
+          </flexbox>
+        </div>
+        <div class="size_item">
+          <flexbox>
+            <flexbox-item :span='6'>
+              <flexbox>
+              <flexbox-item :span='4' class='item_label'>品种</flexbox-item>
+              <flexbox-item :span='8' class='item_info'>{{detailData.variety_name}}</flexbox-item>
+              </flexbox>
+            </flexbox-item>
+            <flexbox-item :span='6' class='after_flex_bx'></flexbox-item>
           </flexbox>
         </div>
       </div>
       <!-- E=产品规格 -->
       <!-- S=详情富文本 -->
-      <div class='detail_rich_txt' v-html='goods.richTxt'></div>
+      <div class='detail_rich_txt' v-html='detailData.describe'></div>
       <!-- E=详情富文本 -->
     </div>
 </template>
@@ -72,37 +114,36 @@
       Flexbox,
       FlexboxItem
     },
-    data () {
-      return {
-        goods: {
-          warehouse: '10',
-          price: '14.9/斤',
-          richTxt: "<h1 style='height:200px'>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1><h1>this is rich text</h1>",
-          title: '【满199减120】 三只松鼠夏威夷果160g 小零食坚果炒货孕妇坚果每日坚果干果休闲零食送开口器 160g',
-          imgList: [
-            'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png',
-            'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png',
-            'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png',
-            'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png'
-          ]
+    props: ['detailData'],
+    watch: {
+      detailData (val) {
+        if(typeof val === 'object' && val.id) {
+          setTimeout(() => {
+            var mySwiper = new Swiper('#goods_detail_swiper', {
+              pagination: {
+                el: '.swiper-pagination',
+                type: 'progressbar'
+              },
+              autoplay:{
+                  delay: 5000,
+                  disableOnInteraction: false,
+              },//可选选项，自动滑动
+              loop : true,
+              lazy: {
+                loadPrevNext: true,
+              },
+            })
+          }, 1)
         }
       }
     },
+    data () {
+      return {
+
+      }
+    },
     mounted() {
-      var mySwiper = new Swiper('#goods_detail_swiper', {
-        pagination: {
-          el: '.swiper-pagination',
-          type: 'progressbar'
-        },
-        autoplay:{
-            delay: 5000,
-            disableOnInteraction: false,
-        },//可选选项，自动滑动
-        loop : true,
-        lazy: {
-          loadPrevNext: true,
-        },
-      })
+
     },
     methods: {
 

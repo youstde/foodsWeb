@@ -13,3 +13,12 @@ export const getAccountBase = (params={}) => {
     params
   })
 };
+
+
+
+// goods
+export const getGoodsBase = (params={}) => {
+  return createAPI('/goods', 'get', {
+    params
+  })
+};

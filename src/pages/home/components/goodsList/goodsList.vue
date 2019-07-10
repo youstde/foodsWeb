@@ -8,7 +8,8 @@
 
 <script>
   import HomeGoodsItem from '@/pages/home/components/homeGoodsItem/homeGoodsItem'
-import { setTimeout } from 'timers';
+  import { setTimeout } from 'timers';
+  import { getGoodsBase, getStoreData } from '@/service/getData'
 
   export default {
     name: 'goods-list',
@@ -52,63 +53,37 @@ import { setTimeout } from 'timers';
     },
     data () {
       return {
-        goodslist: [
-          {
-            id: 1,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质黄瓜',
-            price: '1.46/斤'
-          },
-          {
-            id: 2,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质南瓜',
-            price: '0.99/斤'
-          },
-          {
-            id: 3,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质黄瓜',
-            price: '1.46/斤'
-          },
-          {
-            id: 4,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质南瓜',
-            price: '0.99/斤'
-          },
-          {
-            id: 5,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质黄瓜',
-            price: '1.46/斤'
-          },
-          {
-            id: 6,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质南瓜',
-            price: '0.99/斤'
-          },
-          {
-            id: 7,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质南瓜',
-            price: '0.99/斤'
-          },
-          {
-            id: 8,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质黄瓜',
-            price: '1.46/斤'
-          },
-        ]
+        goodslist: []
       }
     },
     mounted() {
-
+      this.fetchMerchantData()
     },
     methods: {
-
+      fetchMerchantData() {
+        getStoreData({
+          t:'list'
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            const { merchant: { id } } = res.data
+            this.fetchGoodsData(1, id)
+          }
+        })
+      },
+      fetchGoodsData(index, mchId) {
+        getGoodsBase({
+          t: 'list',
+          // mch_id: mchId,
+          mch_id: 107,
+          index,
+          size: 20
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            console.log('rest:', res)
+            this.goodslist = res.data
+          }
+        })
+      }
     }
   }
 </script>
