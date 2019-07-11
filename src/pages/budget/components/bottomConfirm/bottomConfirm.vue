@@ -3,7 +3,7 @@
     <flexbox>
       <flexbox-item :span='8'>
         <div class='total_count'>
-          <div class='price'>合计：￥324.00</div>
+          <div class='price'>合计：￥{{allMoney}}</div>
           <div class='tip'>不含运费</div>
         </div>
       </flexbox-item>
@@ -26,7 +26,7 @@
       BaseButton
     },
     props: [
-
+      'allMoney'
     ],
     data () {
       return {

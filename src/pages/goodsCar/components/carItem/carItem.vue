@@ -2,8 +2,8 @@
   <div class='landscape_list_item'>
     <flexbox>
       <flexbox-item class='flex_item_bx' :span='1'>
-        <div class='check_in_car' v-if='itemObj.type===1'>
-          <check-box
+        <div class='check_in_car' v-if='itemObj.saleable===1'>
+          <goods-car-check-box
           :data='itemObj'
           :checkList='checkList' />
         </div>
@@ -12,13 +12,15 @@
         </div>
       </flexbox-item>
       <flexbox-item class='flex_item_bx' :span='3'>
-         <img :src="itemObj.img" alt="">
+         <img :src="itemObj.picture" alt="">
       </flexbox-item>
       <flexbox-item class='flex_item_bx' :span='8'>
-        <div class="title">{{itemObj.title}}</div>
-        <div class="price_bx">{{itemObj.price}}/{{itemObj.unit}}</div>
-        <div class="car_input_num_out_bx" v-if='itemObj.type===1'>
+        <div class="title">{{itemObj.alias}}</div>
+        <div class="price_bx">{{itemObj.price_sale}}/{{itemObj.specification_name}}</div>
+        <div class="car_input_num_out_bx" v-if='itemObj.saleable===1'>
           <input-num
+          :dataSource='itemObj'
+          :initNum='itemObj.quantity'
           itemHeight='1.2rem'
           type='car'
           :changeBack='changeBack'
@@ -32,7 +34,7 @@
 <script>
   import { Flexbox, FlexboxItem } from 'vux'
   import InputNum from '@/components/inputNum/inputNum'
-  import CheckBox from '@/components/checkBox/checkBox'
+  import GoodsCarCheckBox from '../goodsCarCheckbox/goodsCarCheckbox'
 
   export default {
     name: 'car-item',
@@ -40,7 +42,7 @@
       Flexbox,
       FlexboxItem,
       InputNum,
-      CheckBox
+      GoodsCarCheckBox
     },
     props: [
       'itemObj',
@@ -52,6 +54,9 @@
     watch: {
       checkList(value) {
         this.updateMoneyObj(this.goodsNum)
+      },
+      itemObj(val) {
+        console.log('itemObj:', val)
       }
     },
     data () {

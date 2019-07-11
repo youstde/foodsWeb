@@ -17,60 +17,38 @@
       HomeGoodsItem
     },
     props: [
+      'merchant',
       'pullUpLoadIndex',
       'closeUpdate'
     ],
     watch: {
       pullUpLoadIndex (index) {
-        const { goodslist } = this;
-         const newList = [{
-            id: 5,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质黄瓜',
-            price: '1.46/斤'
-          },
-          {
-            id: 6,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质南瓜',
-            price: '0.99/斤'
-          },
-          {
-            id: 7,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质南瓜',
-            price: '0.99/斤'
-          },
-          {
-            id: 8,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-1.png',
-            title: '精选优质黄瓜',
-            price: '1.46/斤'
-          }]
-        this.goodslist = goodslist.concat(newList)
-        this.closeUpdate();
+        const { goodslist, merchantId } = this;
+        this.fetchGoodsData(index, merchantId, data => {
+          this.goodslist = goodslist.concat(data)
+          this.closeUpdate()
+        })
+
+      },
+      merchant (val) {
+        if(val.id) {
+          this.fetchGoodsData(1, val.id, data => {
+            this.goodslist = data
+          })
+        }
       }
     },
     data () {
       return {
-        goodslist: []
+        goodslist: [],
+        merchantId: ''
       }
     },
     mounted() {
-      this.fetchMerchantData()
+
     },
     methods: {
-      fetchMerchantData() {
-        getStoreData({
-          t:'list'
-        }).then(res => {
-          if(res && res.errcode === 0) {
-            const { merchant: { id } } = res.data
-            this.fetchGoodsData(1, id)
-          }
-        })
-      },
-      fetchGoodsData(index, mchId) {
+      fetchGoodsData(index, mchId, cb) {
         getGoodsBase({
           t: 'list',
           // mch_id: mchId,
@@ -80,7 +58,7 @@
         }).then(res => {
           if(res && res.errcode === 0) {
             console.log('rest:', res)
-            this.goodslist = res.data
+            cb && cb(res.data)
           }
         })
       }

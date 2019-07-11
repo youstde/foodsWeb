@@ -35,7 +35,7 @@
         </div>
      </cube-scroll>
      <div class='total_account_bx'>
-       <statistic-account :allMoney='allMoney' :checkList='checkList' />
+       <statistic-account :allMoney='allMoney' :checkList='checkList' :lists='lists' />
      </div>
     <bottom-nav></bottom-nav>
   </div>
@@ -47,6 +47,7 @@
   import CarItem from './components/carItem/carItem'
   import StatisticAccount from './components/statisticAccount/statisticAccount'
   import { multiplyNum, addNum } from '@/util/tools'
+  import { getGoodsBase } from '@/service/getData'
 
   export default {
     name: 'goods-car',
@@ -67,84 +68,27 @@
         allMoney: 0,  // 选择的商品总计金额
         choosedGoods:{},
         checkList: [],
-        lists: [
-          {
-            id: 1,
-            type: 2,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
-            title: '鲁花家香味浓压榨籽油',
-            price: '39.9',
-            unit: '瓶'
-          },
-          {
-            id: 2,
-            type: 1,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
-            title: '鲁花家香味浓压榨籽油',
-            price: '39.9',
-            unit: '瓶'
-          },
-          {
-            id: 3,
-            type: 1,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
-            title: '鲁花家香味浓压榨籽油',
-            price: '39.9',
-            unit: '瓶'
-          },
-          {
-            id: 4,
-            type: 1,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
-            title: '鲁花家香味浓压榨籽油',
-            price: '39.9',
-            unit: '瓶'
-          },
-          {
-            id: 5,
-            type: 1,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
-            title: '鲁花家香味浓压榨籽油',
-            price: '39.9',
-            unit: '瓶'
-          },
-          {
-            id: 6,
-            type: 1,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
-            title: '鲁花家香味浓压榨籽油',
-            price: '39.9',
-            unit: '瓶'
-          },
-          {
-            id: 7,
-            type: 1,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/005QDhBjly1g3fu937fwxj305a05a74x.jpg',
-            title: '鲁花家香味浓压榨籽油',
-            price: '39.9',
-            unit: '瓶'
-          }
-        ]
+        lists: []
       }
     },
     watch: {
       checkList(value) {
-        console.log(value.length)
+        console.log('value:', value)
+        const newArr = this.lists.map(item => {
+          if(item.saleable === 1) return item
+        })
+        // if(newArr.length === value.length) {
+        //   window.sendMessage('toggle:localcheckstatus', true)
+        // } else {
+        //   window.sendMessage('toggle:localcheckstatus', false)
+        // }
       },
       choosedGoods(value) {
-        const { lists } = this
-        let newMoney = 0
-        // 商品金额计算
-        lists.some(item => {
-          if(value[item.id]) {
-            const multiplycurrentNum = multiplyNum(Number(item.price), Number(value[item.id]))
-            newMoney = addNum(newMoney, multiplycurrentNum)
-          }
-        })
-        this.allMoney = newMoney
+        this.calculateMoney()
       }
     },
     mounted() {
+      this.fetchCarData()
       window.onMessage('update:checkList', arr => {
         this.updateCheckList(arr)
       })
@@ -156,15 +100,44 @@
           this.checkList = []
         }
       })
+      window.onMessage('update:goodsCarNum', () => {
+        this.fetchCarData()
+
+      })
     },
     methods: {
+      calculateMoney() {
+        const { lists, checkList } = this
+        console.log('checkList:', this.checkList)
+        let newMoney = 0
+        // 商品金额计算
+        checkList.forEach(item => {
+          lists.some(one => {
+            if(item === one.serial_no) {
+              const multiplycurrentNum = multiplyNum(Number(one.price_sale), Number(one.quantity))
+              newMoney = addNum(newMoney, multiplycurrentNum)
+            }
+          })
+        })
+        this.allMoney = newMoney
+      },
+      fetchCarData() {
+        getGoodsBase({
+          t: 'cart.list',
+          mch_id: '107'
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            this.lists = res.data.list
+            this.calculateMoney()
+          }
+        })
+      },
       getFullGoodsId() {
         const { lists } = this
         const idArr = []
         lists.some((item) => {
-          if(item.type === 1) idArr.push(item.id)
+          if(item.saleable === 1) idArr.push(item.serial_no)
         })
-        console.log('idArr:', idArr)
         return idArr
       },
       onScrollHandle(pos) {
@@ -224,10 +197,16 @@
       // 清除失效商品
       clearOutGoods() {
         window.sendMessage('toggle:loading', true)
-        setTimeout(() => {
-          window.sendMessage('toggle:loading', false)
-          this.showToast('失效商品已清空', 'txt')
-        }, 2e3)
+        getGoodsBase({
+          t: 'cart.clear',
+          mch_id: '107'
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            window.sendMessage('toggle:loading', false)
+            this.showToast('失效商品已清空', 'txt')
+            this.fetchCarData()
+          }
+        })
       },
       // 删除指定商品
       deleteGoods() {
@@ -240,6 +219,16 @@
             confirmCb: () => {
               // 发送删除商品的请求
               console.log('删除商品')
+              getGoodsBase({
+                t: 'cart.remove',
+                serials: this.checkList.join(','),
+                mch_id: '107'
+              }).then(res => {
+                if(res && res.errcode === 0) {
+                  this.showToast('删除成功!', 'txt')
+                  this.fetchCarData()
+                }
+              })
             }
           })
         } else {

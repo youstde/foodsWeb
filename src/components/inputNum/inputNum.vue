@@ -20,6 +20,7 @@
 
 <script>
   import { Flexbox, FlexboxItem } from 'vux'
+  import { getGoodsBase } from '@/service/getData'
 
   export default {
     name: 'input-num',
@@ -28,6 +29,8 @@
       FlexboxItem,
     },
     props: [
+      'initNum',
+      'dataSource',
       'itemHeight',
       'type',
       'changeBack',
@@ -35,7 +38,7 @@
     ],
     data () {
       return {
-        changeType:1,
+        changeType: 1,
         goodsNum: '1',
         isBlurInput: false
       }
@@ -47,6 +50,7 @@
       }
     },
     mounted() {
+      if(this.initNum) this.goodsNum = this.initNum
       if(this.type === 'car') {
         this.changeBack(1)
       } else {
@@ -55,12 +59,26 @@
       }
     },
     methods: {
+       fetchAddGoodsToCar() {
+         const { serial_no } = this.dataSource
+         getGoodsBase({
+           t: 'cart.add',
+           serial_no,
+           mch_id: '107',
+           quantity: this.goodsNum
+         }).then(res => {
+           if(res && res.errcode === 0) {
+             window.sendMessage('update:goodsCarNum')
+           }
+         })
+       },
        updateNum(num) {
         if(event.keyCode === 13) {
           let value = event.target.value
           event.preventDefault()
           // input失去焦点，从而点击搜索的时候隐藏键盘
           this.$refs.numInput.blur()
+          this.fetchAddGoodsToCar()
         }
       },
       onBulr() {
@@ -85,12 +103,14 @@
           this.goodsNum = (num - 1) + ''
         }
         this.changeType = 2
+        this.fetchAddGoodsToCar()
       },
       addNum() {
         const { goodsNum } = this
         const num = Number(goodsNum)
         this.goodsNum = (num + 1) + ''
         this.changeType = 2
+        this.fetchAddGoodsToCar()
       }
     }
   }

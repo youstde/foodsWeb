@@ -24,7 +24,7 @@
       }
     },
     mounted() {
-      this.fetchStoreData()
+      // this.fetchStoreData()
       const uuId = localStorage.getItem('uuId')
       if(!uuId) {
         getAccountBase({

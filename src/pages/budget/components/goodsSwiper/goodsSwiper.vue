@@ -5,13 +5,13 @@
         <div class="swiper-container" id='budget_goods_swiper'>
           <div class="swiper-wrapper">
             <div class="swiper-slide" v-for='(item, i) in goodslist' :key='i'>
-              <img class='goods_img' :src="item.img" alt="">
+              <img class='goods_img' :src="item.picture" alt="">
             </div>
           </div>
         </div>
       </flexbox-item>
       <flexbox-item :span='4/24'>
-        <div class='text_bx' @click='goToGoodsList'>共6件 ></div>
+        <div class='text_bx' @click='goToGoodsList'>共{{goodslist.length}}件 ></div>
       </flexbox-item>
     </flexbox>
   </div>
@@ -83,10 +83,15 @@
       }
     },
     mounted() {
-      var mySwiper = new Swiper('#budget_goods_swiper', {
-        freeMode : true,
-        slidesPerView: 5
-      })
+      const goodsArrStr = localStorage.getItem('goods_arr')
+      if(goodsArrStr) {
+        const goodsArr = JSON.parse(goodsArrStr)
+        this.goodslist = goodsArr
+        var mySwiper = new Swiper('#budget_goods_swiper', {
+          freeMode : true,
+          slidesPerView: 5
+        })
+      }
     },
     methods: {
       goToGoodsList() {

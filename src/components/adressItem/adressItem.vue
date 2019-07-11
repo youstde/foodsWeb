@@ -1,5 +1,5 @@
 <template>
-  <div class='adress_list_item' @click='goToEditAdress'>
+  <div class='adress_list_item'>
     <flexbox>
       <flexbox-item class='flex_item_bx' :span='2/24'>
         <div class='adress_icon_bx'>
@@ -7,14 +7,16 @@
         </div>
       </flexbox-item>
       <flexbox-item class='flex_item_bx' :span='19/24'>
-        <div class='top_info_bx'>
-          <span class='user_name'>{{dataItem.contacter}}</span>
-          <span class='user_phone'>{{dataItem.mobile}}</span>
+        <div @click='selectItemAdress'>
+          <div class='top_info_bx'>
+            <span class='user_name'>{{dataItem.contacter}}</span>
+            <span class='user_phone'>{{dataItem.mobile}}</span>
+          </div>
+          <div class="user_adress_detail">{{`${dataItem.region_lv1}${dataItem.region_lv2}${dataItem.region_lv3}${dataItem.region_lv3}${dataItem.address}`}}</div>
         </div>
-        <div class="user_adress_detail">{{`${dataItem.region_lv1}${dataItem.region_lv2}${dataItem.region_lv3}${dataItem.region_lv3}${dataItem.address}`}}</div>
       </flexbox-item>
       <flexbox-item class='flex_item_bx' :span='3/24'>
-        <div class='arrow_right_bx'>
+        <div class='arrow_right_bx' @click='goToEditAdress'>
           <span class='icon_bx'><svg-icon iconClass='arrowright' /></span>
         </div>
       </flexbox-item>
@@ -51,6 +53,9 @@
             dataItem: JSON.stringify(this.dataItem)
           }
         })
+      },
+      selectItemAdress() {
+
       }
     }
   }

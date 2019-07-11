@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { uuid, createSign } from './tools'
-import { md5 } from 'vux'
+import { md5, Alert } from 'vux'
 
     const devUrl = '//api.fresh.laoniutech.com';
     const prodTag = '/api';
@@ -111,6 +111,7 @@ import { md5 } from 'vux'
                   const host = window.location.host
                   window.location.href = `//${host}/sign?from=${fromHref}`
                 }
+                alert(data.message)
             }
             return data
         },

@@ -49,28 +49,27 @@
         <!-- E=限时优惠 -->
         <div class='goods_list'>
           <div class='title'>商品列表</div>
-          <div class='goods_list_inner'><goods-list :pullUpLoadIndex='pullUpLoadIndex' :closeUpdate='clearUpdateIcon' /></div>
+          <div class='goods_list_inner'><goods-list :merchant='merchant' :pullUpLoadIndex='pullUpLoadIndex' :closeUpdate='clearUpdateIcon' /></div>
         </div>
       </cube-scroll>
      </div>
      <bottom-nav />
-     <skeleton-load :isShow='isLoading' />
+     <home-append-car  />
   </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex'
   import { mapState } from 'vuex'
   import tools from '@/util/tools'
   import { Flexbox, FlexboxItem } from 'vux'
   import BottomNav from '@/components/bottomNav/bottomNav'
-  import SkeletonLoad from '@/components/skeletonLoad/index'
   import Search from './components/search/search'
   import HomeBanner from './components/homeBanner/homeBanner'
   import HomeNav from './components/homeNav/homeNav'
   import FastNews from './components/fastNews/fastNews'
   import TimeDiscount from './components/timeDiscount/timeDiscount'
   import GoodsList from './components/goodsList/goodsList'
+  import HomeAppendCar from './components/homeAppendCar/homeAppendCar'
 
   import { getHomeData } from './service'
 
@@ -82,17 +81,18 @@
       Flexbox,
       FlexboxItem,
       HomeBanner,
-      SkeletonLoad,
       BottomNav,
       Search,
       HomeNav,
       FastNews,
       TimeDiscount,
-      GoodsList
+      GoodsList,
+      HomeAppendCar
     },
     data () {
       return {
-        isLoading: true,
+        showAppendCar: false,
+        merchant: {},
         userData: '',
         shop: '东昌路店',
         pullUpLoadIndex: 1, // 商品列表下拉的页数
@@ -165,13 +165,10 @@
         ]
       }
     },
-    computed: {
-      ...mapGetters([
-        'merchant'
-      ])
-    },
     mounted() {
-      console.log('merchant:', this.merchant)
+      const { query: { merchant } } = this.$route
+      console.log('merchant:', merchant)
+      this.merchant = JSON.parse(merchant)
       this.getHomeData()
     },
     methods: {
@@ -186,7 +183,6 @@
             this.lunboData = lunbo
             this.categorysData = categorys
             this.rushGoodsData = rush
-            this.isLoading = false
           }
         })
       },

@@ -2,7 +2,7 @@
     <div class='detail_swiper_bx'>
       <div class="swiper-container" id='goods_detail_swiper'>
         <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for='(item, i) in detailData.picture' :key='i'>
+          <div class="swiper-slide" v-for='(item, i) in detailData.pictures' :key='i'>
             <router-link to='/goodsdetail'>
               <img :src='item.url' />
             </router-link>
@@ -117,6 +117,7 @@
     props: ['detailData'],
     watch: {
       detailData (val) {
+        console.log('detailData:', val)
         if(typeof val === 'object' && val.id) {
           setTimeout(() => {
             var mySwiper = new Swiper('#goods_detail_swiper', {

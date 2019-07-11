@@ -41,7 +41,8 @@
     },
     props: [
       'allMoney',
-      'checkList'
+      'checkList',
+      'lists'
     ],
     watch: {
       allMoney(value) {
@@ -56,12 +57,26 @@
       }
     },
     mounted() {
-
+      window.onMessage('full-goods', data => {
+        console.log('fullData:', data)
+      })
     },
     methods: {
       submit() {
-        console.log(1)
-        this.$router.push('/budget')
+        const newArr = []
+        this.checkList.forEach(item => {
+          this.lists.forEach(one => {
+            if(one.serial_no === item) newArr.push(one)
+          })
+        })
+        localStorage.setItem('goods_arr', JSON.stringify(newArr))
+        this.$router.push({
+          path: '/budget',
+          query: {
+            serials: this.checkList.join(','),
+            allmoney: this.allMoney
+          }
+        })
       }
     }
   }

@@ -26,20 +26,26 @@
         </div>
       </flexbox-item>
       <flexbox-item v-if='isSlide' class='add_to_car' :span='isShowCar?5:8'>
-        <div v-if='isShowCar' :class="{inner:true,inner_mormal:type==='1'}" @click='addCar'>
+        <div :class="{inner:true,inner_mormal:type==='1'}" @click='addCar'>
+           购买
+        </div>
+        <!-- <div v-if='isShowCar' :class="{inner:true,inner_mormal:type==='1'}" @click='addCar'>
            购买
         </div>
         <div v-else class='input_num_bx'>
           <input-num itemHeight='1.2rem' :changeBack='changeBack' :blurBack='blurBack'></input-num>
-        </div>
+        </div> -->
       </flexbox-item>
       <flexbox-item v-else class='add_to_car' :span='5'>
-        <div v-if='isShowCar' :class="{inner:true,inner_mormal:type==='1'}" @click='addCar'>
+        <div :class="{inner:true,inner_mormal:type==='1'}" @click='addCar'>
            购买
         </div>
-        <div v-else class='input_num_bx'>
+        <!-- <div v-if='isShowCar' :class="{inner:true,inner_mormal:type==='1'}" @click='addCar'>
+           购买
+        </div> -->
+        <!-- <div v-else class='input_num_bx'>
           <input-num itemHeight='1.2rem' :changeBack='changeBack' :blurBack='blurBack'></input-num>
-        </div>
+        </div> -->
       </flexbox-item>
     </flexbox>
   </div>
@@ -74,6 +80,7 @@
         // this.disableScoll(true)
         this.isShowCar = false;
         console.log(e.currentTarget.getAttribute('data-id'))
+        window.sendMessage('toggle:homeappendcar', this.goodsItem)
       },
       changeBack(num) {
         // if(num === 0) {

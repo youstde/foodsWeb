@@ -35,6 +35,8 @@ const editAdress = r => require.ensure([], () => r(require('../pages/editAdress/
 const orderList = r => require.ensure([], () => r(require('../pages/orderList/index')), 'orderList')
 // 订单详情
 const orderDetail = r => require.ensure([], () => r(require('../pages/orderDetail/index')), 'orderDetail')
+// loading页面
+const skeletonLoad = r => require.ensure([], () => r(require('../pages/skeletonLoad/skeletonLoad')), 'skeletonLoad')
 
 
 Vue.use(Router)
@@ -44,11 +46,16 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: home,
+      name: 'skeletonLoad',
+      component: skeletonLoad,
       children: [
 
       ]
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: home
     },
     {
       path: '/sign',

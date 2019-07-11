@@ -1,5 +1,5 @@
 <template>
-  <div class='skeleton_load_bx' v-if='isToShow'>
+  <div class='skeleton_load_bx'>
     <!-- one -->
     <div class='one_bx'>
       <div class="top_input_bx">
@@ -109,22 +109,6 @@
     },
     data () {
       return {
-        requestFetching: false
-      }
-    },
-    props: [
-      'isShow'
-    ],
-    watch: {
-      isShow(val) {
-        // console.log('isShow:', val)
-      }
-    },
-    computed: {
-      isToShow() {
-        console.log('isShow:', this.isShow)
-        console.log('this.requestFetching:', this.requestFetching)
-        return this.requestFetching || this.isShow
       }
     },
     mounted() {
@@ -139,7 +123,13 @@
           if(res && res.errcode === 0) {
             const { merchant } = res.data
             this.$store.commit('SET_MERCHANT', merchant)
-            this.requestFetching = false
+            localStorage.setItem('merchant', JSON.stringify(merchant))
+            this.$router.push({
+              path: '/home',
+              query: {
+                merchant: JSON.stringify(merchant)
+              }
+            })
           }
         })
       },

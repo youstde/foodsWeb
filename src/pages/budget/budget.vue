@@ -10,7 +10,7 @@
     <!-- 送货上门 -->
     <home-delivery v-else />
     <!-- 底部确认下单区 -->
-    <bottom-confirm />
+    <bottom-confirm :allMoney='allMoney' />
   </div>
 </template>
 
@@ -47,11 +47,15 @@
             id: 3,
             label: '现金支付'
           }
-        ]
+        ],
+        allMoney: 0,
+        serials: ''
       }
     },
     mounted() {
-      const { query: { invoiceType } } = this.$route
+      const { query: { invoiceType, serials, allmoney } } = this.$route
+      this.allMoney = allmoney
+      this.serials = serials
       console.log(invoiceType)
     },
     methods: {
