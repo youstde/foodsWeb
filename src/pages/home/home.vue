@@ -166,9 +166,13 @@
       }
     },
     mounted() {
-      const { query: { merchant } } = this.$route
-      console.log('merchant:', merchant)
-      this.merchant = JSON.parse(merchant)
+      // const { query: { merchant } } = this.$route
+      const merchantStr = localStorage.getItem('merchant')
+      if(merchantStr) {
+        const merchant = JSON.parse(merchantStr)
+        this.merchant = merchant
+        this.shop  = merchant.name
+      }
       this.getHomeData()
     },
     methods: {

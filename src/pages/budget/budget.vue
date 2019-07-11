@@ -6,11 +6,11 @@
       </div>
     </top-back>
     <!-- 自提 -->
-    <get-by-self v-if='deliveryType===0' />
+    <get-by-self v-if="deliveryType==='pickup'" :returnBc='returnBc' />
     <!-- 送货上门 -->
-    <home-delivery v-else />
+    <home-delivery v-else :returnBc='returnBc' />
     <!-- 底部确认下单区 -->
-    <bottom-confirm :allMoney='allMoney' />
+    <bottom-confirm :allMoney='allMoney' :submitBc='handleSubmit' />
   </div>
 </template>
 
@@ -20,6 +20,8 @@
   import GetBySelf from './getBySelf'
   import HomeDelivery from './ homeDelivery'
   import BottomConfirm from './components/bottomConfirm/bottomConfirm'
+
+  import { getOrderBase } from '@/service/getData'
 
   export default {
     name: 'budget',
@@ -32,7 +34,9 @@
     },
     data () {
       return {
-        deliveryType: 0, // 0自提1配送（mock）
+        deliveryType: 'pickup', // pickup自提express配送（mock）
+        mark: '',  // 备注
+        paymentType: '', // 支付方式
         paymentCheckId: null,
         paymentList: [
           {
@@ -53,18 +57,82 @@
       }
     },
     mounted() {
-      const { query: { invoiceType, serials, allmoney } } = this.$route
+      const { query: { invoiceType, serials, allmoney, deliverytype } } = this.$route
       this.allMoney = allmoney
       this.serials = serials
+      if(deliverytype) this.deliveryType = deliverytype
       console.log(invoiceType)
     },
     methods: {
+      handleSubmit() {
+        // 提交订单
+        const { query: { serials } } = this.$route
+        const invoiceDataStr = localStorage.getItem('invoice_data')
+        const merchantStr = localStorage.getItem('merchant')
+        let addressId = ''
+        if(merchantStr) {
+          const merchant = JSON.parse(merchantStr)
+          addressId = merchant.id
+        }
+        const params = {
+          t: 'create',
+          serials,
+          mch_id: '107',
+          deliver_type: this.deliveryType,
+          paytype: this.paymentType,
+          invoice_info: invoiceDataStr,
+          address_id: addressId
+        }
+        console.log('params:', params)
+        let isLegel = true
+        Object.keys(params). forEach(key => {
+          if(!params[key]) isLegel = false
+        })
+        if(isLegel) {
+          getOrderBase(params).then(res => {
+            if(res && res.errcode === 0) {
+              const toast = this.$createToast({
+                txt: '下单成功!',
+                type: 'txt'
+              })
+              toast.show()
+              localStorage.removeItem('invoice_data')
+              localStorage.removeItem('goods_arr')
+            }
+          })
+        }
+      },
+      returnBc(data) {
+        console.log(data)
+        if(data) {
+          Object.keys(data).forEach(key => {
+            switch(key) {
+              case 'mark':
+                this.mark =  data.mark
+                break
+              case 'paymentType':
+                this.paymentType = data.paymentType
+                break
+              default:
+                break
+            }
+          })
+        }
+      },
       updateCheckId(newId) {
         console.log(newId)
         this.paymentCheckId = newId
       },
       toggleType(type) {
+        const { query } = this.$route
         this.deliveryType = type;
+        this.$router.replace({
+          path: '/budget',
+          query: {
+            ...query,
+            deliverytype: type
+          }
+        })
       }
     }
   }

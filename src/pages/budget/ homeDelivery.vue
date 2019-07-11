@@ -4,15 +4,21 @@
       <goods-swiper />
     </div>
     <div class='adress_layer_out_bx'>
-      <div @click='selectAdress'>选择地址</div>
-      <!-- <adress-item></adress-item> -->
+      <adress-item v-if='mainAddress' :dataItem='mainAddress'></adress-item>
+      <div class='invoice_bx'  v-else @click='selectAdress'>
+        <span>地址</span>
+        <div class='right_bx'>
+          <span class='tip'>请选择地址</span>
+          <span class='icon_bx'><svg-icon iconClass='arrowright'></svg-icon></span>
+        </div>
+      </div>
     </div>
     <!-- S=备注 -->
     <div class='mark_bx'>
       <flexbox>
         <flexbox-item :span='3/24' class='mark_label'>备注</flexbox-item>
         <flexbox-item :span='21/24'>
-          <input type="text" class='mark_input' />
+          <input type="text" class='mark_input' v-model='mark' />
         </flexbox-item>
       </flexbox>
     </div>
@@ -35,7 +41,7 @@
     <div class='invoice_bx' @click='writeInvoice'>
       <span>发票</span>
       <div class='right_bx'>
-        <span class='tip'>不需要</span>
+        <span class='tip'>{{invoiceData.title || '不需要'}}</span>
         <span class='icon_bx'><svg-icon iconClass='arrowright'></svg-icon></span>
       </div>
     </div>
@@ -49,6 +55,8 @@
   import AdressItem from '@/components/adressItem/adressItem'
   import PaymentCheckBox from './components/paymentCheckBox/paymentCheckBox'
 
+  import { payType } from './config'
+
   export default {
     name: 'get-by-self',
     components: {
@@ -60,33 +68,45 @@
     },
     data () {
       return {
+        mark: '',
+        mainAddress: null,
         paymentCheckId: null,
-        paymentList: [
-          {
-            id: 1,
-            label: '支付宝支付'
-          },
-          {
-            id: 2,
-            label: '微信支付'
-          },
-          {
-            id: 3,
-            label: '现金支付'
-          }
-        ]
+        paymentList: payType,
+        invoiceData: {}
+      }
+    },
+    props: ['returnBc'],
+    watch: {
+      mark(val) {
+        this.returnBc({
+          mark: val
+        })
+      },
+      paymentCheckId(val) {
+        this.returnBc({
+          paymentType: val
+        })
       }
     },
     mounted() {
-
+      console.log('mainAdress:', localStorage.getItem('main_address'))
+      const mainAddressStr = localStorage.getItem('main_address')
+      if(mainAddressStr) {
+        this.mainAddress = JSON.parse(mainAddressStr)
+      }
+      const invoiceDataStr = localStorage.getItem('invoice_data')
+      if(invoiceDataStr) {
+        this.invoiceData = JSON.parse(invoiceDataStr)
+      }
     },
     methods: {
       selectAdress() {
-        const { path } = this.$route
+        console.log('this.$route:', this.$route)
+        const { fullPath } = this.$route
         this.$router.push({
           path: '/adressmanagement',
           query: {
-            from: path
+            from: fullPath
           }
         })
       },

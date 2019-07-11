@@ -24,7 +24,7 @@
       <flexbox>
         <flexbox-item :span='3/24' class='mark_label'>备注</flexbox-item>
         <flexbox-item :span='21/24'>
-          <input type="text" class='mark_input' />
+          <input type="text" class='mark_input' v-model="mark" />
         </flexbox-item>
       </flexbox>
     </div>
@@ -47,7 +47,7 @@
     <div class='invoice_bx' @click='writeInvoice'>
       <span>发票</span>
       <div class='right_bx'>
-        <span class='tip'>不需要</span>
+        <span class='tip'>{{invoiceData.title || '不需要'}}</span>
         <span class='icon_bx'><svg-icon iconClass='arrowright'></svg-icon></span>
       </div>
     </div>
@@ -61,6 +61,8 @@
   import AdressItem from '@/components/adressItem/adressItem'
   import PaymentCheckBox from './components/paymentCheckBox/paymentCheckBox'
 
+  import { payType } from './config'
+
   export default {
     name: 'home-delivery',
     components: {
@@ -70,28 +72,34 @@
       GoodsSwiper,
       AdressItem
     },
+    props: ['returnBc'],
     data () {
       return {
+        mark: '',
         paymentCheckId: null,
         merchant: {},
-        paymentList: [
-          {
-            id: 1,
-            label: '支付宝支付'
-          },
-          {
-            id: 2,
-            label: '微信支付'
-          },
-          {
-            id: 3,
-            label: '现金支付'
-          }
-        ]
+        paymentList: payType,
+        invoiceData: {}
+      }
+    },
+    watch: {
+      mark(val) {
+        this.returnBc({
+          mark: val
+        })
+      },
+      paymentCheckId(val) {
+        this.returnBc({
+          paymentType: val
+        })
       }
     },
     mounted() {
       const merchantStr = localStorage.getItem('merchant')
+      const invoiceDataStr = localStorage.getItem('invoice_data')
+      if(invoiceDataStr) {
+        this.invoiceData = JSON.parse(invoiceDataStr)
+      }
       if(merchantStr) {
         this.merchant = JSON.parse(merchantStr)
       }
@@ -103,7 +111,14 @@
         this.paymentCheckId = newId
       },
       writeInvoice() {
-        this.$router.push('/writeinvoice')
+        const { fullPath } = this.$route
+        console.log(fullPath)
+        this.$router.push({
+          path: '/writeinvoice',
+          query: {
+            from: fullPath
+          }
+        })
       }
     }
   }

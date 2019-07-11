@@ -1,7 +1,7 @@
 <template>
   <div class='toggle_bar_bx'>
-    <div :class='{toggle_left:true, toggle_item:true, active:type===0}' @click='toggleType(0)'>自提</div>
-    <div :class='{toggle_right:true, toggle_item:true, active:type===1}' @click='toggleType(1)'>送货上门</div>
+    <div :class="{toggle_left:true, toggle_item:true, active:type==='pickup'}" @click="toggleType('pickup')">自提</div>
+    <div :class="{toggle_right:true, toggle_item:true, active:type==='express'}" @click="toggleType('express')">送货上门</div>
   </div>
 </template>
 
@@ -11,14 +11,15 @@
     name: 'toggle-bar',
     data () {
       return {
-        type: 0
+        type: 'pickup'
       }
     },
     props: [
-      'toggleBc'
+      'toggleBc',
     ],
     mounted() {
-
+      const { query: { deliverytype } } = this.$route
+      if(deliverytype) this.type = deliverytype
     },
     methods: {
       toggleType(type) {

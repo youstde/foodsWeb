@@ -9,7 +9,7 @@
       <cube-scroll
       ref='scroll'
       :options='scrollOptions'>
-        <div class='address_item' v-for='item in addressData' :key='item.id'><adress-item :dataItem='item' /></div>
+        <div class='address_item' v-for='item in addressData' :key='item.id'><adress-item :dataItem='item' :fromData='fromData' /></div>
         <div class='add_adress_bt' @click='addAddress'>
           <base-button height='2rem' label='+ 新增收获地址' isRadius=true />
         </div>
@@ -33,6 +33,7 @@
     },
     data() {
       return {
+        fromData: {},
         addressData: [],
         scrollOptions: {
           pullDownRefresh: false,
@@ -42,6 +43,11 @@
       }
     },
     mounted() {
+      console.log(this.$route)
+      const { query: { from } } = this.$route
+      this.fromData = {
+        path: from,
+      }
       this.fetchAddressData()
     },
     methods: {

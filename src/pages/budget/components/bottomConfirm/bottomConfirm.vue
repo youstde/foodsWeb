@@ -8,7 +8,9 @@
         </div>
       </flexbox-item>
       <flexbox-item :span='4'>
-        <base-button height='2.25rem' label='下单' :disabled='isDisabeldBuy' />
+        <div @click='handleSubmit'>
+          <base-button  height='2.25rem' label='下单' :disabled='isDisabeldBuy' />
+        </div>
       </flexbox-item>
     </flexbox>
   </div>
@@ -26,7 +28,8 @@
       BaseButton
     },
     props: [
-      'allMoney'
+      'allMoney',
+      'submitBc'
     ],
     data () {
       return {
@@ -37,7 +40,9 @@
 
     },
     methods: {
-
+      handleSubmit() {
+        this.submitBc()
+      }
     }
   }
 </script>

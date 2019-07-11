@@ -27,6 +27,7 @@ $pagePadding: 0.7rem;
       color: #fff;
       font-size: 0.7rem;
       position: relative;
+      @include textSingleShow;
       .icon_bx {
         width: 0.8rem;
         height: 0.8rem;

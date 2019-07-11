@@ -31,6 +31,14 @@
       <div class='personal_detail_bx' v-if="checkedId==='1'">
         <flexbox class='center_item'>
           <flexbox-item :span='6' class='center_item_label'>
+            抬头名称
+          </flexbox-item>
+          <flexbox-item class='personal_right_bx' :span='6'>
+            <input class='detail_input' type="text" v-model='name' placeholder="请输入抬头名称">
+          </flexbox-item>
+        </flexbox>
+        <flexbox class='center_item'>
+          <flexbox-item :span='6' class='center_item_label'>
             发票内容
           </flexbox-item>
           <flexbox-item class='personal_right_bx' :span='6'>
@@ -42,7 +50,7 @@
             收票人邮箱
           </flexbox-item>
           <flexbox-item class='personal_right_bx' :span='6'>
-            1320388@qq.com
+            <input class='detail_input' type="text" v-model='email' placeholder="请输入邮箱地址">
           </flexbox-item>
         </flexbox>
       </div>
@@ -54,7 +62,7 @@
             抬头名称
           </flexbox-item>
           <flexbox-item class='personal_right_bx' :span='9'>
-            <input class='detail_input' type="text" placeholder="请输入抬头名称">
+            <input class='detail_input' type="text"  v-model='name' placeholder="请输入抬头名称">
           </flexbox-item>
         </flexbox>
         <flexbox class='center_item'>
@@ -62,7 +70,7 @@
             公司税号
           </flexbox-item>
           <flexbox-item class='personal_right_bx' :span='9'>
-            <input class='detail_input' type="text" placeholder="请输入公司税号">
+            <input class='detail_input' type="text" v-model="taxid" placeholder="请输入公司税号">
           </flexbox-item>
         </flexbox>
         <flexbox class='center_item'>
@@ -78,11 +86,20 @@
             更多信息
           </flexbox-item>
           <flexbox-item class='personal_right_bx' :span='8'>
-            <div @click='writeMoreMsg'>
+            <input class='detail_input' type="text"  v-model='remark' placeholder="备注、地址、开户行等(非必填)">
+            <!-- <div @click='writeMoreMsg'>
               <span class='more_msg_tip more_msg_tip_active' v-if='mark.length'>{{mark}}</span>
               <span class='more_msg_tip' v-else>备注、地址、开户行等(非必填)</span>
               <span class='icon_bx'><svg-icon iconClass='arrowright'></svg-icon></span>
-            </div>
+            </div> -->
+          </flexbox-item>
+        </flexbox>
+        <flexbox class='center_item'>
+          <flexbox-item :span='6' class='center_item_label'>
+            收票人邮箱
+          </flexbox-item>
+          <flexbox-item class='personal_right_bx' :span='6'>
+            <input class='detail_input' type="text"  v-model='email' placeholder="请输入邮箱地址">
           </flexbox-item>
         </flexbox>
       </div>
@@ -112,7 +129,11 @@
     data () {
       return {
         checkedId: '1',
-        mark: ''
+        mark: '',
+        name: '',  // 抬头
+        remark: '', // 备注
+        email: '', // 邮箱
+        taxid: ''  // 公司税号
       }
     },
     mounted() {
@@ -140,12 +161,32 @@
       },
       handleSubmit() {
         // ====todo===这个地方是想提交发票信息后把发票类型带回到配送方式页
-        this.$router.replace({
-          path: '/budget',
-          query: {
-            invoiceType: this.checkedId
+        console.log(this.$route)
+        const { query: { from } } = this.$route
+        const params = {
+          name: this.name,
+          email: this.email,
+          title: this.checkedId === '1'? '个人': '单位'
+        }
+        if(params.name && params.email && params.title) {
+          if(this.checkedId === '2') {
+            params.taxid = this.taxid
+            params.remark = this.remark
           }
-        })
+          const resultParams = JSON.stringify(params)
+          console.log(resultParams)
+          localStorage.setItem('invoice_data', resultParams)
+          this.$router.replace({
+            path: from
+          })
+        } else {
+          // 优化
+          const toast = this.$createToast({
+            txt: '请填写完整信息',
+            type: 'txt'
+          })
+          toast.show()
+        }
       }
     }
   }

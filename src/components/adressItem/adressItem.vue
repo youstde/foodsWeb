@@ -34,7 +34,8 @@
       FlexboxItem
     },
     props: [
-      'dataItem'
+      'dataItem',
+      'fromData'
     ],
     data () {
       return {
@@ -55,7 +56,25 @@
         })
       },
       selectItemAdress() {
-
+        if(this.fromData) {
+          localStorage.setItem('main_address', JSON.stringify(this.dataItem))
+          const { path } = this.fromData
+          const { id } = this.dataItem
+          if(path) {
+            this.$router.push(path)
+          }
+        } else {
+          const { path, fullPath } = this.$route
+          if(path === '/budget') {
+            // 说明在订单填写页
+            this.$router.push({
+              path: '/adressmanagement',
+              query: {
+                from: fullPath
+              }
+            })
+          }
+        }
       }
     }
   }

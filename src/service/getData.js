@@ -22,3 +22,10 @@ export const getGoodsBase = (params={}) => {
     params
   })
 };
+
+// order
+export const getOrderBase = (params={}) => {
+  return createAPI('/order', 'get', {
+    params
+  })
+};
