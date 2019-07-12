@@ -4,7 +4,7 @@ import { md5, Alert } from 'vux'
 
     // const devUrl = '//api.fresh.laoniutech.com';
     const devUrl = '//h5api.yicaipi.com'
-    const prodTag = '/api';
+    const prodTag = '//h5api.yicaipi.com';
     const codeMessage = {
         200: '服务器成功返回请求的数据。',
         201: '新建或修改数据成功。',
@@ -52,7 +52,7 @@ import { md5, Alert } from 'vux'
 
     // const devBaseUrl = '//192.168.1.230:8099/'
 
-    const prodBaseUrl = prodTag || '/admin'
+    const prodBaseUrl = prodTag
 
     const baseUrl = isDevelopment ? devBaseUrl : prodBaseUrl
 

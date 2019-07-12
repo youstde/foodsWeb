@@ -10,6 +10,17 @@
   @include halfTopLine;
   .bottom_nav_item {
     text-align: center;
+    position: relative;
+    .num_icon_bx {
+      color: #fff;
+      font-size: 0.6rem;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      background-color: $priceActiveColor;
+      @include borderRadius(50%);
+      padding: 0.1rem;
+    }
     a {
       display: block;
     }

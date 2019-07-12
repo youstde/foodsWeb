@@ -10,6 +10,7 @@
   import HomeGoodsItem from '@/pages/home/components/homeGoodsItem/homeGoodsItem'
   import { setTimeout } from 'timers';
   import { getGoodsBase, getStoreData } from '@/service/getData'
+  import { getLocalStorage } from '@/util/tools'
 
   export default {
     name: 'goods-list',
@@ -49,10 +50,11 @@
     },
     methods: {
       fetchGoodsData(index, mchId, cb) {
+        const localMerchant = getLocalStorage('merchant')
         getGoodsBase({
           t: 'list',
           // mch_id: mchId,
-          mch_id: 107,
+          mch_id: localMerchant.id,
           index,
           size: 20
         }).then(res => {

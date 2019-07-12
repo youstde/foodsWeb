@@ -72,6 +72,7 @@
   import HomeAppendCar from './components/homeAppendCar/homeAppendCar'
 
   import { getHomeData } from './service'
+  import { getLocalStorage } from '@/util/tools'
 
   import { setTimeout } from 'timers';
 
@@ -167,19 +168,16 @@
     },
     mounted() {
       // const { query: { merchant } } = this.$route
-      const merchantStr = localStorage.getItem('merchant')
-      if(merchantStr) {
-        const merchant = JSON.parse(merchantStr)
-        this.merchant = merchant
-        this.shop  = merchant.name
-      }
+      const localMerchant = getLocalStorage('merchant')
+      this.merchant = localMerchant
+      this.shop  = localMerchant.name
       this.getHomeData()
     },
     methods: {
       getHomeData() {
         getHomeData({
           t: 'infos',
-          mch_id: '107'
+          mch_id: this.merchant.id
         }).then(res => {
           if(res && res.errcode === 0) {
             const { notice, lunbo, categorys, rush } = res.data

@@ -115,7 +115,14 @@
         this.paymentCheckId = newId
       },
       writeInvoice() {
-        this.$router.push('/writeinvoice')
+        const { fullPath } = this.$route
+        console.log(fullPath)
+        this.$router.push({
+          path: '/writeinvoice',
+          query: {
+            from: fullPath
+          }
+        })
       }
     }
   }

@@ -52,10 +52,15 @@
         }).then(res => {
           if(res && res.errcode === 0) {
             this.shopList = res.data.list
-            const { mch_id: storeId, list: storeData } = res.data
-            this.currentStoreId = storeId
+            const { merchant: { id }, list: storeData } = res.data
+            const localMerchantStr = localStorage.getItem('merchant')
+            let localMerchant = null
+            if(localMerchantStr) {
+              localMerchant = JSON.parse(localMerchantStr)
+            }
+            this.currentStoreId = localMerchant.id? localMerchant.id: id
             storeData.forEach(item => {
-              if(storeId === item.id) {
+              if(id === item.id) {
                 this.currentStore = item.name
               }
             })
@@ -63,9 +68,12 @@
         })
       },
       toggleShop(id) {
-        console.log(id)
-        // 发送请求，成功后路由跳转到主页
-        this.$router.push({path:'/'})
+        this.shopList.forEach(item => {
+          if(item.id === id) {
+            localStorage.setItem('merchant', JSON.stringify(item))
+            this.$router.push({path:'/home'})
+          }
+        })
       },
       cancel() {
         this.$router.push({path:'/'})

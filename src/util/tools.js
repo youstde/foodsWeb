@@ -33,3 +33,13 @@ export const multiplyNum = (num1, num2) => {
   const finalNum = Math.pow(baseNum, 2);
   return (num1 * baseNum) * (num2 * baseNum) / finalNum;
 }
+
+
+export const getLocalStorage = name => {
+  const localStr = localStorage.getItem(name)
+  let localObj = null
+  if(localStr) {
+    localObj = JSON.parse(localStr)
+  }
+  return localObj
+}

@@ -53,6 +53,7 @@
   import { setTimeout } from 'timers';
 
   import { getGoodsBase } from '@/service/getData'
+  import { getLocalStorage } from '@/util/tools'
 
   export default {
     name: 'append-car',
@@ -138,11 +139,12 @@
       },
       handleToCar() {
         console.log(this.dataSource)
+        const localMerchant = getLocalStorage('merchant')
         const { serial_no } = this.dataSource
         getGoodsBase({
           t: 'cart.add',
           serial_no,
-          mch_id: 107,
+          mch_id: localMerchant.id,
           quantity: this.goodsNum
         }).then(res => {
           if(res && res.errcode === 0) {

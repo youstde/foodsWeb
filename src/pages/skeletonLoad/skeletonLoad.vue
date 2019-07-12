@@ -126,9 +126,6 @@
             localStorage.setItem('merchant', JSON.stringify(merchant))
             this.$router.push({
               path: '/home',
-              query: {
-                merchant: JSON.stringify(merchant)
-              }
             })
           }
         })

@@ -22,6 +22,7 @@
   import BottomConfirm from './components/bottomConfirm/bottomConfirm'
 
   import { getOrderBase } from '@/service/getData'
+  import { getLocalStorage } from '@/util/tools'
 
   export default {
     name: 'budget',
@@ -68,20 +69,16 @@
         // 提交订单
         const { query: { serials } } = this.$route
         const invoiceDataStr = localStorage.getItem('invoice_data')
-        const merchantStr = localStorage.getItem('merchant')
-        let addressId = ''
-        if(merchantStr) {
-          const merchant = JSON.parse(merchantStr)
-          addressId = merchant.id
-        }
+        const localAdress = getLocalStorage('main_address')
+        const localMerchant = getLocalStorage('merchant')
         const params = {
           t: 'create',
           serials,
-          mch_id: '107',
+          mch_id: localMerchant.id,
           deliver_type: this.deliveryType,
           paytype: this.paymentType,
           invoice_info: invoiceDataStr,
-          address_id: addressId
+          address_id: localAdress.id
         }
         console.log('params:', params)
         let isLegel = true

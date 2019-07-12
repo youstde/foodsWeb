@@ -22,6 +22,8 @@
   import { Flexbox, FlexboxItem } from 'vux'
   import { getGoodsBase } from '@/service/getData'
 
+  import { getLocalStorage } from '@/util/tools'
+
   export default {
     name: 'input-num',
     components: {
@@ -61,10 +63,11 @@
     methods: {
        fetchAddGoodsToCar() {
          const { serial_no } = this.dataSource
+         const localMerchant = getLocalStorage('merchant')
          getGoodsBase({
            t: 'cart.add',
            serial_no,
-           mch_id: '107',
+           mch_id: localMerchant.id,
            quantity: this.goodsNum
          }).then(res => {
            if(res && res.errcode === 0) {

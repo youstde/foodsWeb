@@ -27,6 +27,7 @@
   import DetailSwiper from './components/detailSwiper/detailSwiper'
 
   import { getGoodsBase } from '@/service/getData'
+  import { getLocalStorage } from '@/util/tools'
 
   export default {
     name: 'goods-detail',
@@ -58,10 +59,11 @@
     methods: {
       // 暂时门店的id都是固定为107
       fetchDetailData(serialNo) {
+        const localMerchant = getLocalStorage('merchant')
         getGoodsBase({
           t: 'detail',
           serial_no: serialNo,
-          mch_id: 107
+          mch_id: localMerchant.id
         }).then(res => {
           if(res && res.errcode === 0) {
             this.detailData = res.data

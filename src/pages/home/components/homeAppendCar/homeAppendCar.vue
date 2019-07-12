@@ -45,7 +45,7 @@
   import { Flexbox, FlexboxItem } from 'vux'
   import BaseToast from '@/components/baseToast/baseToast'
   import { setTimeout } from 'timers';
-
+  import { getLocalStorage } from '@/util/tools'
   import { getGoodsBase } from '@/service/getData'
 
   export default {
@@ -121,16 +121,18 @@
         // this.showAddNum = true
       },
       handleToCar() {
-        console.log(this.dataSource)
+        const localMerchant = getLocalStorage('merchant')
         const { serial_no } = this.dataSource
         getGoodsBase({
           t: 'cart.add',
           serial_no,
-          mch_id: 107,
+          mch_id: localMerchant.id,
           quantity: this.goodsNum
         }).then(res => {
           if(res && res.errcode === 0) {
             this.$refs.baseToast.onShowToast('success', '添加购物车成功!')
+            // 当有商品添加到购物车时手动通知底部导航栏
+            window.sendMessage('update:goodsCarNum')
             this.cancelNum()
             setTimeout(() => {
               this.isShowAppendCar = false

@@ -48,6 +48,7 @@
   import StatisticAccount from './components/statisticAccount/statisticAccount'
   import { multiplyNum, addNum } from '@/util/tools'
   import { getGoodsBase } from '@/service/getData'
+  import { getLocalStorage } from '@/util/tools'
 
   export default {
     name: 'goods-car',
@@ -109,6 +110,7 @@
       calculateMoney() {
         const { lists, checkList } = this
         console.log('checkList:', this.checkList)
+
         let newMoney = 0
         // 商品金额计算
         checkList.forEach(item => {
@@ -122,9 +124,10 @@
         this.allMoney = newMoney
       },
       fetchCarData() {
+        const localMerchant = getLocalStorage('merchant')
         getGoodsBase({
           t: 'cart.list',
-          mch_id: '107'
+          mch_id: localMerchant.id
         }).then(res => {
           if(res && res.errcode === 0) {
             this.lists = res.data.list
@@ -197,9 +200,10 @@
       // 清除失效商品
       clearOutGoods() {
         window.sendMessage('toggle:loading', true)
+        const localMerchant = getLocalStorage('merchant')
         getGoodsBase({
           t: 'cart.clear',
-          mch_id: '107'
+          mch_id: localMerchant.id
         }).then(res => {
           if(res && res.errcode === 0) {
             window.sendMessage('toggle:loading', false)
@@ -211,6 +215,7 @@
       // 删除指定商品
       deleteGoods() {
         console.log(this.checkList)
+        const localMerchant = getLocalStorage('merchant')
         const { checkList } = this
         if(checkList.length) {
           this.showAlert({
@@ -222,7 +227,7 @@
               getGoodsBase({
                 t: 'cart.remove',
                 serials: this.checkList.join(','),
-                mch_id: '107'
+                mch_id: localMerchant.id
               }).then(res => {
                 if(res && res.errcode === 0) {
                   this.showToast('删除成功!', 'txt')

@@ -16,7 +16,7 @@
       </flexbox-item>
       <flexbox-item class='flex_item_bx' :span='8'>
         <div class="title">{{itemObj.alias}}</div>
-        <div class="price_bx">{{itemObj.price_sale}}/{{itemObj.specification_name}}</div>
+        <div class="price_bx">￥{{itemObj.price_sale}}</div>
         <div class="car_input_num_out_bx" v-if='itemObj.saleable===1'>
           <input-num
           :dataSource='itemObj'
