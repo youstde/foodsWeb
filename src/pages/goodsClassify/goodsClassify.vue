@@ -78,8 +78,13 @@
           size: 10
         }
         getGoodsBase(params).then(res => {
+          const { sourceData } = this
           if(res && res.errcode === 0) {
-            this.sourceData = res.data
+            if(categoryId) {
+              this.sourceData = res.data
+            } else {
+              this.sourceData = [...sourceData, ...res.data]
+            }
           }
         })
       },

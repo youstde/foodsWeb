@@ -61,8 +61,13 @@
         })
       },
       addAddress() {
+        const { fullPath } = this.$route
+        console.log(this.$route)
         this.$router.push({
-          path: '/editadress'
+          path: '/editadress',
+          query: {
+            from: fullPath
+          }
         })
       }
     }

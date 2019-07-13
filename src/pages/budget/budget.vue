@@ -77,9 +77,9 @@
           mch_id: localMerchant.id,
           deliver_type: this.deliveryType,
           paytype: this.paymentType,
-          invoice_info: invoiceDataStr,
-          address_id: localAdress.id
         }
+        if(localAdress) params.address_id = localAdress.id
+        if(invoiceDataStr) params.invoice_info = invoiceDataStr
         console.log('params:', params)
         let isLegel = true
         Object.keys(params). forEach(key => {

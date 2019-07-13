@@ -162,8 +162,13 @@
               if(this.dataItem) params.id = this.dataItem.id
               getAccountBase(params).then(res => {
                 if(res && res.errcode === 0) {
+                  const { query: { from } } = this.$route
                   this.$refs.baseToast.onShowToast('success', '操作成功!', () => {
-                    this.$router.push({path: '/adressmanagement'})
+                    if(from) {
+                      this.$router.push({path: from})
+                    } else {
+                      this.$router.push({path: '/adressmanagement'})
+                    }
                   })
                 }
               })
