@@ -121,9 +121,22 @@
           t: 'list'
         }).then(res => {
           if(res && res.errcode === 0) {
-            const { merchant } = res.data
-            this.$store.commit('SET_MERCHANT', merchant)
-            localStorage.setItem('merchant', JSON.stringify(merchant))
+            const { query: { mecid } } = this.$route
+            console.log(mecid)
+            const { list } = res.data
+            if(mecid) {
+              // 指定门店
+              list.forEach(item => {
+                if(`${item.id}` === mecid) {
+                  this.$store.commit('SET_MERCHANT', item)
+                  localStorage.setItem('merchant', JSON.stringify(item))
+                }
+              })
+            } else {
+              const { merchant } = res.data
+              this.$store.commit('SET_MERCHANT', merchant)
+              localStorage.setItem('merchant', JSON.stringify(merchant))
+            }
             this.$router.push({
               path: '/home',
             })

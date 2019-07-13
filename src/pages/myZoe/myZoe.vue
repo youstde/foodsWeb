@@ -9,6 +9,7 @@
       </div>
       <div class='user_name_bx' v-if='userInfo'>{{userInfo.name}}</div>
       <div class='login_link' v-else><router-link to='/sign'>登录/注册</router-link></div>
+      <div class='login_out' v-if='userInfo' @click='loginOut'>退出</div>
     </div>
     <div class='middle_center_bx'>
       <div class="nav_list">
@@ -38,6 +39,8 @@
 <script>
   import { Flexbox, FlexboxItem } from 'vux'
   import BottomNav from '@/components/bottomNav/bottomNav'
+
+  import { getAccountBase } from '@/service/getData'
 
   export default {
     name: 'my-zoe',
@@ -70,7 +73,17 @@
       }
     },
     methods: {
-
+      loginOut() {
+        debugger
+        getAccountBase({
+          t: 'logout'
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            localStorage.removeItem('user_info')
+            window.location.reload()
+          }
+        })
+      }
     }
   }
 </script>

@@ -19,6 +19,8 @@
 
   import { getGoodsBase } from '@/service/getData'
 
+  import { getLocalStorage } from '@/util/tools'
+
   export default {
     name: 'bottom-nav',
     components: {
@@ -48,7 +50,15 @@
       }
     },
     mounted() {
-
+      // 手动触发
+      window.onMessage('update:BottomGoodsCarNum', num => {
+        // debugger
+        this.goodsNum = num
+      })
+      const num = getLocalStorage('car_nums')
+      if(num) {
+        this.goodsNum = num
+      }
     },
     methods: {
 

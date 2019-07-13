@@ -82,6 +82,7 @@
         this.goodsNum = 1
         this.keyNum = ''
         this.$store.commit('SET_IS_SHOW_COVER', false)
+        this.isShowAppendCar = false
       },
       confirmNum(e) {
         const { keyNum } = this
@@ -110,6 +111,7 @@
         }, 100)
         if(key !== NaN) {
           this.keyNum += stringKey
+          this.goodsNum = this.keyNum
         }
       },
       addToCar() {
@@ -132,7 +134,10 @@
           if(res && res.errcode === 0) {
             this.$refs.baseToast.onShowToast('success', '添加购物车成功!')
             // 当有商品添加到购物车时手动通知底部导航栏
-            window.sendMessage('update:goodsCarNum')
+            const { quantity_total } = res.data
+            localStorage.setItem('car_nums', quantity_total)
+            localStorage.setItem('active_serial_no', serial_no)
+            window.sendMessage('update:BottomGoodsCarNum', quantity_total)
             this.cancelNum()
             setTimeout(() => {
               this.isShowAppendCar = false

@@ -12,10 +12,10 @@
         </div>
       </flexbox-item>
       <flexbox-item class='flex_item_bx' :span='3'>
-         <img :src="itemObj.picture" alt="">
+         <img :src="itemObj.picture" alt="" @click='goToDetail'>
       </flexbox-item>
       <flexbox-item class='flex_item_bx' :span='8'>
-        <div class="title">{{itemObj.alias}}</div>
+        <div class="title" @click='goToDetail'>{{itemObj.alias}}</div>
         <div class="price_bx">￥{{itemObj.price_sale}}</div>
         <div class="car_input_num_out_bx" v-if='itemObj.saleable===1'>
           <input-num
@@ -68,6 +68,15 @@
 
     },
     methods: {
+      goToDetail() {
+        const { serial_no } = this.itemObj
+        this.$router.push({
+          path: '/goodsdetail',
+          query: {
+            serialNo: serial_no
+          }
+        })
+      },
       changeBack(num, type) {
         this.goodsNum = num
         this.updateMoneyObj(num)

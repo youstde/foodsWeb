@@ -105,8 +105,15 @@
         this.fetchCarData()
 
       })
+      this.initCheckedList()
     },
     methods: {
+      initCheckedList() {
+        const serialNo = localStorage.getItem('active_serial_no')
+        if(serialNo) {
+          this.checkList.push(serialNo)
+        }
+      },
       calculateMoney() {
         const { lists, checkList } = this
         console.log('checkList:', this.checkList)
@@ -130,7 +137,10 @@
           mch_id: localMerchant.id
         }).then(res => {
           if(res && res.errcode === 0) {
-            this.lists = res.data.list
+            const { list, quantity_total } = res.data
+            this.lists = list
+            window.sendMessage('update:BottomGoodsCarNum', quantity_total)
+            localStorage.setItem('car_nums', quantity_total)
             this.calculateMoney()
           }
         })

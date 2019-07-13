@@ -181,6 +181,8 @@
         }).then(res => {
           if(res && res.errcode === 0) {
             const { notice, lunbo, categorys, rush } = res.data
+            localStorage.setItem('categorys_data', JSON.stringify(categorys))
+            localStorage.setItem('rush_goods_data', JSON.stringify(rush))
             this.fastNewsData = notice
             this.lunboData = lunbo
             this.categorysData = categorys

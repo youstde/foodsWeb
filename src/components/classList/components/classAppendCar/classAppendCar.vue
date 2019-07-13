@@ -1,19 +1,13 @@
 <template>
-  <div>
+  <div v-show='isShowAppendCar'>
     <div class='append_car'>
         <flexbox>
-          <flexbox-item class='append_car_left' :span='2'>
-            <span class='icon_bx' @click='goToCar'>
-              <svg-icon iconClass='cart-moren'></svg-icon>
-              <p class='num_charact'>{{goodsCarNum}}</p>
-            </span>
-          </flexbox-item>
-          <flexbox-item class='append_car_right' :span='10'>
+          <flexbox-item class='append_car_right' :span='12'>
             <flexbox>
-              <flexbox-item span='{showAddNum?8:12}'>
+              <flexbox-item :span='8'>
                 <div class='append_car_right_left' @click='addToCar'>加入购物车</div>
               </flexbox-item>
-              <flexbox-item v-show='showAddNum' class='append_car_right_right clear' :span='4'>
+              <flexbox-item class='append_car_right_right clear' :span='4'>
                 <div class='opera_icon_bx' @click='subtractNum'>
                   <span class='icon_bx'><svg-icon iconClass='jian'></svg-icon></span>
                 </div>
@@ -25,7 +19,7 @@
             </flexbox>
           </flexbox-item>
         </flexbox>
-        <div class="key_borad" v-show='showAddNum'>
+        <div class="key_borad">
           <div class="title">{{keyNum || '请输入所需数量'}}</div>
             <div class='keys_out_bx' @click='getKey'>
               <flexbox v-for='(itemLine, i) in keyboradKeys' :key='i'>
@@ -51,21 +45,20 @@
   import { Flexbox, FlexboxItem } from 'vux'
   import BaseToast from '@/components/baseToast/baseToast'
   import { setTimeout } from 'timers';
-
-  import { getGoodsBase } from '@/service/getData'
   import { getLocalStorage } from '@/util/tools'
+  import { getGoodsBase } from '@/service/getData'
 
   export default {
-    name: 'append-car',
+    name: 'class-append-car',
     components: {
       Flexbox,
       FlexboxItem,
       BaseToast
     },
-    props: ['dataSource'],
     data () {
       return {
-        goodsCarNum: 0,
+        dataSource: {},
+        isShowAppendCar: false,
         showAddNum: false,
         goodsNum: 1,
         keyNum: '',
@@ -76,36 +69,20 @@
         ]
       }
     },
-    watch: {
-      isShowCover(value) {
-        if(!value) {
-          // 重置状态，清空输入框中数量
-          this.showAddNum = false
-          this.goodsNum = 1
-          this.keyNum = ''
-        }
-      }
-    },
     mounted() {
-      const num = getLocalStorage('car_nums')
-      this.goodsCarNum = num
-    },
-    computed: {
-      ...mapGetters([
-        'isShowCover'
-      ])
+      window.onMessage('toggle:classappendcar', data=> {
+        this.isShowAppendCar = true
+        console.log('data:', data)
+        this.dataSource = data
+      })
     },
     methods: {
-      goToCar() {
-        this.$router.push({
-          path: '/goodscar'
-        })
-      },
       cancelNum() {
-        this.showAddNum = false
+        // this.showAddNum = false
         this.goodsNum = 1
         this.keyNum = ''
         this.$store.commit('SET_IS_SHOW_COVER', false)
+        this.isShowAppendCar = false
       },
       confirmNum(e) {
         const { keyNum } = this
@@ -138,15 +115,14 @@
         }
       },
       addToCar() {
-        if(this.showAddNum) {
-          this.handleToCar()
-          return
-        }
-        this.showAddNum = true
-        this.$store.commit('SET_IS_SHOW_COVER', true)
+        this.handleToCar()
+        // if(this.showAddNum) {
+        //   this.handleToCar()
+        //   return
+        // }
+        // this.showAddNum = true
       },
       handleToCar() {
-        console.log(this.dataSource)
         const localMerchant = getLocalStorage('merchant')
         const { serial_no } = this.dataSource
         getGoodsBase({
@@ -156,8 +132,16 @@
           quantity: this.goodsNum
         }).then(res => {
           if(res && res.errcode === 0) {
+            debugger
             this.$refs.baseToast.onShowToast('success', '添加购物车成功!')
+            // 当有商品添加到购物车时手动通知底部导航栏
+            const { quantity_total } = res.data
+            localStorage.setItem('car_nums', quantity_total)
+            window.sendMessage('update:BottomGoodsCarNum', quantity_total)
             this.cancelNum()
+            setTimeout(() => {
+              this.isShowAppendCar = false
+            }, 1e3)
           }
         })
       },
@@ -166,7 +150,7 @@
         if(goodsNum === 0) return
         this.goodsNum = Number(goodsNum) - 1
         if((Number(goodsNum) - 1) === 0) {
-          this.showAddNum = false
+          // this.showAddNum = false
           this.goodsNum = 1
           this.$store.commit('SET_IS_SHOW_COVER', false)
         }

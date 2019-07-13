@@ -1,30 +1,25 @@
 <template>
   <div class='landscape_list_item clear'>
     <div class='item_left'>
-      <img :src="itemObj.img" alt="">
+      <img :src="itemObj.picture" alt="">
     </div>
     <div class='item_right'>
-      <div class='title'>{{itemObj.title}}</div>
-      <div class='price'>{{itemObj.price}}</div>
+      <div class='title'>{{itemObj.alias}}</div>
+      <div class='price'>￥{{itemObj.price_sale}}</div>
     </div>
-    <div v-if='isShowCar' class='goods_car_bx' :data-id='itemObj.id' @click='addCar'>
+    <div class='goods_car_bx' :data-id='itemObj.id' @click='addCar'>
       <div class='buy_btn'>购买</div>
-    </div>
-    <div v-else class='input_num_bx'>
-      <input-num itemHeight='1.6rem' :changeBack='changeBack' :blurBack='blurBack'></input-num>
     </div>
   </div>
 </template>
 
 <script>
   import GoodsCar from '../goodsCar/goodsCar'
-  import InputNum from '../inputNum/inputNum'
 
   export default {
     name: 'list-item',
     components: {
       GoodsCar,
-      InputNum
     },
     props: [
       'itemObj',
@@ -45,6 +40,7 @@
         this.disableScoll(true)
         this.isShowCar = false;
         console.log(e.currentTarget.getAttribute('data-id'))
+        window.sendMessage('toggle:classappendcar', this.itemObj)
       },
       changeBack(num, type) {
         console.log(num)

@@ -9,9 +9,9 @@
       </div>
     </top-back>
     <div v-if='showLabelList' class="top_nav_list_bx">
-      <div :class='{list_item:true,active_item:activeLabel===item.id}' @click='toggleActiveLabel(item.id)' v-for='(item, i) in tabLabels' :key='i'>{{item.label}}</div>
+      <div :class='{list_item:true,active_item:activeLabel===item.id}' @click='toggleActiveLabel(item.id)' v-for='(item, i) in tabLabels' :key='i'>{{item.name}}</div>
     </div>
-    <class-list></class-list>
+    <class-list :sourceData='sourceData' :uploadCb='uploadCb'></class-list>
     <bottom-nav></bottom-nav>
   </div>
 </template>
@@ -22,6 +22,9 @@
   import ScrollNav from './components/scrollNav/scrollNav'
   import ClassList from '@/components/classList/classList'
   import BottomNav from '@/components/bottomNav/bottomNav'
+
+  import { getLocalStorage } from '@/util/tools'
+  import { getGoodsBase } from '@/service/getData'
 
   export default {
     name: 'goods-classify',
@@ -35,40 +38,8 @@
       return {
         activeLabel: 0,
         showLabelList: false,
-        tabLabels: [
-          {
-            id: 0,
-            label: '关注'
-          },
-          {
-            id: 21,
-            label: '今日特卖'
-          },
-         {
-           id: 23,
-          label: '零食小吃'
-         },
-         {
-           id: 43,
-            label: '母婴用品'
-          },
-          {
-            id: 65,
-            label: '酒水饮料'
-          },
-         {
-           id: 76,
-          label: '家居用品'
-         },
-         {
-           id: 74,
-          label: '美妆百货'
-         },
-         {
-           id: 123,
-          label: '个护清洁'
-         }
-        ],
+        tabLabels: [],
+        sourceData: []
       }
     },
     computed: {
@@ -84,9 +55,38 @@
       }
     },
     mounted() {
-
+      const categorysData = getLocalStorage('categorys_data')
+      this.tabLabels = categorysData
+      const { query: { id } } = this.$route
+      console.log('id:', id)
+      if(id) {
+        this.activeLabel = Number(id)
+        this.fetchListData(id)
+      } else {
+        this.activeLabel = categorysData[0].id
+        this.fetchListData(categorysData[0].id)
+      }
     },
     methods: {
+      fetchListData(categoryId, index) {
+        const merchant = getLocalStorage('merchant')
+        const params = {
+          t: 'list',
+          category_id: categoryId || this.activeLabel,
+          mch_id: merchant.id,
+          index: index || 1,
+          size: 10
+        }
+        getGoodsBase(params).then(res => {
+          if(res && res.errcode === 0) {
+            this.sourceData = res.data
+          }
+        })
+      },
+      uploadCb(index) {
+        console.log('index:', index)
+        this.fetchListData(null, index)
+      },
       toggleLabelShow() {
         const { showLabelList } = this
         this.showLabelList = !showLabelList
@@ -95,9 +95,18 @@
       toggleActiveLabel(id) {
         this.activeLabel = id
         this.toggleLabelShow()
+        this.fetchListData(id)
       },
       setActiveCb(id) {
         this.activeLabel = id
+        console.log('setActiveCb:', id)
+        this.fetchListData(id)
+        this.$router.replace({
+          path: '/goodsclassify',
+          query: {
+            id
+          }
+        })
       }
     }
   }
