@@ -1,17 +1,20 @@
 <template>
   <div class='list_item_bx' :key='dataItem.id'>
       <div class="top_bx">
-        <div class="order_num_bx">订单号：{{dataItem.orderId}}</div>
+        <div class="order_num_bx">订单号：{{dataItem.serial_no}}</div>
         <div class="tag">{{orderStatus[dataItem.status]}}</div>
       </div>
       <div class="goods_list_bx">
-        <goods-swiper :swiperId='dataItem.id' />
+        <goods-swiper
+          :swiperId='dataItem.id'
+          :summary='dataItem.summary'
+        />
       </div>
       <div class="bottom_bx">
         <div class="to_pay_bt" v-if='dataItem.status===0'>去支付</div>
         <div class="total_price">
-          <span class='label'>共6件&nbsp;合计:</span>
-          <span class='price'>￥{{dataItem.price}}</span>
+          <span class='label'>共{{ dataItem.quantity }}件&nbsp;合计:</span>
+          <span class='price'>￥{{ dataItem.amount }}</span>
         </div>
       </div>
   </div>
@@ -41,7 +44,7 @@
       }
     },
     mounted() {
-      console.log(this.dataItem)
+      // console.log(this.dataItem)
     },
     methods: {
 

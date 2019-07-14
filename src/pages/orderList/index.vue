@@ -24,28 +24,47 @@
         >
            <!-- 全部 -->
           <cube-slide-item>
-            <cube-scroll :data="allData" :options="scrollOptions">
-              <order-list :dataSource='allData' />
+            <cube-scroll
+              ref="allData"
+              :data="allData.data"
+              :options="scrollOptions"
+              :scroll-events="['scroll']"
+              @pulling-down="() => onPullingdown(-1, 'allData')"
+              @pulling-up="() => onPullingUp(-1, 'allData')"
+            >
+              <order-list :dataSource='allData.data' />
             </cube-scroll>
           </cube-slide-item>
           <!-- 代付款 -->
           <cube-slide-item>
-            <cube-scroll :data="noPayData" :options="scrollOptions">
-              <order-list :dataSource='noPayData' />
+            <cube-scroll
+              ref="noPayData"
+              :data="noPayData.data"
+              :options="scrollOptions"
+              @pulling-down="() => onPullingdown(0, 'noPayData')"
+              @pulling-up="() => onPullingUp(0, 'noPayData')"
+            >
+              <order-list :dataSource='noPayData.data' />
             </cube-scroll>
           </cube-slide-item>
           <!-- 代发货 -->
           <cube-slide-item>
-            <cube-scroll :data="waitDispatchData" :options="scrollOptions">
-              <order-list :dataSource='waitDispatchData' />
+            <cube-scroll
+              ref="waitDispatchData"
+              :data="waitDispatchData.data"
+              :options="scrollOptions"
+              @pulling-down="() => onPullingdown(1, 'waitDispatchData')"
+              @pulling-up="() => onPullingUp(1, 'waitDispatchData')"
+            >
+              <order-list :dataSource='waitDispatchData.data' />
             </cube-scroll>
           </cube-slide-item>
           <!-- 配送中 -->
-           <cube-slide-item>
+          <!-- <cube-slide-item>
             <cube-scroll :data="tavalData" :options="scrollOptions">
               <order-list :dataSource='tavalData' />
             </cube-scroll>
-          </cube-slide-item>
+          </cube-slide-item> -->
         </cube-slide>
       </div>
     </div>
@@ -55,9 +74,9 @@
 <script>
   import { Flexbox, FlexboxItem, Toast } from 'vux'
   import TopBack from '@/components/topBack/topBack'
-  import { ALL_DATA, NO_PAY_DATA, WAIT_DISPATCH_DATA, TAVAL_DATA } from './mock'
-
   import OrderList from './components/orderList/orderList'
+
+  import { getOrderBase } from '@/service/getData'
 
   function findIndex(ary, fn) {
   if (ary.findIndex) {
@@ -99,9 +118,9 @@
           {
             label: '代发货'
           },
-          {
-            label: '配送中'
-          }
+          // {
+          //   label: '配送中'
+          // }
         ],
         loop: false,
         autoPlay: false,
@@ -114,12 +133,25 @@
         },
         scrollOptions: {
           /* lock x-direction when scrolling horizontally and  vertically at the same time */
-          directionLockThreshold: 0
+          directionLockThreshold: 0,
+          pullUpLoad: true,
         },
-        allData: ALL_DATA,
-        noPayData: NO_PAY_DATA,
-        waitDispatchData: WAIT_DISPATCH_DATA,
-        tavalData: TAVAL_DATA
+        allData: {
+          data: [],
+          index: 1,
+          end: false,
+        },
+        noPayData: {
+          data: [],
+          index: 1,
+          end: false,
+        },
+        waitDispatchData: {
+          data: [],
+          index: 1,
+          end: false,
+        },
+        // tavalData: TAVAL_DATA
       }
     },
     computed: {
@@ -127,7 +159,7 @@
         let index = 0
         index = findIndex(this.tabLabels, item => item.label === this.selectedLabel)
         return index
-      }
+      },
     },
     mounted() {
       // console.log(this.allData)
@@ -138,11 +170,49 @@
       } else {
         this.updateLabel()
       }
+      this.fetchEachTabData()
     },
     methods: {
-       changePage (current) {
+      changePage (current) {
         this.selectedLabel = this.tabLabels[current].label
-        console.log(current)
+        // console.log('changePage', current)
+      },
+      fetchEachTabData () {
+        this.fetchData(-1, 'allData')
+        this.fetchData(0, 'noPayData')
+        this.fetchData(1, 'waitDispatchData')
+      },
+      fetchData (status, dataKey, index = 1) {
+        console.log(index)
+        getOrderBase({
+          t: 'list',
+          status,
+          index,
+          size: 10,
+        }).then(res => {
+          if (res && res.errcode === 0) {
+            if (index <= 1) {
+              this[dataKey].data = res.data
+            } else {
+              this[dataKey].data = this[dataKey].data.concat(res.data)
+            }
+            this[dataKey].index = res.pages ? res.pages.index : index
+            this[dataKey].end = index >= (res.pages ? res.pages.lenght : 1)
+
+            this.$refs[dataKey].forceUpdate()
+          }
+        })
+      },
+      onPullingUp (status, dataKey) {
+        const { index, end } = this[dataKey]
+        if (!end) {
+          this.fetchData(status, dataKey, index + 1)
+        } else {
+          this.$refs[dataKey].forceUpdate()
+        }
+      },
+      onPullingdown (index) {
+        console.log(11, index)
       },
       scroll (pos) {
         const x = Math.abs(pos.x)
