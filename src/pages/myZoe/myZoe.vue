@@ -74,7 +74,6 @@
     },
     methods: {
       loginOut() {
-        debugger
         getAccountBase({
           t: 'logout'
         }).then(res => {

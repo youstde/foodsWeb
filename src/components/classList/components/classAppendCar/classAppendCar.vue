@@ -132,7 +132,6 @@
           quantity: this.goodsNum
         }).then(res => {
           if(res && res.errcode === 0) {
-            debugger
             this.$refs.baseToast.onShowToast('success', '添加购物车成功!')
             // 当有商品添加到购物车时手动通知底部导航栏
             const { quantity_total } = res.data
