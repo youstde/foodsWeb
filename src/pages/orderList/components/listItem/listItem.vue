@@ -1,12 +1,15 @@
 <template>
-  <div class='list_item_bx' :key='dataItem.id'>
+  <div class='list_item_bx'
+    :key='dataItem.serial_no'
+    @click.stop.prevent="() => onGoDetial(dataItem.serial_no)"
+  >
       <div class="top_bx">
         <div class="order_num_bx">订单号：{{dataItem.serial_no}}</div>
         <div class="tag">{{orderStatus[dataItem.status]}}</div>
       </div>
       <div class="goods_list_bx">
         <goods-swiper
-          :swiperId='dataItem.id'
+          :swiperId='dataItem.serial_no'
           :summary='dataItem.summary'
         />
       </div>
@@ -47,7 +50,9 @@
       // console.log(this.dataItem)
     },
     methods: {
-
+      onGoDetial (serial_no) {
+        this.$router.push(`/orderDetail?serialNo=${serial_no}`)
+      }
     }
   }
 </script>

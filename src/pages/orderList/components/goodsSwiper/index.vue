@@ -62,7 +62,6 @@
       .swiper-wrapper {
         .swiper-slide {
           // width: 5.75rem !important;
-          width: 3rem;
           background-color: #fff;
           .goods_img {
             width: 2.5rem;

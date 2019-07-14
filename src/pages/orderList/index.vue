@@ -135,6 +135,7 @@
           /* lock x-direction when scrolling horizontally and  vertically at the same time */
           directionLockThreshold: 0,
           pullUpLoad: true,
+          click: false, // 默认true, 然后会给里面多分配一次点击事件
         },
         allData: {
           data: [],
