@@ -40,7 +40,7 @@
           {
             id: 1,
             img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/%E5%95%86%E5%93%81%E6%B8%85%E5%8D%951.jpg',
-            title: '特级鲜冻虾仁冷冻新鲜包邮500g*2青虾仁新鲜虾仁野生海鲜虾仁生鲜',
+            title: '特级鲜冻虾仁冷冻新鲜包邮500g*2青虾仁新鲜虾仁野生海鲜虾仁生鲜sads',
             price: '3.90',
             num: 1,
             allPrice: '3.90'
