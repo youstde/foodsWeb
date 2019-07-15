@@ -102,7 +102,7 @@
                 this.onShowToast('success', '登录成功!')
                 setTimeout(() => {
                   if(this.fromLink) window.location.href = this.fromLink
-                  this.$router.push({path:'/myzoe'})
+                  this.$router.push({path:'/'})
                 }, 1e3)
               } else {
                 const toast = this.$createToast({

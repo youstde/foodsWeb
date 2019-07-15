@@ -95,6 +95,10 @@
               toast.show()
               localStorage.removeItem('invoice_data')
               localStorage.removeItem('goods_arr')
+
+              setTimeout(() => {
+                this.$router.push(`/orderList`)
+              }, 1000)
             }
           })
         }

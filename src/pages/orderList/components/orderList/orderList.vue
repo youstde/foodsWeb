@@ -35,4 +35,8 @@
 <style scoped lang="scss">
   @import 'src/style/mixin.scss';
   @import './index.scss';
+
+  .item_out_container_bx{
+    margin-bottom: .5rem;
+  }
 </style>
