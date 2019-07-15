@@ -20,6 +20,14 @@ $paddingLeft: 0.5rem;
   .vux-flexbox-item {
     margin-left: 0 !important;
   }
+  .common_img_bx {
+    height: 8.5rem;
+    overflow: hidden;
+  }
+  .small_img_bx {
+    height: 5rem;
+    padding: 0.4rem 0.4rem 0;
+  }
   img {
     width: 100%;
     height: auto;

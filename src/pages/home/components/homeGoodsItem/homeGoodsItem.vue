@@ -1,6 +1,8 @@
 <template>
   <div :class="{home_goods_item_bx:true, goods_item_mormal:type==='1'}">
-    <img :src="goodsItem.picture" alt="" @click='handleToDetail'>
+    <div :class="{common_img_bx:true, small_img_bx:type==='1'}" @click='handleToDetail'>
+      <img :src="goodsItem.picture" alt="">
+    </div>
     <div class='goods_title'>{{goodsItem.alias}}</div>
     <flexbox class='goods_detail_bx'>
       <flexbox-item v-if='isSlide' class='goods_price' :span='7'>
