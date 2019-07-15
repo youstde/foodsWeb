@@ -95,7 +95,7 @@
         showAppendCar: false,
         merchant: {},
         userData: '',
-        shop: '东昌路店',
+        shop: '',
         pullUpLoadIndex: 1, // 商品列表下拉的页数
         scrollOptions: {
           pullDownRefresh: true,
@@ -169,8 +169,14 @@
     mounted() {
       // const { query: { merchant } } = this.$route
       const localMerchant = getLocalStorage('merchant')
-      this.merchant = localMerchant
-      this.shop  = localMerchant.name
+      if(localMerchant) {
+        this.merchant = localMerchant
+        this.shop  = localMerchant.name
+      } else {
+        this.$router.replace({
+          path: '/'
+        })
+      }
       this.getHomeData()
     },
     methods: {

@@ -41,6 +41,7 @@
   import BottomNav from '@/components/bottomNav/bottomNav'
 
   import { getAccountBase } from '@/service/getData'
+import { setTimeout } from 'timers';
 
   export default {
     name: 'my-zoe',
@@ -78,10 +79,14 @@
           t: 'logout'
         }).then(res => {
           if(res && res.errcode === 0) {
+            const { sk } = res.data
             localStorage.removeItem('user_info')
             localStorage.removeItem('active_serial_no')
             localStorage.removeItem('car_nums')
-            window.location.reload()
+            localStorage.setItem('uuId', sk)
+            setTimeout(() => {
+              window.location.reload()
+            }, 100)
           }
         })
       }

@@ -136,7 +136,13 @@
             // 当有商品添加到购物车时手动通知底部导航栏
             const { quantity_total } = res.data
             localStorage.setItem('car_nums', quantity_total)
-            localStorage.setItem('active_serial_no', serial_no)
+            const activeSerialNoStr = localStorage.getItem('active_serial_no')
+            let activeSerialNoArr = []
+            if(activeSerialNoStr) {
+              activeSerialNoArr = JSON.parse(activeSerialNoStr)
+            }
+            activeSerialNoArr.push(serial_no)
+            localStorage.setItem('active_serial_no', JSON.stringify(activeSerialNoArr))
             window.sendMessage('update:BottomGoodsCarNum', quantity_total)
             this.cancelNum()
             setTimeout(() => {

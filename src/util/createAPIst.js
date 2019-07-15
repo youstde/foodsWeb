@@ -1,10 +1,17 @@
 import axios from 'axios'
 import { uuid, createSign } from './tools'
 import { md5, Alert } from 'vux'
-
-    const devUrl = '//api.fresh.laoniutech.com';
-    // const devUrl = '//h5api.yicaipi.com'
-    const prodTag = '//h5api.yicaipi.com';
+    console.log(window.location.host)
+    const host = window.location.host
+    let devUrl = ''
+    let prodTag = ''
+    if(host === 'h5.fresh.laoniutech.com' || host=== 'project.znckj.com') {
+      devUrl = '//api.fresh.laoniutech.com';
+      prodTag = '//api.fresh.laoniutech.com';
+    } else {
+      devUrl = '//h5api.yicaipi.com'
+      prodTag = '//h5api.yicaipi.com';
+    }
     const codeMessage = {
         200: '服务器成功返回请求的数据。',
         201: '新建或修改数据成功。',

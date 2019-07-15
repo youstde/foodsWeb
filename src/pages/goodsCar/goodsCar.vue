@@ -110,9 +110,10 @@
     },
     methods: {
       initCheckedList() {
-        const serialNo = localStorage.getItem('active_serial_no')
-        if(serialNo) {
-          this.checkList.push(serialNo)
+        const serialNoStr = localStorage.getItem('active_serial_no')
+        if(serialNoStr) {
+          const serialNoArr = JSON.parse(serialNoStr)
+          this.checkList = [...this.checkList, ...serialNoArr]
         }
       },
       calculateMoney() {

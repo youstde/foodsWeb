@@ -156,6 +156,13 @@
           increment: this.goodsNum
         }).then(res => {
           if(res && res.errcode === 0) {
+            const activeSerialNoStr = localStorage.getItem('active_serial_no')
+            let activeSerialNoArr = []
+            if(activeSerialNoStr) {
+              activeSerialNoArr = JSON.parse(activeSerialNoStr)
+            }
+            activeSerialNoArr.push(serial_no)
+            localStorage.setItem('active_serial_no', JSON.stringify(activeSerialNoArr))
             this.$refs.baseToast.onShowToast('success', '添加购物车成功!')
             this.cancelNum()
           }
