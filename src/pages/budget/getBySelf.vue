@@ -62,6 +62,7 @@
   import PaymentCheckBox from './components/paymentCheckBox/paymentCheckBox'
 
   import { payType } from './config'
+  import { getLocalStorage } from '@/util/tools'
 
   export default {
     name: 'home-delivery',
@@ -79,7 +80,7 @@
         paymentCheckId: null,
         merchant: {},
         paymentList: payType,
-        invoiceData: {}
+        invoiceData: {},
       }
     },
     watch: {
@@ -95,20 +96,36 @@
       }
     },
     mounted() {
-      const merchantStr = localStorage.getItem('merchant')
-      const invoiceDataStr = localStorage.getItem('invoice_data')
-      if(invoiceDataStr) {
-        this.invoiceData = JSON.parse(invoiceDataStr)
+      const merchant = getLocalStorage('merchant')
+      const userInfo = getLocalStorage('user_info')
+      const invoiceData = getLocalStorage('invoice_data')
+      if(invoiceData) {
+        this.invoiceData = invoiceData
       }
-      if(merchantStr) {
-        this.merchant = JSON.parse(merchantStr)
+      if(merchant) {
+        this.merchant = merchant
       }
-      console.log('merchant:', localStorage.getItem('merchant'))
+      if(userInfo.mch_id === merchant.id) {
+        // 说明该用户为该店的管理员
+        this.paymentList.push({
+          id: 'cash',
+          label: '现金支付'
+        })
+      }
+      console.log('merchant:', getLocalStorage('merchant'))
     },
     methods: {
       updateCheckId(newId) {
-        console.log(newId)
+        const { query } = this.$route
         this.paymentCheckId = newId
+        this.$router.replace({
+          path: '/budget',
+          query: {
+            ...query,
+            paytype: newId
+          }
+        })
+
       },
       writeInvoice() {
         const { fullPath } = this.$route

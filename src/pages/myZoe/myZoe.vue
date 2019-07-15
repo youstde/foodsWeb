@@ -74,12 +74,13 @@
     },
     methods: {
       loginOut() {
-        debugger
         getAccountBase({
           t: 'logout'
         }).then(res => {
           if(res && res.errcode === 0) {
             localStorage.removeItem('user_info')
+            localStorage.removeItem('active_serial_no')
+            localStorage.removeItem('car_nums')
             window.location.reload()
           }
         })

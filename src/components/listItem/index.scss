@@ -25,6 +25,12 @@
       font-size: 0.6rem;
       color: $priceActiveColor;
     }
+    .price_odder {
+      color: #bebebe;
+      font-size: 10px;
+      text-decoration: line-through;
+      padding-top: 0.2rem;
+    }
   }
   .goods_car_bx {
     position: absolute;

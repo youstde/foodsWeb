@@ -42,7 +42,7 @@
         <div class='time_discount'>
           <div class='title'>
             <span>限时优惠</span>
-            <span class='get_more'><router-link to='/goodsclassify'>查看更多 ></router-link></span>
+            <span class='get_more'><router-link to='/goodsclassify?id=1'>查看更多 ></router-link></span>
           </div>
           <time-discount :rushGoodsData='rushGoodsData' />
         </div>

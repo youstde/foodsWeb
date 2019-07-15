@@ -10,7 +10,7 @@
                   id: item.id
                 }
               }">
-                <span class='icon_bx'><img src="@/assets/home-nav.jpeg" alt=""></span>
+                <span class='icon_bx'><img :src="item.icon" alt=""></span>
                 <p class='item_label'>{{item.name}}</p>
               </router-link>
             </div>

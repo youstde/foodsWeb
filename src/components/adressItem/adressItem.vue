@@ -43,15 +43,17 @@
       }
     },
     mounted() {
-
+      console.log('fromData:', this.fromData)
     },
     methods: {
       goToEditAdress() {
+        const { fullPath } = this.$route
         this.$router.push({
           path: '/editadress',
           query: {
             label: '编辑收货地址',
-            dataItem: JSON.stringify(this.dataItem)
+            dataItem: JSON.stringify(this.dataItem),
+            from: fullPath
           }
         })
       },

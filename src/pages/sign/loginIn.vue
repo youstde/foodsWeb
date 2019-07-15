@@ -32,6 +32,7 @@
   import SendCode from './components/sendCode/sendCode'
   import { login } from './service'
   import { setTimeout } from 'timers';
+  import { getStoreData } from '@/service/getData'
 
   export default {
     name: 'sign',
@@ -78,6 +79,15 @@
       }
     },
     methods: {
+      fetchStoreData() {
+        getStoreData({
+          t: 'list'
+        }).then(res => {
+          if(res && res.errcode === 0) {
+
+          }
+        })
+      },
       submit() {
         const { phoneCode, telphone } = this;
         const vPhone = this.$refs.phoneValidator.validate()
@@ -102,7 +112,7 @@
                 this.onShowToast('success', '登录成功!')
                 setTimeout(() => {
                   if(this.fromLink) window.location.href = this.fromLink
-                  this.$router.push({path:'/'})
+                  this.$router.push({path:'/myzoe'})
                 }, 1e3)
               } else {
                 const toast = this.$createToast({

@@ -3,9 +3,9 @@
     <img :src="goodsItem.picture" alt="" @click='handleToDetail'>
     <div class='goods_title'>{{goodsItem.alias}}</div>
     <flexbox class='goods_detail_bx'>
-      <flexbox-item v-if='isSlide' class='goods_price' :span='isShowCar?7:4'>
+      <flexbox-item v-if='isSlide' class='goods_price' :span='7'>
         <!-- 有打折价 -->
-        <div v-if='goodsItem.cheapPrice'>
+        <div v-if='goodsItem.price_rush'>
           <p class='fresh_price'>￥{{goodsItem.price_rush}}</p>
           <p class='past_price'>￥{{goodsItem.price_sale}}</p>
         </div>
@@ -16,7 +16,7 @@
       </flexbox-item>
       <flexbox-item v-else class='goods_price' :span='7'>
         <!-- 有打折价 -->
-        <div v-if='goodsItem.cheapPrice'>
+        <div v-if='goodsItem.price_rush'>
           <p class='fresh_price'>￥{{goodsItem.price_rush}}</p>
           <p class='past_price'>￥{{goodsItem.price_sale}}</p>
         </div>
@@ -25,7 +25,7 @@
           <p class='normal_price'>￥{{goodsItem.price_sale}}</p>
         </div>
       </flexbox-item>
-      <flexbox-item v-if='isSlide' class='add_to_car' :span='isShowCar?5:8'>
+      <flexbox-item v-if='isSlide' class='add_to_car' :span='5'>
         <div :class="{inner:true,inner_mormal:type==='1'}" @click='addCar'>
            购买
         </div>

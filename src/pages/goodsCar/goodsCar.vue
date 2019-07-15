@@ -102,6 +102,7 @@
         }
       })
       window.onMessage('update:goodsCarNum', () => {
+        console.log(111)
         this.fetchCarData()
 
       })

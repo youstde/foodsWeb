@@ -39,7 +39,12 @@
       }
     },
     mounted() {
-
+      const { query: { paytype } } = this.$route
+      console.log('paytype:', paytype , this.data)
+      const { id } = this.data
+      if(paytype === id) {
+        this.checked = true
+      }
     },
     methods: {
 

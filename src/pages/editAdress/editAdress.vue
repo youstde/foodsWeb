@@ -165,9 +165,9 @@
                   const { query: { from } } = this.$route
                   this.$refs.baseToast.onShowToast('success', '操作成功!', () => {
                     if(from) {
-                      this.$router.push({path: from})
+                      this.$router.replace({path: from})
                     } else {
-                      this.$router.push({path: '/adressmanagement'})
+                      this.$router.replace({path: '/adressmanagement'})
                     }
                   })
                 }

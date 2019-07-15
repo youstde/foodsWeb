@@ -153,7 +153,7 @@
           t: 'cart.add',
           serial_no,
           mch_id: localMerchant.id,
-          quantity: this.goodsNum
+          increment: this.goodsNum
         }).then(res => {
           if(res && res.errcode === 0) {
             this.$refs.baseToast.onShowToast('success', '添加购物车成功!')

@@ -30,6 +30,7 @@
       color: $morenColor;
       font-size: 0.6rem;
       padding-bottom: 0.35rem;
+      @include singleLineView;
     }
   }
 }

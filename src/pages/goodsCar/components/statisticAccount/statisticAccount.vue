@@ -31,6 +31,8 @@
   import LocalCheckBox from '../localCheckBox/localCheckBox'
   import MinButton from '@/components/minButton/minButton'
 
+  import { getLocalStorage } from '@/util/tools'
+
   export default {
     name: 'statisic-account',
     components: {
@@ -63,20 +65,39 @@
     },
     methods: {
       submit() {
-        const newArr = []
-        this.checkList.forEach(item => {
-          this.lists.forEach(one => {
-            if(one.serial_no === item) newArr.push(one)
+        const userInfo = getLocalStorage('user_info')
+        if(!this.checkList.length) {
+          const toast = this.$createToast({
+            txt: '请选择你需要下单的商品!',
+            type: 'txt'
           })
-        })
-        localStorage.setItem('goods_arr', JSON.stringify(newArr))
-        this.$router.push({
-          path: '/budget',
-          query: {
-            serials: this.checkList.join(','),
-            allmoney: this.allMoney
-          }
-        })
+          toast.show()
+          return
+        }
+        if(userInfo) {
+          const newArr = []
+          this.checkList.forEach(item => {
+            this.lists.forEach(one => {
+              if(one.serial_no === item) newArr.push(one)
+            })
+          })
+          localStorage.setItem('goods_arr', JSON.stringify(newArr))
+          this.$router.push({
+            path: '/budget',
+            query: {
+              serials: this.checkList.join(','),
+              allmoney: this.allMoney
+            }
+          })
+        } else {
+           const { path } = this.$route
+           this.$router.push({
+             path: '/sign',
+             query: {
+               from: path
+             }
+           })
+        }
       }
     }
   }

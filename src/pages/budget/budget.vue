@@ -39,20 +39,6 @@
         mark: '',  // 备注
         paymentType: '', // 支付方式
         paymentCheckId: null,
-        paymentList: [
-          {
-            id: 1,
-            label: '支付宝支付'
-          },
-          {
-            id: 2,
-            label: '微信支付'
-          },
-          {
-            id: 3,
-            label: '现金支付'
-          }
-        ],
         allMoney: 0,
         serials: ''
       }
@@ -67,7 +53,7 @@
     methods: {
       handleSubmit() {
         // 提交订单
-        const { query: { serials } } = this.$route
+        const { query: { serials, paytype } } = this.$route
         const invoiceDataStr = localStorage.getItem('invoice_data')
         const localAdress = getLocalStorage('main_address')
         const localMerchant = getLocalStorage('merchant')
@@ -76,13 +62,20 @@
           serials,
           mch_id: localMerchant.id,
           deliver_type: this.deliveryType,
-          paytype: this.paymentType,
+          paytype
         }
         if(localAdress) params.address_id = localAdress.id
         if(invoiceDataStr) params.invoice_info = invoiceDataStr
         console.log('params:', params)
         let isLegel = true
         Object.keys(params). forEach(key => {
+          if(key === 'paytype' && !params[key]) {
+            const toast = this.$createToast({
+              txt: '请选择支付方式!',
+              type: 'txt'
+            })
+            toast.show()
+          }
           if(!params[key]) isLegel = false
         })
         if(isLegel) {

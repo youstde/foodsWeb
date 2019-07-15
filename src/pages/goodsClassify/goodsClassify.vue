@@ -38,7 +38,13 @@
       return {
         activeLabel: 0,
         showLabelList: false,
-        tabLabels: [],
+        tabLabels: [
+          {
+            icon: "",
+            id: 1,
+            name: "限时抢购"
+          }
+        ],
         sourceData: []
       }
     },
@@ -56,7 +62,10 @@
     },
     mounted() {
       const categorysData = getLocalStorage('categorys_data')
-      this.tabLabels = categorysData
+      this.tabLabels = [
+        ...this.tabLabels,
+        ...categorysData
+      ]
       const { query: { id } } = this.$route
       console.log('id:', id)
       if(id) {
