@@ -100,7 +100,7 @@
             return !valid
           })
           if(isLegal) {
-            // 发送请求
+            // 发送请求拿数据request
             login({
               t: 'login',
               mobile: telphone,

@@ -2,8 +2,8 @@ import axios from 'axios'
 import { uuid, createSign } from './tools'
 import { md5, Alert } from 'vux'
 
-    // const devUrl = '//api.fresh.laoniutech.com';
-    const devUrl = '//h5api.yicaipi.com'
+    const devUrl = '//api.fresh.laoniutech.com';
+    // const devUrl = '//h5api.yicaipi.com'
     const prodTag = '//h5api.yicaipi.com';
     const codeMessage = {
         200: '服务器成功返回请求的数据。',
