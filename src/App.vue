@@ -10,6 +10,7 @@
   import { mapGetters } from 'vuex'
   import baseLoading from '@/components/baseLoading/baseLoading'
   import { getAccountBase, getStoreData } from '@/service/getData'
+  import { isAliOrWx } from '@/util/tools'
 
   export default {
     name: 'App',
@@ -24,6 +25,8 @@
       }
     },
     mounted() {
+      const result = isAliOrWx()
+      console.log('isAliOrWx:', result)
       // this.fetchStoreData()
       const uuId = localStorage.getItem('uuId')
       if(!uuId) {

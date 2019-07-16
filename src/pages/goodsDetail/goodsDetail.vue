@@ -13,10 +13,11 @@
     </div>
     <cube-scroll
         ref='scroll'
+        :data="detailData"
         :options='scrollOptions'>
       <detail-swiper :detailData='detailData' />
-      </cube-scroll>
-      <append-car :dataSource='detailData' ></append-car>
+    </cube-scroll>
+    <append-car :dataSource='detailData' ></append-car>
   </div>
 </template>
 

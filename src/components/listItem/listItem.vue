@@ -61,7 +61,7 @@
       },
       goTodetail() {
         const { serial_no } = this.itemObj
-        this.$router.replace({
+        this.$router.push({
           path: '/goodsdetail',
           query: {
             serialNo: serial_no
