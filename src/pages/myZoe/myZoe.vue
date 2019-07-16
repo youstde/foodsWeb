@@ -54,7 +54,7 @@ import { setTimeout } from 'timers';
       return {
         navArr: [
           {
-            path: '/myorder',
+            path: '/orderlist',
             icon: 'order',
             label: '我的订单'
           },
