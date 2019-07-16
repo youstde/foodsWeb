@@ -162,7 +162,8 @@
               activeSerialNoArr = JSON.parse(activeSerialNoStr)
             }
             activeSerialNoArr.push(serial_no)
-            localStorage.setItem('active_serial_no', JSON.stringify(activeSerialNoArr))
+            const middleArr = [...new Set(activeSerialNoArr)]
+            localStorage.setItem('active_serial_no', JSON.stringify(middleArr))
             this.$refs.baseToast.onShowToast('success', '添加购物车成功!')
             this.cancelNum()
           }

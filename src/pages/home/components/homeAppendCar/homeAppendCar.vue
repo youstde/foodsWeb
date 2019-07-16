@@ -142,7 +142,8 @@
               activeSerialNoArr = JSON.parse(activeSerialNoStr)
             }
             activeSerialNoArr.push(serial_no)
-            localStorage.setItem('active_serial_no', JSON.stringify(activeSerialNoArr))
+            const middleArr = [...new Set(activeSerialNoArr)]
+            localStorage.setItem('active_serial_no', JSON.stringify(middleArr))
             window.sendMessage('update:BottomGoodsCarNum', quantity_total)
             this.cancelNum()
             setTimeout(() => {

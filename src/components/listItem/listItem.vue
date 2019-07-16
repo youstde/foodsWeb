@@ -1,10 +1,10 @@
 <template>
   <div class='landscape_list_item clear'>
-    <div class='item_left'>
+    <div class='item_left' @click='goTodetail'>
       <img :src="itemObj.picture" alt="">
     </div>
     <div class='item_right'>
-      <div class='title'>{{itemObj.alias}}</div>
+      <div class='title' @click='goTodetail'>{{itemObj.alias}}</div>
       <div v-if='itemObj.price_rush'>
         <div class='price'>￥{{itemObj.price_rush}}</div>
         <div class='price_odder'>￥{{itemObj.price_sale}}</div>
@@ -37,7 +37,7 @@
       }
     },
     mounted() {
-
+      console.log(this.itemObj)
     },
     methods: {
       addCar(e) {
@@ -58,6 +58,15 @@
           this.isShowCar = true
         }
         this.blurFun()
+      },
+      goTodetail() {
+        const { serial_no } = this.itemObj
+        this.$router.replace({
+          path: '/goodsdetail',
+          query: {
+            serialNo: serial_no
+          }
+        })
       }
     }
   }

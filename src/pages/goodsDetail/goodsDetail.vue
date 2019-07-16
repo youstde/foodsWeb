@@ -67,6 +67,7 @@
         }).then(res => {
           if(res && res.errcode === 0) {
             this.detailData = res.data
+            this.$refs.scroll.forceUpdate()
           }
         })
       }

@@ -1,6 +1,6 @@
 <template>
   <div class='class_list'>
-    <condition-tab />
+    <!-- <condition-tab /> -->
     <div class="scroll_bx">
       <cube-scroll
         ref='scroll'
