@@ -30,9 +30,9 @@
             </div>
 
            <flexbox>
-             <flexbox-item :span='4' class='borad_item'><div class='have_right_line' @click='cancelNum'>取消</div></flexbox-item>
-             <flexbox-item :span='4' class='borad_item'><div class='have_right_line' @click='getKey'>0</div></flexbox-item>
-             <flexbox-item :span='4' class='borad_item'><div @click='confirmNum'>确定</div></flexbox-item>
+             <!-- <flexbox-item :span='4' class='borad_item'><div class='have_right_line' @click='cancelNum'>取消</div></flexbox-item> -->
+             <flexbox-item :span='12' class='borad_item'><div class='have_right_line' @click='getKey'>0</div></flexbox-item>
+             <!-- <flexbox-item :span='4' class='borad_item'><div @click='confirmNum'>确定</div></flexbox-item> -->
            </flexbox>
         </div>
     </div>
@@ -67,6 +67,21 @@
           [4,5,6],
           [7,8,9]
         ]
+      }
+    },
+     computed: {
+      ...mapGetters([
+        'isShowCover'
+      ])
+    },
+     watch: {
+      isShowCover(value) {
+        if(!value) {
+          // 重置状态，清空输入框中数量
+          this.isShowAppendCar = false
+          this.goodsNum = 1
+          this.keyNum = ''
+        }
       }
     },
     mounted() {

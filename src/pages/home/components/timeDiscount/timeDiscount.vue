@@ -27,7 +27,7 @@
           setTimeout(() => {
             var mySwiper = new Swiper('#time_discount_swiper', {
               freeMode : true,
-              slidesPerView: 3.2
+              slidesPerView: 2.2
             })
           }, 1)
         }

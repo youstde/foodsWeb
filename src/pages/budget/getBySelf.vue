@@ -41,6 +41,11 @@
           :checkBc='updateCheckId' />
         </span>
       </div>
+      <flexbox v-if="paymentCheckId === 'cash'">
+        <flexbox-item :span='12'>
+          <input type="number" class='actual_price_input' v-model="factPrice" placeholder="请输入实收金额" />
+        </flexbox-item>
+      </flexbox>
     </div>
     <!-- E=支付方式 -->
     <!-- S=发票 -->
@@ -76,6 +81,7 @@
     props: ['returnBc'],
     data () {
       return {
+        factPrice: '', // 实收金额
         mark: '',
         paymentCheckId: null,
         merchant: {},
@@ -105,13 +111,13 @@
       if(merchant) {
         this.merchant = merchant
       }
-      if(userInfo.mch_id === merchant.id) {
+      // if(userInfo.mch_id === merchant.id) {
         // 说明该用户为该店的管理员
         this.paymentList.push({
           id: 'cash',
           label: '现金支付'
         })
-      }
+      // }
       console.log('merchant:', getLocalStorage('merchant'))
     },
     methods: {

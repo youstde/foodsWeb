@@ -36,9 +36,9 @@
             </div>
 
            <flexbox>
-             <flexbox-item :span='4' class='borad_item'><div class='have_right_line' @click='cancelNum'>取消</div></flexbox-item>
-             <flexbox-item :span='4' class='borad_item'><div class='have_right_line' @click='getKey'>0</div></flexbox-item>
-             <flexbox-item :span='4' class='borad_item'><div @click='confirmNum'>确定</div></flexbox-item>
+             <!-- <flexbox-item :span='4' class='borad_item'><div class='have_right_line' @click='cancelNum'>取消</div></flexbox-item> -->
+             <flexbox-item :span='12' class='borad_item'><div class='have_right_line' @click='getKey'>0</div></flexbox-item>
+             <!-- <flexbox-item :span='4' class='borad_item'><div @click='confirmNum'>确定</div></flexbox-item> -->
            </flexbox>
         </div>
     </div>

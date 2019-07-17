@@ -81,6 +81,7 @@
       addCar(e) {
         // this.disableScoll(true)
         this.isShowCar = false;
+        this.$store.commit('SET_IS_SHOW_COVER', true)
         console.log(e.currentTarget.getAttribute('data-id'))
         window.sendMessage('toggle:homeappendcar', this.goodsItem)
       },

@@ -30,9 +30,9 @@
             </div>
 
            <flexbox>
-             <flexbox-item :span='4' class='borad_item'><div class='have_right_line' @click='cancelNum'>取消</div></flexbox-item>
-             <flexbox-item :span='4' class='borad_item'><div class='have_right_line' @click='getKey'>0</div></flexbox-item>
-             <flexbox-item :span='4' class='borad_item'><div @click='confirmNum'>确定</div></flexbox-item>
+             <!-- <flexbox-item :span='8' class='borad_item'><div class='have_right_line' @click='cancelNum'>返回</div></flexbox-item> -->
+             <flexbox-item :span='12' class='borad_item'><div class='have_right_line' @click='getKey'>0</div></flexbox-item>
+             <!-- <flexbox-item :span='4' class='borad_item'><div @click='confirmNum'>确定</div></flexbox-item> -->
            </flexbox>
         </div>
     </div>
@@ -69,6 +69,21 @@
         ]
       }
     },
+    computed: {
+      ...mapGetters([
+        'isShowCover'
+      ])
+    },
+    watch: {
+      isShowCover(value) {
+        if(!value) {
+          // 重置状态，清空输入框中数量
+          this.isShowAppendCar = false
+          this.goodsNum = 1
+          this.keyNum = ''
+        }
+      }
+    },
     mounted() {
       window.onMessage('toggle:homeappendcar', data=> {
         this.isShowAppendCar = true
@@ -78,29 +93,28 @@
     },
     methods: {
       cancelNum() {
-        // this.showAddNum = false
         this.goodsNum = 1
         this.keyNum = ''
         this.$store.commit('SET_IS_SHOW_COVER', false)
         this.isShowAppendCar = false
       },
-      confirmNum(e) {
-        const { keyNum } = this
-        const odderClass = e.target.getAttribute('class')
-        e.target.setAttribute('class', `active ${odderClass}`)
-        setTimeout(() => {
-           e.target.setAttribute('class', odderClass)
-        }, 100)
-        if(keyNum.length) {
-          console.log(keyNum)
-          if(keyNum === '0') {
-            this.cancelNum()
-            return
-          }
-          this.goodsNum = keyNum.replace(/^0+/, '')
-          this.keyNum = ''
-        }
-      },
+      // confirmNum(e) {
+      //   const { keyNum } = this
+      //   const odderClass = e.target.getAttribute('class')
+      //   e.target.setAttribute('class', `active ${odderClass}`)
+      //   setTimeout(() => {
+      //      e.target.setAttribute('class', odderClass)
+      //   }, 100)
+      //   if(keyNum.length) {
+      //     console.log(keyNum)
+      //     if(keyNum === '0') {
+      //       this.cancelNum()
+      //       return
+      //     }
+      //     this.goodsNum = keyNum.replace(/^0+/, '')
+      //     this.keyNum = ''
+      //   }
+      // },
       getKey(e) {
         const {innerText:stringKey} = e.target
         const key = Number(stringKey)

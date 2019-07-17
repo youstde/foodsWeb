@@ -35,6 +35,11 @@
           :checkBc='updateCheckId' />
         </span>
       </div>
+      <flexbox v-if="paymentCheckId === 'cash'">
+        <flexbox-item :span='12'>
+          <input type="number" class='actual_price_input' v-model="factPrice" placeholder="请输入实收金额" />
+        </flexbox-item>
+      </flexbox>
     </div>
     <!-- E=支付方式 -->
     <!-- S=发票 -->
@@ -69,6 +74,7 @@
     },
     data () {
       return {
+        factPrice: '', // 实收金额
         mark: '',
         mainAddress: null,
         paymentCheckId: null,

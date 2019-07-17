@@ -18,6 +18,7 @@
 </template>
 
 <script>
+
   import GoodsCar from '../goodsCar/goodsCar'
 
   export default {
@@ -43,6 +44,7 @@
       addCar(e) {
         this.disableScoll(true)
         this.isShowCar = false;
+        this.$store.commit('SET_IS_SHOW_COVER', true)
         console.log(e.currentTarget.getAttribute('data-id'))
         window.sendMessage('toggle:classappendcar', this.itemObj)
       },

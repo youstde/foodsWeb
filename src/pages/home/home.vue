@@ -39,7 +39,7 @@
           <!-- E=快讯 -->
         </div>
         <!-- S=限时优惠 -->
-        <div class='time_discount'>
+        <div class='time_discount' v-if='rushGoodsData.length >= 2'>
           <div class='title'>
             <span>限时优惠</span>
             <span class='get_more'><router-link to='/goodsclassify?id=1'>查看更多 ></router-link></span>
