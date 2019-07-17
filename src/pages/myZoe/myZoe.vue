@@ -24,7 +24,7 @@
       </div>
       <div class="service_phone">
         <div class="title">客服电话</div>
-        <p>400-5486-4354</p>
+        <p>17301747954</p>
       </div>
       <!-- <div class='statement_bx'>
         <router-link to='/useragreement'>
