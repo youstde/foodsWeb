@@ -26,11 +26,11 @@
         <div class="title">客服电话</div>
         <p>400-5486-4354</p>
       </div>
-      <div class='statement_bx'>
+      <!-- <div class='statement_bx'>
         <router-link to='/useragreement'>
         《用户使用条款和隐私声明》
         </router-link>
-      </div>
+      </div> -->
     </div>
     <bottom-nav></bottom-nav>
   </div>

@@ -15,6 +15,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "cube-ui": "^1.12.20",
+    "pingpp-js": "^2.2.14",
     "svg-sprite-loader": "^3.6.2",
     "swiper": "^4.5.0",
     "vue": "^2.5.2",
