@@ -68,10 +68,12 @@
         </cube-slide>
       </div>
     </div>
+    <toast-type :type='showToastType' :message='toastTypeValue' :showToast='showWarningToast' :onHide="onHide"></toast-type>
   </div>
 </template>
 
 <script>
+  import ToastType from '@/components/toastType/toastType'
   import { Flexbox, FlexboxItem, Toast } from 'vux'
   import TopBack from '@/components/topBack/topBack'
   import OrderList from './components/orderList/orderList'
@@ -102,10 +104,14 @@
       TopBack,
       Flexbox,
       FlexboxItem,
-      OrderList
+      OrderList,
+      ToastType,
     },
     data () {
       return {
+        showToastType: '',
+        toastTypeValue: '',
+        showWarningToast: false,
         selectedLabel: '全部',
         disabled: false,
         tabLabels: [
@@ -163,6 +169,14 @@
       },
     },
     mounted() {
+      const { query: { success } } = this.$route
+      if(success !== undefined) {
+        if(success === 'true') {
+          this.onShowToast('success', '支付成功!')
+        } else {
+          this.onShowToast('warn', '支付失败!')
+        }
+      }
       // console.log(this.allData)
       if(this.checkQuery('key')) {
         // 此时是有搜索条件的,不必调用热门搜索和历史搜索
@@ -270,6 +284,14 @@
         // 发送请求，获取列表信息
         this.showAllLabel =false
         console.log('submit', key)
+      },
+      onShowToast(type, value) {
+        this.showToastType = type
+        this.toastTypeValue = value
+        this.showWarningToast = true
+      },
+      onHide() {
+        this.showWarningToast = false
       }
     }
   }
