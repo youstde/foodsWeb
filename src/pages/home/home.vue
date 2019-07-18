@@ -14,7 +14,7 @@
               <!-- S=门店切换 -->
               <div class='home_top_container'>
                 <router-link class='shop_name' to='/toggleshop'>
-                  {{shop}}
+                  <span class='shop_name_span'>{{shop}}</span>
                   <span class='icon_bx'><svg-icon iconClass='arrowdown' /></span>
                 </router-link>
               </div>

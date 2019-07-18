@@ -31,7 +31,11 @@ $pagePadding: 0.7rem;
       display: block;
       font-size: 0.7rem;
       position: relative;
-      @include textSingleShow;
+      .shop_name_span {
+        width: 100%;
+        display: block;
+        @include textSingleShow;
+      }
       .icon_bx {
         width: 0.8rem;
         height: 0.8rem;
