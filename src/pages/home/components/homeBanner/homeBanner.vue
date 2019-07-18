@@ -3,7 +3,7 @@
     <div class="swiper-wrapper">
       <div class="swiper-slide" v-for='item in lunboData' :key='item.ssid' @click='test'>
         <a :href='item.link'>
-        <img :data-src="item.pictures" src='https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/home-banner.png' class="swiper-lazy">
+        <img :data-src="item.pictures" src='@/assets/logo_.pic_hd.png' class="swiper-lazy">
         <div class="swiper-lazy-preloader"></div>
         </a>
       </div>

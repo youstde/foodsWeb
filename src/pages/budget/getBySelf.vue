@@ -116,7 +116,7 @@
       if(merchant) {
         this.merchant = merchant
       }
-      // if(userInfo.mch_id === merchant.id) {
+      if(userInfo.mch_id === merchant.id) {
         // 说明该用户为该店的管理员
         let isHaveCash = false
         this.paymentList.forEach(item => {
@@ -128,7 +128,7 @@
             label: '现金支付'
           })
         }
-      // }
+      }
       console.log('merchant:', getLocalStorage('merchant'))
     },
     methods: {

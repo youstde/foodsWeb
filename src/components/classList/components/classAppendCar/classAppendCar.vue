@@ -147,23 +147,22 @@
           increment: this.goodsNum
         }).then(res => {
           if(res && res.errcode === 0) {
-            this.$refs.baseToast.onShowToast('success', '添加购物车成功!')
-            // 当有商品添加到购物车时手动通知底部导航栏
-            const { quantity_total } = res.data
-            localStorage.setItem('car_nums', quantity_total)
-            const activeSerialNoStr = localStorage.getItem('active_serial_no')
-            let activeSerialNoArr = []
-            if(activeSerialNoStr) {
-              activeSerialNoArr = JSON.parse(activeSerialNoStr)
-            }
-            activeSerialNoArr.push(serial_no)
-            const middleArr = [...new Set(activeSerialNoArr)]
-            localStorage.setItem('active_serial_no', JSON.stringify(middleArr))
-            window.sendMessage('update:BottomGoodsCarNum', quantity_total)
-            this.cancelNum()
-            setTimeout(() => {
+            this.$refs.baseToast.onShowToast('success', '添加购物车成功!', () => {
+              // 当有商品添加到购物车时手动通知底部导航栏
+              const { quantity_total } = res.data
+              localStorage.setItem('car_nums', quantity_total)
+              const activeSerialNoStr = localStorage.getItem('active_serial_no')
+              let activeSerialNoArr = []
+              if(activeSerialNoStr) {
+                activeSerialNoArr = JSON.parse(activeSerialNoStr)
+              }
+              activeSerialNoArr.push(serial_no)
+              const middleArr = [...new Set(activeSerialNoArr)]
+              localStorage.setItem('active_serial_no', JSON.stringify(middleArr))
+              window.sendMessage('update:BottomGoodsCarNum', quantity_total)
+              this.cancelNum()
               this.isShowAppendCar = false
-            }, 1e3)
+            })
           }
         })
       },

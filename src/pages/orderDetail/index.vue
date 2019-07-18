@@ -7,7 +7,7 @@
         </flexbox-item>
         <flexbox-item class='top_back_item title' :span='10'>
           <span>订单详情</span>
-          <div class='status_label'>完成</div>
+          <div class='status_label'>{{detial.status_desc}}</div>
         </flexbox-item>
       </flexbox>
     </div>
@@ -18,7 +18,7 @@
       </div>
       <div class="goods_introvice">
         <div class="goods_introvice_title">发票类型</div>
-        <div class="goods_introvice_text">无</div>
+        <div class="goods_introvice_text">{{detial.invoice.title}}</div>
       </div>
       <!-- 商品信息 -->
       <div class="goods_detail">
@@ -32,10 +32,10 @@
         </div>
         <div class="goods_price_item">
           <div class="goods_price_item_label">配送费用</div>
-          <div class="goods_price_item_value">￥{{''}}</div>
+          <div class="goods_price_item_value">￥{{detial.fee_delivery}}</div>
         </div>
         <div class="goods_price_all">
-          <div>实付款：<span class="goods_price_price">￥{{''}}</span>
+          <div>实付款：<span class="goods_price_price">￥{{detial.amount_actually}}</span>
           </div>
         </div>
       </div>

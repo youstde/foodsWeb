@@ -7,11 +7,11 @@
       <div v-if="!isHide">
         <div class="goods_item">
           <div class="goods_item_label">下单时间</div>
-          <!-- <div class="goods_item_value">{{ data.serial_no }}</div> -->
+          <div class="goods_item_value">{{ data.create_time }}</div>
         </div>
         <div class="goods_item">
           <div class="goods_item_label">支付方式</div>
-          <!-- <div class="goods_item_value">{{ data.serial_no }}</div> -->
+          <div class="goods_item_value">{{ data.paytype_desc }}</div>
         </div>
       </div>
       <div class="button_group">

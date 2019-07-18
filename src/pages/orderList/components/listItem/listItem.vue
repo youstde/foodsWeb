@@ -1,23 +1,22 @@
 <template>
   <div class='list_item_bx'
     :key='dataItem.serial_no'
-    @click.stop.prevent="() => onGoDetial(dataItem.serial_no)"
   >
-      <div class="top_bx">
+      <div class="top_bx" @click.stop.prevent="() => onGoDetial(dataItem.serial_no)">
         <div class="order_num_bx">订单号：{{dataItem.serial_no}}</div>
-        <div class="tag">{{orderStatus[dataItem.status]}}</div>
+        <div class="tag">{{dataItem.status_desc}}</div>
       </div>
-      <div class="goods_list_bx">
+      <div class="goods_list_bx" @click.stop.prevent="() => onGoDetial(dataItem.serial_no)">
         <goods-swiper
           :swiperId='dataItem.serial_no'
           :summary='dataItem.summary'
         />
       </div>
       <div class="bottom_bx">
-        <div class="to_pay_bt" v-if='dataItem.status===0'>去支付</div>
+        <div class="to_pay_bt" v-if='dataItem.status===0' @click='handleRePay'>去支付</div>
         <div class="total_price">
           <span class='label'>共{{ dataItem.quantity }}件&nbsp;合计:</span>
-          <span class='price'>￥{{ dataItem.amount }}</span>
+          <span class='price'>￥{{ dataItem.amount_total }}</span>
         </div>
       </div>
   </div>
@@ -26,6 +25,8 @@
 <script>
   import { Flexbox, FlexboxItem, Toast } from 'vux'
   import GoodsSwiper from '../goodsSwiper/index'
+  import { getOrderBase } from '@/service/getData'
+  var pingpp = require('pingpp-js')
 
   export default {
     name: 'list-item',
@@ -50,6 +51,33 @@
       // console.log(this.dataItem)
     },
     methods: {
+      handleRePay() {
+        console.log(this.dataItem)
+        const { serial_no } = this.dataItem
+        getOrderBase({
+          t: 'repay',
+          serial_no,
+          paytype: 'alipay'
+        }).then(res => {
+          if(res && res.errcode === 0) {
+            const { charge } = res.data
+            this.handlePing(charge)
+          }
+        })
+      },
+      handlePing(charge) {
+        pingpp.createPayment(charge, function(result, err) {
+          if (result == "success") {
+            // 只有微信公众账号 (wx_pub)、微信小程序 (wx_lite)、QQ 公众号 (qpay_pub)、支付宝口碑 (alipay_qr)
+            // 支付成功的结果会在这里返回，其他的支付结果都会跳转到 extra 中对应的 URL。
+
+          } else if (result == "fail") {
+            // data 不正确或者微信公众账号/微信小程序/QQ 公众号/支付宝口碑支付失败时会在此处返回
+          } else if (result == "cancel") {
+            // 微信公众账号、微信小程序、QQ 公众号、支付宝口碑支付取消支付
+          }
+        })
+      },
       onGoDetial (serial_no) {
         this.$router.push(`/orderDetail?serialNo=${serial_no}`)
       }

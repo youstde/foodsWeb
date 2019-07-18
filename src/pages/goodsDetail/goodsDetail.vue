@@ -13,7 +13,7 @@
     </div>
     <cube-scroll
         ref='scroll'
-        :data="detailData"
+        :data="[]"
         :options='scrollOptions'>
       <detail-swiper :detailData='detailData' />
     </cube-scroll>
