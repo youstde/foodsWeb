@@ -42,7 +42,8 @@
         paymentType: '', // 支付方式
         paymentCheckId: null,
         allMoney: 0,
-        serials: ''
+        serials: '',
+        factPrice: '' // 实收金额
       }
     },
     mounted() {
@@ -65,6 +66,18 @@
           mch_id: localMerchant.id,
           deliver_type: this.deliveryType,
           paytype
+        }
+        if(paytype && paytype === 'cash') {
+          if(this.factPrice) {
+            params.amount = this.factPrice
+          } else {
+            const toast = this.$createToast({
+              txt: '请输入实收金额!',
+              type: 'txt'
+            })
+            toast.show()
+            return
+          }
         }
         if(localAdress) params.address_id = localAdress.id
         if(invoiceDataStr) params.invoice_info = invoiceDataStr
@@ -90,6 +103,7 @@
               toast.show()
               localStorage.removeItem('invoice_data')
               localStorage.removeItem('goods_arr')
+              localStorage.removeItem('active_serial_no')
               // 这个地方调用支付的接口
               this.handlePay()
               // setTimeout(() => {
@@ -135,6 +149,9 @@
                 break
               case 'paymentType':
                 this.paymentType = data.paymentType
+                break
+              case 'factPrice':
+                this.factPrice = data.factPrice
                 break
               default:
                 break

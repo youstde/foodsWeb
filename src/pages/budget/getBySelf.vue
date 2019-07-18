@@ -99,6 +99,11 @@
         this.returnBc({
           paymentType: val
         })
+      },
+      factPrice(val) {
+        this.returnBc({
+          factPrice: val
+        })
       }
     },
     mounted() {
@@ -113,10 +118,16 @@
       }
       // if(userInfo.mch_id === merchant.id) {
         // 说明该用户为该店的管理员
-        this.paymentList.push({
-          id: 'cash',
-          label: '现金支付'
+        let isHaveCash = false
+        this.paymentList.forEach(item => {
+          if(item.id === 'cash') isHaveCash = true
         })
+        if(!isHaveCash) {
+          this.paymentList.push({
+            id: 'cash',
+            label: '现金支付'
+          })
+        }
       // }
       console.log('merchant:', getLocalStorage('merchant'))
     },

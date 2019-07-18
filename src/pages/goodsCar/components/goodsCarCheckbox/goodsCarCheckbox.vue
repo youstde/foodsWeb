@@ -8,6 +8,7 @@
 </template>
 
 <script>
+  import { getLocalStorage } from '@/util/tools'
 
   export default {
     name: 'goods-car-check-box',
@@ -22,6 +23,8 @@
     },
     watch: {
       checkList(value) {
+        console.log('value:', value)
+        this.updateActiveGoods(value)
         this.localArr = []
       }
     },
@@ -41,7 +44,9 @@
 
     },
     methods: {
-
+      updateActiveGoods(value) {
+        localStorage.setItem('active_serial_no', JSON.stringify(value))
+      }
     }
   }
 </script>

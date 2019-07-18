@@ -66,6 +66,7 @@
     methods: {
       submit() {
         const userInfo = getLocalStorage('user_info')
+        console.log(this.checkList)
         if(!this.checkList.length) {
           const toast = this.$createToast({
             txt: '请选择你需要下单的商品!',
