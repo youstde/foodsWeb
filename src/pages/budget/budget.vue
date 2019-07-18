@@ -104,27 +104,15 @@
               localStorage.removeItem('invoice_data')
               localStorage.removeItem('goods_arr')
               localStorage.removeItem('active_serial_no')
+              const { charge } = res.data
               // 这个地方调用支付的接口
-              this.handlePay()
+              this.handlePing(charge)
               // setTimeout(() => {
               //   this.$router.push(`/orderList`)
               // }, 1000)
             }
           })
         }
-      },
-      handlePay() {
-        const { query: { serials, paytype } } = this.$route
-        getOrderBase({
-          t: 'test.charge',
-          paytype,
-          amount: 2
-        }).then(res => {
-          if(res && res.errcode === 0) {
-            const { charge } = res.data
-            this.handlePing(charge)
-          }
-        })
       },
       handlePing(charge) {
         pingpp.createPayment(charge, function(result, err) {

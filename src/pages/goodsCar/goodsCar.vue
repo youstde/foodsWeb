@@ -106,15 +106,26 @@
         this.fetchCarData()
 
       })
-      this.initCheckedList()
     },
     methods: {
       initCheckedList() {
         const serialNoStr = localStorage.getItem('active_serial_no')
         if(serialNoStr) {
           const serialNoArr = JSON.parse(serialNoStr)
+          if(this.clearOutGoodsFromSerialNo()) return
           this.checkList = [...this.checkList, ...serialNoArr]
         }
+      },
+      clearOutGoodsFromSerialNo() {
+        // 把active_serial_no中过期的商品serial_no去掉
+        let isHaveOutTime = false
+        this.lists.forEach(item => {
+          if(item.saleable === -1) {
+            isHaveOutTime = true
+          }
+        })
+        if(isHaveOutTime) window.localStorage.removeItem('active_serial_no')
+        return isHaveOutTime
       },
       calculateMoney() {
         const { lists, checkList } = this
@@ -144,6 +155,7 @@
             window.sendMessage('update:BottomGoodsCarNum', quantity_total)
             localStorage.setItem('car_nums', quantity_total)
             this.calculateMoney()
+            this.initCheckedList()
           }
         })
       },
