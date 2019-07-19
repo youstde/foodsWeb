@@ -113,7 +113,7 @@
         if(serialNoStr) {
           const serialNoArr = JSON.parse(serialNoStr)
           if(this.clearOutGoodsFromSerialNo()) return
-          this.checkList = [...this.checkList, ...serialNoArr]
+          this.checkList = [...new Set([...this.checkList, ...serialNoArr])]
         }
       },
       clearOutGoodsFromSerialNo() {
@@ -214,7 +214,6 @@
         this.$refs.scroll.refresh()
       },
       appendChooseGoods(obj) {
-        console.log('obj:', obj)
         const { choosedGoods } = this
         this.choosedGoods = {...choosedGoods, ...obj}
       },
