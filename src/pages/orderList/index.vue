@@ -176,6 +176,9 @@
         } else {
           this.onShowToast('warn', '支付失败!')
         }
+        this.$router.replace({
+          path: '/orderlist'
+        })
       }
       // console.log(this.allData)
       if(this.checkQuery('key')) {
