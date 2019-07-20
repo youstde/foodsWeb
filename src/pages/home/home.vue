@@ -176,11 +176,12 @@
         this.$router.replace({
           path: '/'
         })
+        return
       }
-      this.getHomeData()
+      this.fetchGetHomeData()
     },
     methods: {
-      getHomeData() {
+      fetchGetHomeData() {
         getHomeData({
           t: 'infos',
           mch_id: this.merchant.id
