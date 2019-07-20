@@ -37,61 +37,17 @@
       return {
         goodslist: [
           {
-            id: 1,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-2.png',
-            title: '精选优质黄瓜',
-            odderPrice: '14.6/斤',
-            cheapPrice: '1.46/斤'
+            content: "新到山东荷兰十五特价0.83/斤888",
+            date: "2019/07/01 - 2019/07/31",
+            name: "荷兰土豆促销",
+            ssid: 133
           },
           {
-            id: 2,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-2.png',
-            title: '精选优质南瓜',
-            odderPrice: '2.6/斤',
-            cheapPrice: '0.99/斤'
-          },
-          {
-            id: 3,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-2.png',
-            title: '精选优质黄瓜',
-            odderPrice: '14.6/斤',
-            cheapPrice: '1.46/斤'
-          },
-          {
-            id: 4,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-2.png',
-            title: '精选优质南瓜',
-            odderPrice: '2.6/斤',
-            cheapPrice: '0.99/斤'
-          },
-          {
-            id: 5,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-2.png',
-            title: '精选优质黄瓜',
-            odderPrice: '14.6/斤',
-            cheapPrice: '1.46/斤'
-          },
-          {
-            id: 6,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-2.png',
-            title: '精选优质南瓜',
-            odderPrice: '2.6/斤',
-            cheapPrice: '0.99/斤'
-          },
-          {
-            id: 7,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-2.png',
-            title: '精选优质南瓜',
-            odderPrice: '2.6/斤',
-            cheapPrice: '0.99/斤'
-          },
-          {
-            id: 8,
-            img: 'https://bwblog.oss-cn-hangzhou.aliyuncs.com/test/time-discount-2.png',
-            title: '精选优质黄瓜',
-            odderPrice: '14.6/斤',
-            cheapPrice: '1.46/斤'
-          },
+            content: "新到山东荷兰十五特价0.83/斤888",
+            date: "2019/07/01 - 2019/07/31",
+            name: "荷兰土豆促销",
+            ssid: 134
+          }
         ]
       }
     },
