@@ -104,12 +104,20 @@
               localStorage.removeItem('invoice_data')
               localStorage.removeItem('goods_arr')
               localStorage.removeItem('active_serial_no')
-              const { charge } = res.data
-              // 这个地方调用支付的接口
-              this.handlePing(charge)
-              // setTimeout(() => {
-              //   this.$router.push(`/orderList`)
-              // }, 1000)
+              const { redirect, charge } = res.data
+              // h5下单成功后，如果有redirect就跳转新地址
+              // 如果没有就拿charge去调用支付
+              // 如果什么都没有就直接跳订单列表
+              if(redirect) {
+                window.location.href = redirect
+              } else if(charge) {
+                // 这个地方调用支付的接口
+                this.handlePing(charge)
+              } else {
+                this.$router.replace({
+                  path: '/orderlist'
+                })
+              }
             }
           })
         }
