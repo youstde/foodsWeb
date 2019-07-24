@@ -116,16 +116,24 @@
       },
       getKey(e) {
         const {innerText:stringKey} = e.target
-        const key = Number(stringKey)
+        let key = ''
+        if(stringKey === '.') {
+          key = stringKey
+        } else {
+          key = Number(stringKey)
+        }
         const odderClass = e.target.getAttribute('class')
         e.target.setAttribute('class', `active ${odderClass}`)
         setTimeout(() => {
            e.target.setAttribute('class', odderClass)
         }, 100)
         if(key !== NaN) {
-          console.log(this.keyNum)
           if(this.keyNum === '0') {
-            this.keyNum = stringKey
+            if(key === '.') {
+              this.keyNum += stringKey
+            } else {
+              this.keyNum = stringKey
+            }
           } else {
             this.keyNum += stringKey
           }
