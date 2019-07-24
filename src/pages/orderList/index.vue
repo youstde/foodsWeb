@@ -1,6 +1,6 @@
 <template>
   <div class='order_list_bx'>
-    <top-back heightNum='1.95rem'>
+    <top-back heightNum='1.95rem' :to='toPath'>
       <div class="go_back_right_lbx">
         <cube-tab-bar v-model="selectedLabel"
                     show-slider
@@ -109,6 +109,7 @@
     },
     data () {
       return {
+        toPath: '',
         showToastType: '',
         toastTypeValue: '',
         showWarningToast: false,
@@ -176,6 +177,7 @@
         } else {
           this.onShowToast('warn', '支付失败!')
         }
+        this.toPath = '/home'
         this.$router.replace({
           path: '/orderlist'
         })

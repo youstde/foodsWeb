@@ -20,7 +20,8 @@
     props: [
       'type',
       'heightNum',
-      'paddingBtm'
+      'paddingBtm',
+      'to'
     ],
     data () {
       return {
@@ -32,7 +33,13 @@
     },
     methods: {
       goBack() {
-        this.$router.go(-1)
+        if(this.to) {
+          this.$router.replace({
+            path: this.to
+          })
+        } else {
+          this.$router.go(-1)
+        }
       }
     }
   }
