@@ -62,7 +62,7 @@
         color: $themeColor;
         font-size: 0.75rem;
         float: left;
-        width: 1.3rem;
+        width: 2rem;
         height: 2.2rem;
         background-color: #fff;
       }
@@ -88,6 +88,14 @@
       font-size: 0.6rem;
       text-align: left;
       padding-left: 0.7rem;
+      position: relative;
+      .key_borad_title_delete {
+        width: 0.8rem;
+        height: 0.8rem;
+        position: absolute;
+        right: 1rem;
+        @include positionMiddle()
+      }
     }
     .keys_out_bx {
       width: 100%;
@@ -108,6 +116,12 @@
         &.active {
           background-color:#f1f1f1;
         }
+      }
+      .delete_out_bx {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0.5rem;
       }
     }
   }

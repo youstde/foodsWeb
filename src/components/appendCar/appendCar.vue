@@ -17,7 +17,7 @@
                 <div class='opera_icon_bx' @click='subtractNum'>
                   <span class='icon_bx'><svg-icon iconClass='jian'></svg-icon></span>
                 </div>
-                <input type="number" v-model='goodsNum' disabled class='num_input'>
+                <input type="text" v-model='goodsNum' disabled class='num_input'>
                 <div class='opera_icon_bx' @click='addNum'>
                   <span class='icon_bx'><svg-icon iconClass='add'></svg-icon></span>
                 </div>
@@ -26,7 +26,10 @@
           </flexbox-item>
         </flexbox>
         <div class="key_borad" v-show='showAddNum'>
-          <div class="title">{{keyNum || '请输入所需数量'}}</div>
+            <div class="title">
+              {{keyNum || '请输入所需数量'}}
+              <span class='key_borad_title_delete' @click='deleteAllNum'><svg-icon iconClass='ic_Set up_ delete'></svg-icon></span>
+            </div>
             <div class='keys_out_bx' @click='getKey'>
               <flexbox v-for='(itemLine, i) in keyboradKeys' :key='i'>
                 <flexbox-item :span='4' class='borad_item'><div class='have_right_line'>{{itemLine[0]}}</div></flexbox-item>
@@ -36,9 +39,9 @@
             </div>
 
            <flexbox>
-             <!-- <flexbox-item :span='4' class='borad_item'><div class='have_right_line' @click='cancelNum'>取消</div></flexbox-item> -->
-             <flexbox-item :span='12' class='borad_item'><div class='have_right_line' @click='getKey'>0</div></flexbox-item>
-             <!-- <flexbox-item :span='4' class='borad_item'><div @click='confirmNum'>确定</div></flexbox-item> -->
+             <flexbox-item :span='4' class='borad_item'><div class='have_right_line' @click='getKey'>.</div></flexbox-item>
+             <flexbox-item :span='4' class='borad_item'><div class='have_right_line' @click='getKey'>0</div></flexbox-item>
+             <flexbox-item :span='4' class='borad_item'><span class='delete_out_bx' @click='deleteNumber'><svg-icon iconClass='delete'></svg-icon></span></flexbox-item>
            </flexbox>
         </div>
     </div>
@@ -53,7 +56,7 @@
   import { setTimeout } from 'timers';
 
   import { getGoodsBase } from '@/service/getData'
-  import { getLocalStorage } from '@/util/tools'
+  import { getLocalStorage, deleteNum, addNum } from '@/util/tools'
 
   export default {
     name: 'append-car',
@@ -124,6 +127,19 @@
           this.keyNum = ''
         }
       },
+      deleteAllNum() {
+        this.goodsNum = '0';
+        this.keyNum = '0';
+      },
+      deleteNumber() {
+        console.log(this.goodsNum)
+        const goodsnum = `${this.goodsNum}`
+        if(goodsnum === '') return
+        const length = goodsnum.length
+        const subString = goodsnum.substring(0, length - 1)
+        this.goodsNum = subString.replace(/\.$/, '')
+        this.keyNum = subString.replace(/\.$/, '')
+      },
       getKey(e) {
         const {innerText:stringKey} = e.target
         const key = Number(stringKey)
@@ -133,7 +149,11 @@
            e.target.setAttribute('class', odderClass)
         }, 100)
         if(key !== NaN) {
-          this.keyNum += stringKey
+          if(this.keyNum === '0') {
+            this.keyNum = stringKey
+          } else {
+            this.keyNum += stringKey
+          }
           this.goodsNum = this.keyNum
         }
       },
@@ -149,11 +169,20 @@
         console.log(this.dataSource)
         const localMerchant = getLocalStorage('merchant')
         const { serial_no } = this.dataSource
+        if(!this.goodsNum || this.goodsNum === '0') {
+          const toast = this.$createToast({
+            txt: '请输入正确的商品数量',
+            type: 'txt'
+          })
+          toast.show()
+          return
+        }
+        const goodnum = `${this.goodsNum}`.replace(/\.$/, '')
         getGoodsBase({
           t: 'cart.add',
           serial_no,
           mch_id: localMerchant.id,
-          increment: this.goodsNum
+          increment: goodnum
         }).then(res => {
           if(res && res.errcode === 0) {
             const activeSerialNoStr = localStorage.getItem('active_serial_no')
@@ -171,17 +200,20 @@
       },
       subtractNum() {
         const { goodsNum } = this
-        if(goodsNum === 0) return
-        this.goodsNum = Number(goodsNum) - 1
-        if((Number(goodsNum) - 1) === 0) {
-          this.showAddNum = false
-          this.goodsNum = 1
-          this.$store.commit('SET_IS_SHOW_COVER', false)
+        if(goodsNum === '0') return
+        this.goodsNum = `${deleteNum(Number(goodsNum), 1)}`
+        this.keyNum = this.goodsNum;
+        if((Number(goodsNum) - 1) <= 0) {
+          this.goodsNum = '0';
+          this.keyNum = '0';
+          // this.goodsNum = 1
+          // this.$store.commit('SET_IS_SHOW_COVER', false)
         }
       },
       addNum() {
         const { goodsNum } = this
-        this.goodsNum = Number(goodsNum) + 1
+        this.goodsNum = `${addNum(Number(goodsNum), 1)}`
+        this.keyNum = this.goodsNum;
       }
     }
   }
