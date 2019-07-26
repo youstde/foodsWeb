@@ -83,6 +83,7 @@ import { setTimeout } from 'timers';
             localStorage.removeItem('user_info')
             localStorage.removeItem('active_serial_no')
             localStorage.removeItem('car_nums')
+            // localStorage.removeItem('merchant')
             localStorage.setItem('uuId', sk)
             setTimeout(() => {
               window.location.reload()
