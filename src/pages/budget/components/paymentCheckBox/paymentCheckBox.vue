@@ -55,8 +55,8 @@
 <style lang="scss" scoped>
   @import 'src/style/mixin';
   .check_box_bx {
-    width: 0.85rem;
-    height: 0.85rem;
+    width: 1rem;
+    height: 1rem;
     background-color: #eeeeee;
     @include borderRadius(50%);
     overflow: hidden;

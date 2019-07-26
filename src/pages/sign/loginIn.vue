@@ -23,7 +23,7 @@
       <div class='submit_btn'><cube-button :disabled='isSending' @click='submit'>确定</cube-button></div>
     </div>
     <toast-type :type='showToastType' :message='toastTypeValue' :showToast='showWarningToast' :onHide="onHide"></toast-type>
-    <div class='statement'>登录即代表你同意<router-link to='/useragreement'>《用户使用条款和隐私声明》</router-link></div>
+    <div class='statement'>登录即代表你同意<router-link to='/useragreement'>《退换货规则声明》</router-link></div>
   </div>
 </template>
 
