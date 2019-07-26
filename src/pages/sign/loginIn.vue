@@ -52,7 +52,7 @@
         phoneRules: {
           required: true,
           type: 'number',
-          pattern: /^1[34578]\d{9}$/
+          pattern: /^1\d{10}$/
         },
         phoneMessages: {
           pattern: '请输入正确手机号'
