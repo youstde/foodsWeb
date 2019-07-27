@@ -31,6 +31,22 @@
           <div class="goods_price_item_value">￥{{detial.amount}}</div>
         </div>
         <div class="goods_price_item">
+          <div class="goods_price_item_label">商品总价</div>
+          <div class="goods_price_item_value">￥{{detial.amount_total}}</div>
+        </div>
+         <div class="goods_price_item">
+          <div class="goods_price_item_label">配送方式</div>
+          <div class="goods_price_item_value">{{detial.deliver_desc}}</div>
+        </div>
+        <div class="goods_price_item">
+          <div class="goods_price_item_label">运费</div>
+          <div class="goods_price_item_value">￥{{detial.fee_delivery}}</div>
+        </div>
+        <div class="goods_price_item">
+          <div class="goods_price_item_label">配送地址</div>
+          <div class="goods_price_item_value">{{detial.address}}</div>
+        </div>
+        <div class="goods_price_item">
           <div class="goods_price_item_label">配送费用</div>
           <div class="goods_price_item_value">￥{{detial.fee_delivery}}</div>
         </div>
