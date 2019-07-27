@@ -3,6 +3,7 @@
     <div class='goods_item' v-for='(item,i) in goodslist' :key='i'>
       <div class='goods_item_inner'><HomeGoodsItem :goodsItem='item' type='2' /></div>
     </div>
+    <p class='no_more_data' v-if='nomoreData'>----没有更多数据了----</p>
   </div>
 </template>
 
@@ -26,8 +27,15 @@
       pullUpLoadIndex (index) {
         const { goodslist, merchantId } = this;
         this.fetchGoodsData(index, merchantId, data => {
-          this.goodslist = goodslist.concat(data)
-          this.closeUpdate()
+          console.log('data:', this.nomoreData)
+          if(!data.length) {
+            this.nomoreData = true
+            this.closeUpdate()
+          } else {
+            this.nomoreData = false
+            this.goodslist = goodslist.concat(data)
+            this.closeUpdate()
+          }
         })
 
       },
@@ -41,6 +49,7 @@
     },
     data () {
       return {
+        nomoreData: false,
         goodslist: [],
         merchantId: ''
       }

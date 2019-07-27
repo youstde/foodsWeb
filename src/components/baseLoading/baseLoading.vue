@@ -31,7 +31,7 @@
     top: 0;
     left: 0;
     z-index: 111;
-    // background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0,0,0,0.2);
     .icon_bx {
       @include positionCenter;
     }
