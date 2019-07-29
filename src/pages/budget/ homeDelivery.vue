@@ -93,6 +93,11 @@
         this.returnBc({
           paymentType: val
         })
+      },
+      factPrice(val) {
+        this.returnBc({
+          factPrice: val
+        })
       }
     },
     mounted() {
