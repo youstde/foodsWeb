@@ -13,48 +13,49 @@
     </div>
     <div class="container_out_bx">
        <!-- S=商品列表 -->
-      <div class='goods_list_out_bx'>
-        <goods-item v-for='(item, i) in goodsList' :key='i' :goodsItem='item' />
-      </div>
-      <div class="goods_introvice">
-        <div class="goods_introvice_title">发票类型</div>
-        <div class="goods_introvice_text">{{detial.invoice.title}}</div>
-      </div>
-      <!-- 商品信息 -->
-      <div class="goods_detail">
-        <goods-detial :data='detial' />
-      </div>
-      <!-- 商品价格 -->
-      <div class="goods_price">
-        <div class="goods_price_item">
-          <div class="goods_price_item_label">商品总额</div>
-          <div class="goods_price_item_value">￥{{detial.amount}}</div>
-        </div>
-        <div class="goods_price_item">
-          <div class="goods_price_item_label">商品总价</div>
-          <div class="goods_price_item_value">￥{{detial.amount_total}}</div>
-        </div>
-         <div class="goods_price_item">
-          <div class="goods_price_item_label">配送方式</div>
-          <div class="goods_price_item_value">{{detial.deliver_desc}}</div>
-        </div>
-        <div class="goods_price_item">
-          <div class="goods_price_item_label">运费</div>
-          <div class="goods_price_item_value">￥{{detial.fee_delivery}}</div>
-        </div>
-        <div class="goods_price_item">
-          <div class="goods_price_item_label">配送地址</div>
-          <div class="goods_price_item_value">{{detial.address}}</div>
-        </div>
-        <div class="goods_price_item">
-          <div class="goods_price_item_label">配送费用</div>
-          <div class="goods_price_item_value">￥{{detial.fee_delivery}}</div>
-        </div>
-        <div class="goods_price_all">
-          <div>实付款：<span class="goods_price_price">￥{{detial.amount_actually}}</span>
+       <cube-scroll
+        ref='scroll'
+        :data='goodsList'
+        :options='scrollOptions'>
+          <div class='goods_list_out_bx'>
+            <goods-item v-for='(item, i) in goodsList' :key='i' :goodsItem='item' />
           </div>
-        </div>
-      </div>
+          <div class="goods_introvice">
+            <div class="goods_introvice_title">发票类型</div>
+            <div class="goods_introvice_text">{{detial.invoice.title || '无'}}</div>
+          </div>
+          <!-- 商品信息 -->
+          <div class="goods_detail">
+            <goods-detial :data='detial' />
+          </div>
+          <!-- 商品价格 -->
+          <div class="goods_price">
+            <div class="goods_price_item">
+              <div class="goods_price_item_label">配送方式</div>
+              <div class="goods_price_item_value">{{detial.deliver_desc}}</div>
+            </div>
+            <div class="goods_price_item">
+              <div class="goods_price_item_label">配送地址</div>
+              <div class="goods_price_item_value">{{detial.address}}</div>
+            </div>
+            <div class="goods_price_item">
+              <div class="goods_price_item_label">商品总价</div>
+              <div class="goods_price_item_value">￥{{detial.amount_goods}}</div>
+            </div>
+            <div class="goods_price_item">
+              <div class="goods_price_item_label">配送费用</div>
+              <div class="goods_price_item_value">￥{{detial.fee_delivery}}</div>
+            </div>
+            <div class="goods_price_item">
+              <div class="goods_price_item_label">订单总金额</div>
+              <div class="goods_price_item_value">￥{{detial.amount_total}}</div>
+            </div>
+            <div class="goods_price_all">
+              <div>实付款：<span class="goods_price_price">￥{{detial.amount_actually}}</span>
+              </div>
+            </div>
+          </div>
+        </cube-scroll>
     </div>
   </div>
 </template>
@@ -78,6 +79,11 @@
     },
     data () {
       return {
+        scrollOptions: {
+          pullDownRefresh: false,
+          pullUpLoad: false,
+          scrollbar: true
+        },
         goodsList: [],
         detial: {},
       }
