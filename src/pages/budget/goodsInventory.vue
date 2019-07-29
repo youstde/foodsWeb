@@ -11,7 +11,7 @@
       <div class="top_title">
         <flexbox>
           <flexbox-item>商品</flexbox-item>
-          <flexbox-item :style="{'text-align':'right'}">共6件</flexbox-item>
+          <flexbox-item :style="{'text-align':'right'}">共{{allQuantity}}件</flexbox-item>
         </flexbox>
       </div>
       <div class='goods_inventory_detail_out_bx'>
@@ -31,6 +31,7 @@
   import { Flexbox, FlexboxItem } from 'vux'
   import TopBack from '@/components/topBack/topBack'
   import InventoryItem from './components/inventoryItem/inventoryItem'
+  import { addNum } from '@/util/tools'
 
   export default {
     name: 'goods-inventory',
@@ -49,6 +50,15 @@
           scrollbar: true
         },
         dataSource: []
+      }
+    },
+    computed: {
+      allQuantity () {
+        let num = 0
+        this.dataSource.forEach(item => {
+          num = addNum(num, item.quantity)
+        })
+        return num
       }
     },
     mounted() {
