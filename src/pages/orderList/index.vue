@@ -47,14 +47,26 @@
               <order-list :dataSource='noPayData.data' />
             </cube-scroll>
           </cube-slide-item>
-          <!-- 代发货 -->
+          <!-- 已支付 -->
+          <cube-slide-item>
+            <cube-scroll
+              ref="havePayData"
+              :data="havePayData.data"
+              :options="scrollOptions"
+              @pulling-down="() => onPullingdown(1, 'havePayData')"
+              @pulling-up="() => onPullingUp(1, 'havePayData')"
+            >
+              <order-list :dataSource='havePayData.data' />
+            </cube-scroll>
+          </cube-slide-item>
+          <!-- 已取消 -->
           <cube-slide-item>
             <cube-scroll
               ref="waitDispatchData"
               :data="waitDispatchData.data"
               :options="scrollOptions"
-              @pulling-down="() => onPullingdown(1, 'waitDispatchData')"
-              @pulling-up="() => onPullingUp(1, 'waitDispatchData')"
+              @pulling-down="() => onPullingdown(11, 'waitDispatchData')"
+              @pulling-up="() => onPullingUp(11, 'waitDispatchData')"
             >
               <order-list :dataSource='waitDispatchData.data' />
             </cube-scroll>
@@ -123,7 +135,10 @@
             label: '待支付'
           },
           {
-            label: '代发货'
+            label: '已支付'
+          },
+          {
+            label: '已取消'
           },
           // {
           //   label: '配送中'
@@ -145,6 +160,11 @@
           click: false, // 默认true, 然后会给里面多分配一次点击事件
         },
         allData: {
+          data: [],
+          index: 1,
+          end: false,
+        },
+        havePayData: {
           data: [],
           index: 1,
           end: false,
@@ -202,7 +222,8 @@
       fetchEachTabData () {
         this.fetchData(-1, 'allData')
         this.fetchData(0, 'noPayData')
-        this.fetchData(1, 'waitDispatchData')
+        this.fetchData(1, 'havePayData')
+        this.fetchData(11, 'waitDispatchData')
       },
       fetchData (status, dataKey, index = 1) {
         console.log(index)
