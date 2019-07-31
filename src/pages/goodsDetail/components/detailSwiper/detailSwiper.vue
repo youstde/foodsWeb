@@ -13,7 +13,7 @@
       <div class='detail_swiper_detail'>
         <div class='title'>{{detailData.alias}}</div>
         <div class='botttom_bx'>
-          <div class='left_price'>￥{{detailData.price_sale}}</div>
+          <div class='left_price'>￥{{detailData.price_sale}}/{{detailData.specification_name}}</div>
           <div class='right_warehouse'>库存: {{detailData.stock_now}}</div>
         </div>
       </div>

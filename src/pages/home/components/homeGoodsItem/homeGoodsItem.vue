@@ -8,23 +8,23 @@
       <flexbox-item v-if='isSlide' class='goods_price' :span='7'>
         <!-- 有打折价 -->
         <div v-if='goodsItem.price_rush'>
-          <p class='fresh_price'>￥{{goodsItem.price_rush}}</p>
-          <p class='past_price'>￥{{goodsItem.price_sale}}</p>
+          <p class='fresh_price'>￥{{goodsItem.price_rush}}/{{goodsItem.specification_name}}</p>
+          <p class='past_price'>￥{{goodsItem.price_sale}}/{{goodsItem.specification_name}}</p>
         </div>
         <!-- 无打折价 -->
         <div v-else>
-          <p class='normal_price'>￥{{goodsItem.price_sale}}</p>
+          <p class='normal_price'>￥{{goodsItem.price_sale}}/{{goodsItem.specification_name}}</p>
         </div>
       </flexbox-item>
       <flexbox-item v-else class='goods_price' :span='7'>
         <!-- 有打折价 -->
         <div v-if='goodsItem.price_rush'>
-          <p class='fresh_price'>￥{{goodsItem.price_rush}}</p>
-          <p class='past_price'>￥{{goodsItem.price_sale}}</p>
+          <p class='fresh_price'>￥{{goodsItem.price_rush}}/{{goodsItem.specification_name}}</p>
+          <p class='past_price'>￥{{goodsItem.price_sale}}/{{goodsItem.specification_name}}</p>
         </div>
         <!-- 无打折价 -->
         <div v-else>
-          <p class='normal_price'>￥{{goodsItem.price_sale}}</p>
+          <p class='normal_price'>￥{{goodsItem.price_sale}}/{{goodsItem.specification_name}}</p>
         </div>
       </flexbox-item>
       <flexbox-item v-if='isSlide' class='add_to_car' :span='5'>

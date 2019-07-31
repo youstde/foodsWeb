@@ -6,10 +6,10 @@
     <div class='item_right'>
       <div class='title' @click='goTodetail'>{{itemObj.alias}}</div>
       <div v-if='itemObj.price_rush'>
-        <div class='price'>￥{{itemObj.price_rush}}</div>
-        <div class='price_odder'>￥{{itemObj.price_sale}}</div>
+        <div class='price'>￥{{itemObj.price_rush}}/{{itemObj.specification_name}}</div>
+        <div class='price_odder'>￥{{itemObj.price_sale}}/{{itemObj.specification_name}}</div>
       </div>
-      <div class='price' v-else>￥{{itemObj.price_sale}}</div>
+      <div class='price' v-else>￥{{itemObj.price_sale}}/{{itemObj.specification_name}}</div>
     </div>
     <div class='goods_car_bx' :data-id='itemObj.id' @click='addCar'>
       <div class='buy_btn'>购买</div>

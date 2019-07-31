@@ -174,8 +174,10 @@
       if(success !== undefined) {
         if(success === 'true') {
           this.onShowToast('success', '支付成功!')
-        } else {
+        } else if(success === 'false') {
           this.onShowToast('warn', '支付失败!')
+        } else if(success === 'cancel') {
+          this.onShowToast('warn', '支付取消!')
         }
         this.toPath = '/home'
         this.$router.replace({
